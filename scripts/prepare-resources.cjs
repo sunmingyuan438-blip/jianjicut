@@ -16,8 +16,13 @@ for (const [from, to] of [
   ['recovered/draft-shell', 'draft-shell'],
 ]) {
   const source=path.join(recovery,from),target=path.join(output,to);
+  // The published Mac source package already contains these resources. Keep
+  // them in place so a clean external checkout does not need the developer's
+  // sibling `xycut-recovered-0.2.10` directory. The sibling is only a legacy
+  // fallback for older local workspaces that have not bundled the resources.
+  if(fs.existsSync(target))continue;
   if(fs.existsSync(source))fs.cpSync(source,target,{recursive:true,filter:p=>!p.includes('__pycache__')});
-  else if(!fs.existsSync(target))throw new Error('缺少恢复资源：'+to+'；请使用包含 resources 的完整工程包');
+  else throw new Error('缺少恢复资源：'+to+'；请使用包含 resources 的完整工程包');
 }
 // Recovered scripts remain the baseline; maintained adapters are reapplied after
 // copying it so preparing resources cannot silently discard local fixes.
@@ -34,3 +39,4 @@ require('./patch-local-template-access.cjs').patchLocalTemplateAccess(path.join(
 const html = fs.readFileSync(htmlFile, 'utf8');
 if(!html.includes('src="/bridge.js"'))fs.writeFileSync(htmlFile, html.replace('</head>', '<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: https: blob:; media-src \'self\' https: blob:; connect-src \'self\' https:; frame-src https:; font-src \'self\' data:"><style>.titlebar{-webkit-app-region:drag}.titlebar button,.titlebar input,.titlebar select{-webkit-app-region:no-drag}</style><script src="/bridge.js"></script></head>'));
 console.log('Recovered resources prepared. Original files were preserved.');
+

@@ -2,10 +2,18 @@
 
 你是 XYCut Mac 版验收测试员。请在 macOS 13 或更高版本上完成以下测试，不要登录，不要购买积分，不要调用真实 AI 生成服务；只验证本地功能和离线 smoke 流程。
 
-## 一、选择安装包
+## 一、获取安装包
 
-- Apple 芯片（M1/M2/M3/M4）使用 `XYCut-restored-0.2.10-macOS-arm64-TEST.zip`。
-- Intel 芯片使用 `XYCut-restored-0.2.10-macOS-x64-TEST.zip`。
+优先使用仓库脚本获取预编译包。脚本会下载分片、自动拼接并校验 SHA-256：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sunmingyuan438-blip/jianjicut/main/scripts/download-mac-test-package.sh -o download-mac-test-package.sh
+chmod +x download-mac-test-package.sh
+./download-mac-test-package.sh arm64   # Apple Silicon M1/M2/M3/M4
+# Intel Mac 使用：./download-mac-test-package.sh x64
+```
+
+脚本完成后解压生成的 ZIP。Apple Silicon 使用 `XYCut-restored-0.2.10-macOS-arm64-TEST.zip`，Intel 使用 `XYCut-restored-0.2.10-macOS-x64-TEST.zip`。
 
 ## 二、启动
 
@@ -56,3 +64,4 @@
 6. 可选：说明是否能打开剪映，以及是否能在剪映中打开生成的 `draft_content.json` 对应草稿。
 
 不要删除验收记录目录，不要把任何 API Key、Cookie、登录令牌或个人文件上传到 GitHub。
+

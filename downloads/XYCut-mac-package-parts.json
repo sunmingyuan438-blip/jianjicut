@@ -1,0 +1,400 @@
+{
+  "arm64": {
+    "archive": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip",
+    "bytes": 180438845,
+    "sha256": "4b5b283c778d5240e01ce5e47c7fa6c8015cdad964c4629b8c806b56e8168156",
+    "part_size": 6291456,
+    "parts": [
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part00",
+        "bytes": 6291456,
+        "sha256": "8524b027bf4c8b4eeaa79ad1a49fcafdada9d5d6d5ba412834d143d4c740d3e7"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part01",
+        "bytes": 6291456,
+        "sha256": "9c291f71cec3f732fbedbcc46079b28586ebbce94626f97c4b890551c457ab81"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part02",
+        "bytes": 6291456,
+        "sha256": "5d58e38728ed86f69c2410f461029f55b4b8469cf7144cef9a3857372c1605d1"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part03",
+        "bytes": 6291456,
+        "sha256": "621156ced383d664ea9c49afbbb28d04db127c91772e86d333ca95ace28a548c"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part04",
+        "bytes": 6291456,
+        "sha256": "6d5eb2e3b0a7aa69b272695bfd27df0edceb781f08711e19ad016062c0eec07c"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part05",
+        "bytes": 6291456,
+        "sha256": "626a35663a907a2ab49155c292b29e4868c5954c8d0d48f1b20ca6677069e5f5"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part06",
+        "bytes": 6291456,
+        "sha256": "4ca970fc7d54be80cc86ca1b9d71eb66a4e685030ba4eaeed3fe7eb15c8fca8d"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part07",
+        "bytes": 6291456,
+        "sha256": "d0e4e4f660de0dea6dc81081578e77d1045b7e4cd44a359240c3e8d1009cee59"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part08",
+        "bytes": 6291456,
+        "sha256": "588acd22bc719ffb0b1a35c7f440c368187d81b6bb8791b7d945f77dd7193264"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part09",
+        "bytes": 6291456,
+        "sha256": "1a0a1891e0a71eb523386cf99c4161351763fe1df35d4cb63ae78465dd653837"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part10",
+        "bytes": 6291456,
+        "sha256": "fc384cadc891634d5df3c6ba2f6e981e52208351e1a69c134abdb7afafa6b829"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part11",
+        "bytes": 6291456,
+        "sha256": "e3a55caa07e72cb42d9df016c6a3c7b7a707e071089a88484e95c41f36e777a1"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part12",
+        "bytes": 6291456,
+        "sha256": "beac2af97e095e27e14bc1b794a1acb743569106df669d8997c11271cedb655a"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part13",
+        "bytes": 6291456,
+        "sha256": "984cbb980541ba4097f613480530a2dbd648f72ec8d8572d93f5e48ecb003caa"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part14",
+        "bytes": 6291456,
+        "sha256": "cef8a432840e8d6665303793d4c4b85a1ce2f20857596cda3c1a4030c0a2a22b"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part15",
+        "bytes": 6291456,
+        "sha256": "b7b5c54c3915b7d74c6fb14c0e1718b1412dda93dca5d4466985185440616103"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part16",
+        "bytes": 6291456,
+        "sha256": "612a503c287b482f5295b9e4430775a83fa198324c1876c20211031e92f1f8f9"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part17",
+        "bytes": 6291456,
+        "sha256": "0f9b86e3b159401214c28ef1bfa7f506f3798f71b936a6a61266b8732bdb769a"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part18",
+        "bytes": 6291456,
+        "sha256": "ad2d42cdc386b1b4ae3dce6244e65f70533959ca39deacdc590fae8ff8cda0bc"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part19",
+        "bytes": 6291456,
+        "sha256": "d3ed0acc31249e535d426e076ae047d034e02a7f6fb6d584dbfc67b524cc171f"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part20",
+        "bytes": 6291456,
+        "sha256": "e5efd0403d87d7be6d811f78e3d4ee31fe3c48518ef8b4a1a7ac87f0d549e433"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part21",
+        "bytes": 6291456,
+        "sha256": "6840108f7e6fa4bdc08d368b2a43772416dd16e7e2f48b32845361458cf663e8"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part22",
+        "bytes": 6291456,
+        "sha256": "459e865d648bd0a7f3da9d01172e6e74b04b0d216c57d7c0cded951e7de413f9"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part23",
+        "bytes": 6291456,
+        "sha256": "a7383290ba5619ec21d3180a03a9b26131a33a720f20f83b87443bf58764ef87"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part24",
+        "bytes": 6291456,
+        "sha256": "8645ede301e14d42f0e76514500203b1f1e2dafe0fbcfb676f022f693136e723"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part25",
+        "bytes": 6291456,
+        "sha256": "0f60f3892e89d24c4c9070bc04538a73282d244fc73859ed6b8a328d07fff9c4"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part26",
+        "bytes": 6291456,
+        "sha256": "110f2ed458980205cbd98d7ab8961ae63f319ddd24d06f51613e67e03cbe51cc"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part27",
+        "bytes": 6291456,
+        "sha256": "ce6b5ded6bd33774fd6c11b182c45f9b20156568decd87eb516d85ea0fd7d078"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip.part28",
+        "bytes": 4278077,
+        "sha256": "67c760b02572aad23a7cdd5e8f914c413b05e88510c59c013d3cd8e7caa331e2"
+      }
+    ],
+    "git_blob_shas": [
+      "44b9230f17af668d1ddeeddbefa3cc96342f80a9",
+      "dc581222d8167d9dde797314680015b71fbe9d64",
+      "5c0a10cd7591c9b2b16c5f148ccb60217777bb4b",
+      "ff0c967c94ff493326cca9d40d030f2d8cb58fe8",
+      "5db587d29e93c7739bc9d87c9de530caa5208e0f",
+      "a741cb2bdafaf979ee5688769783ee7e7211d791",
+      "5eae83f26c9555993506ff005f95d0cc3b610cbe",
+      "c4a03e1dc61c69575f486c4dc7a6860521d8a357",
+      "940df6ec29eb068079e28c9e801ae0b5dc03e174",
+      "7c1274a2dcf74386b5d8e6016d0cde9e163a06be",
+      "482fb594e4098a1a434f77bb0dd21ff0ef704aa1",
+      "0eb0101c2b82ef62520ec2dc2aeea4e0b1ef369e",
+      "238f7245a9eb9ab9d9be64810089988f09b6958d",
+      "857f55937daf9485813903339eb5b544381c6582",
+      "f4f30cfc8abd00da2e07c2fab80a4e4a201c496c",
+      "656c0dde890a01f2ca22f224ed564879d0188f99",
+      "93bbaf9c151abba4438d4ede81901dc562228cad",
+      "b11506b4aa2d1ded8afa20514edd7059e827fc31",
+      "1b5db868022760cb8dfb42422e8c1419df81bfdf",
+      "56fb4bacfd83c5fcbd7731a30bfdbc8604499e4b",
+      "1a4916c4616e67929fbfe0d1561d3f11efe11843",
+      "14cb217770df63fa8a4770828341b1b14584278c",
+      "be19b72799b7f504fd5b9e6c90a4764acd8a7cca",
+      "38daf1676ff37b0271ca4954164c8eced2164227",
+      "57639cef472c4220f6aa8f6426213ec6b0982118",
+      "732124bf6fbb84da2823a166b62e562c7e839054",
+      "4698f1ee25cd5f57b5f78190084bf72df8517a18",
+      "e3f3cd056e2d587771584ae313b436e24383b6b6",
+      "20c9fada016003787fefaa5366be8153ba96c6e5"
+    ]
+  },
+  "x64": {
+    "archive": "XYCut-restored-0.2.10-macOS-x64-TEST.zip",
+    "bytes": 208178050,
+    "sha256": "0cc1b5e750b23b5b2da1ab471f2275a3f635f224a4b1ab1809f6becb82169cec",
+    "part_size": 6291456,
+    "parts": [
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part00",
+        "bytes": 6291456,
+        "sha256": "322fa4b1b119d82ee6000fef580bcd934dbc0a4a2b9d919dd7d8a2a5cac4a605"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part01",
+        "bytes": 6291456,
+        "sha256": "a91fe66be116c860e25ace81f37c6bb18b1f1d52bd76a504f7f306d6d6f9cf2b"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part02",
+        "bytes": 6291456,
+        "sha256": "7aff5a2519f44f2d1272a43de6c246adc786d8ff7bf30c6edf041bf5dcbd476c"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part03",
+        "bytes": 6291456,
+        "sha256": "07dc5ec8b6749fd28b08da96f9b87b5d9b2063aca8e12bc5aaf33ea885bbf65d"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part04",
+        "bytes": 6291456,
+        "sha256": "8919162ea4d0e90a557770fb438edade1ef19e68f551703cb5ca2e76821386c1"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part05",
+        "bytes": 6291456,
+        "sha256": "f06b3133299954be14eff7dc8136c03d2258a9c597ea0057c8067959677fb235"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part06",
+        "bytes": 6291456,
+        "sha256": "5821cfc996c127e543d358f6ed90a594a27f2524f1d90f0e15e0d2eacb77977e"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part07",
+        "bytes": 6291456,
+        "sha256": "6ccd3809115f0caceb3e09e8fa8fe1b2eaf653af6f24a1493b93f695c1a9f5e4"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part08",
+        "bytes": 6291456,
+        "sha256": "c4d17b52e666afa154728248beb1cc7ce8c9ab1afc958421522463373f21cc47"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part09",
+        "bytes": 6291456,
+        "sha256": "6b829ce3b94a9f073f05c666147551304019ffa95595efb6750e70062d1274ea"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part10",
+        "bytes": 6291456,
+        "sha256": "4c318c9912a0f67868258c233a1f082abaccd5a6936e2c7ec86bf10fcfb46a3e"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part11",
+        "bytes": 6291456,
+        "sha256": "212f94b1866eef06329587c555456154d25398280c7000b3e2a35b6c07424cc6"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part12",
+        "bytes": 6291456,
+        "sha256": "44ba9dc182d53564a4262498d69346c368fd7335dde61cbe2d043d2cf1813c8a"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part13",
+        "bytes": 6291456,
+        "sha256": "1873fd46c9a198f296c9850064ce35e2f46240e5523a96cec16fd11b3fc0d0c0"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part14",
+        "bytes": 6291456,
+        "sha256": "ae62f1efda6707c43b3d9d8089e45dad9a8e6f747513f7b8a6ffe4ee7f1a5486"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part15",
+        "bytes": 6291456,
+        "sha256": "f2c741c19f6cd230b74a01de10dc667c553dc13edab8ac98cb4aeb9d4f12c407"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part16",
+        "bytes": 6291456,
+        "sha256": "a11d3f84f1679ef4da2077df8e5b09bf4e5dbcc6f2437d80622975f1405ff6cf"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part17",
+        "bytes": 6291456,
+        "sha256": "e653bc948f2b4c362300fceadc95036f1ba2d85942c79d5f7a9e9c277aed1934"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part18",
+        "bytes": 6291456,
+        "sha256": "c457e5b17ad510d48bf09910a2b6c5bb5789591a067dc1c1716e0247348449a8"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part19",
+        "bytes": 6291456,
+        "sha256": "d134d5032b8736c2522154b2d43b848289205efcebf347c37e363806dc5fa06c"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part20",
+        "bytes": 6291456,
+        "sha256": "a2eda79f4313ab374918584777e332208762296a11085a98274ad258d03c1760"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part21",
+        "bytes": 6291456,
+        "sha256": "b0d8ba8c434c8e50cc45bbe292d5fb54053a54225c49df5a35ff81ea98c21745"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part22",
+        "bytes": 6291456,
+        "sha256": "265d7f9f23eb994db3e0ca3cce2b09270cb54c494f40ef13db86f055cf504ef7"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part23",
+        "bytes": 6291456,
+        "sha256": "f75db7c44ca44d7b4b906dad19f8e39d2ba643720883c9eb8da6d6038a04ba90"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part24",
+        "bytes": 6291456,
+        "sha256": "f372db440736561f16decad67faef0bc0a1d894747c48c81bf75a6dbcb0d0b6f"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part25",
+        "bytes": 6291456,
+        "sha256": "64a3ea5dfa4f5d40207b59f1a716cfec8bbe9af56f67968629018deda07b3af1"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part26",
+        "bytes": 6291456,
+        "sha256": "6e0b1b445ab3d3fab4e2de0a0b8b0df749e1f098d2eb32e95881babbf1f6d0eb"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part27",
+        "bytes": 6291456,
+        "sha256": "9e519ebbcdf8988d5b3126b488795b5effae18b1cef53792f799ce13deaa1e5a"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part28",
+        "bytes": 6291456,
+        "sha256": "3cc14be228e46225d1739fe610b5351416e5b78b782701e3e7ca5b6e70a78e6a"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part29",
+        "bytes": 6291456,
+        "sha256": "c4595472912f462a2b62ca43053ba8d9d8641d65244066d6e5847b0ccc15f81b"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part30",
+        "bytes": 6291456,
+        "sha256": "8d6bc215f6f490153691c0d1a03647e9410fccd5f3ee35c7adfb282133344a10"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part31",
+        "bytes": 6291456,
+        "sha256": "7e5ad4a0bad621e1135b666c4398b5e84e21d5ee99a069db030a80065173431e"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part32",
+        "bytes": 6291456,
+        "sha256": "251789701378f4296fde58bffcd02217fd80cbaf298f6f9e1d983858ff327531"
+      },
+      {
+        "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip.part33",
+        "bytes": 560002,
+        "sha256": "6f224ce2027a6a5263ab2fefafede92edcd14cfcd03b4f1abc1f0840512005a5"
+      }
+    ],
+    "git_blob_shas": [
+      "794ef0bd1319020895681b0163db69802bad3306",
+      "2ece709a8b793a3b6463fbbf3b76d89bf86ff50f",
+      "d13e4113b86c6ef345d2e00b55e372c2e22139f1",
+      "ea96ce61e03637dc4e8123bccf62c72cd42a8538",
+      "c4ca020953b043d33403eb7f134aeec9d0759a3f",
+      "a391232b0c9899b530e64411c20e2c606d01db54",
+      "16285fc9d26e9f7b269c92fb0545f850a67e7c3f",
+      "35e599fba87e47dd8de09a73520ec676a11a18db",
+      "f2e6c9a049cc9af68319014b4c4befac7cd5fc25",
+      "c40c44bcebbb257f7756d07737b8b079055b4b20",
+      "5bb966908cf04447549430610ed384a4d6a36ab3",
+      "83e4a893781bc1b58461710f492dc12b79dc274c",
+      "51d39c0ce7b3dce399ecd10f23e006ab25a5cfa0",
+      "bf326fd9249352b2eabeea6a96618eb8a0853aa7",
+      "2ef3ee0d8bcda26e2958dd1749c185a86ddae4d7",
+      "dc311e33f1fa6adef33e8e9ce349455fdcc6d063",
+      "2f6cf9d015bf50327beb74e0f9b67e6525ba59b9",
+      "cfb46570a77219ef8f3bfbdb8c634022316aca49",
+      "439e4ede81c7aedf0d884745b518ea98245045c1",
+      "761879df8eea07bc604c934978bb41ac23d87c45",
+      "fd86aed528926f2adeee623efe28269aa7d1b769",
+      "2f59d6032fa8eaec835acc04f44feef53c390d42",
+      "5d471ef065f20a48489486d1f539d9db29a63a46",
+      "dbb9d60d771a26c478ca92cdb955519e2804ccc6",
+      "094a3b3de7639889e81f488a34af2a27b8dd1a1e",
+      "b13b05659ab24908b377cdeb7bd0e22e36a44635",
+      "2843b4001f741cd5d8a9de310e6f1f79ff1af6ca",
+      "8b00a846d1e5aa547d8bacc1b341f4133c14c555",
+      "155c46aeee376ede807cb8fb5bd27e43b3cb215f",
+      "25e252a15acb047797d7874c79865858de5c878a",
+      "b11e7000d51105af9c440ee84a48d760e600fbfc",
+      "5dca13015547ca31c4eb24dde4a3e11bb881e007",
+      "a0ce4ae31af018cd27fac40879906c31f9135baa",
+      "b107bbec1a2f66b8d6ac57cf2d4f05dc79566a81"
+    ]
+  }
+}

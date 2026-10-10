@@ -1,14 +1,5 @@
 bd4da8535060ae3cd5a72b71bc355f5f1c42764f6d26f0a10033efb5a43020ac  XYCut-restored-0.2.10-Windows-x64-Setup.exe
 4b5b283c778d5240e01ce5e47c7fa6c8015cdad964c4629b8c806b56e8168156  XYCut-restored-0.2.10-macOS-arm64-TEST.zip
 0cc1b5e750b23b5b2da1ab471f2275a3f635f224a4b1ab1809f6becb82169cec  XYCut-restored-0.2.10-macOS-x64-TEST.zip
-a4adf5227605223ea291c02484808ebb5c56bdf440bf355067bf17146e8b8411  XYCut-restored-0.2.10-source.zip
-e5e8056c48015aba6a748073a207791234f59ed909d222192e51d08cd5fdef5b  XYCut-restored-0.2.10-mac-source-lite.zip
-e5e8056c48015aba6a748073a207791234f59ed909d222192e51d08cd5fdef5b  XYCut-restored-0.2.10-mac-source-lite.zip (local final package before splitting)
-f3e6cd8987ecd0247a7d46458383881ed4f90b69944dfe47d5eff215af8371db  XYCut-restored-0.2.10-mac-source-lite.zip.part00
-c9ffeefb1105a436888f7d385f7576f689f5084982ad2f26ffafb97a44fe03ce  XYCut-restored-0.2.10-mac-source-lite.zip.part01
-a3b39a3e80a7f54c6aeae804c221893e83cb58398a74fe720d540a472cb06a5e  XYCut-restored-0.2.10-mac-source-lite.zip.part02
-d5335b7acba6ae96cfccc041155442291a4fc6501b86d613f01ad12c08849551  XYCut-restored-0.2.10-mac-source-lite.zip.part03
-f7b245caa897f7c525a353387571e75bd308f45297e7870c0a216dcdddc143c3  XYCut-restored-0.2.10-mac-source-lite.zip.part04
-b4e9a311c56d22a1ae0d37c4e68f20a14b8c8428f0bc401d218f5206dafa4768  XYCut-restored-0.2.10-mac-source-lite.zip.part05
-0ee3eeeacd0900b495dc112874a7e9d7c9a81d1756c3b75bf9fb3e68fe82e84d  XYCut-restored-0.2.10-mac-source-lite.zip.part06
-640ef02cbff4f6f2bfbba4dea07c55fca39b732c4422d862356a5faf6cd122f5  XYCut-restored-0.2.10-mac-source-lite.zip.part07
+dc28286bb93224c42c496b260e11e6cd3ba4c8a8ee7cf29deca48b6067ca1e80  XYCut-restored-0.2.10-source.zip
+4a06b922cbc045260e728976ea8772bbc566f142c9fc8ac63ff5608d730f6f03  XYCut-restored-0.2.10-mac-source-lite.zip

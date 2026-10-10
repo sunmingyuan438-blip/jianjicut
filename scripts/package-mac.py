@@ -25,11 +25,6 @@ VERSION = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))["devDe
 CHECKSUMS = json.loads((ROOT / "node_modules/electron/checksums.json").read_text(encoding="utf-8"))
 PYTHON_HASHES = {"arm64": "6292c6484ab2c96c80116f4bdb3da638d816206fe11a102e83787a2f75591b94", "x64": "eafceb263d9507ff0052ae9d6f1c415bb99299dcb202a931865b8ca044a5e40e"}
 
-# Prevent a stale app.asar from silently entering a newer Mac bundle. The
-# Windows build is the shared platform-neutral application payload.
-subprocess.run(["node", str(ROOT / "scripts/verify-mac-inputs.cjs")], cwd=ROOT, check=True)
-
-
 def download(url, name, algorithm, expected):
     file = CACHE / name
     if not file.exists():
@@ -160,5 +155,10 @@ done
 
 
 if __name__ == "__main__":
+    # Native Mac development imports inputs()/tar_entries() only. Validate the
+    # Windows payload only when this entry point actually assembles a bundle.
+    if "--download-only" not in sys.argv:
+        subprocess.run(["node", str(ROOT / "scripts/verify-mac-inputs.cjs")], cwd=ROOT, check=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         list(executor.map(inputs if "--download-only" in sys.argv else build, ["arm64", "x64"]))
+

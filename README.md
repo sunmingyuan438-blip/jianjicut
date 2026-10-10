@@ -10,7 +10,7 @@ Windows 使用 `dist/XYCut-restored-0.2.10-Windows-x64-Setup.exe`，或解压后
 
 Mac 需要 **macOS 13 或更高版本**。M 系列芯片使用 `macOS-arm64-TEST.zip`，Intel 使用 `macOS-x64-TEST.zip`。将 ZIP 复制到 Mac 本机目录并解压；先运行 `首次准备并启动.command`，它会为同目录的测试应用进行本地开发签名并打开应用。这些包尚未经过 Mac 运行验证，也没有 Developer ID 发布签名或公证。
 
-从 GitHub 获取源码并在 Mac 上测试时，先按 `GITHUB_MAC_TEST.md` 下载并拼接 `downloads/XYCut-restored-0.2.10-mac-source-lite.zip.part00` 至 `part07`，再执行 `npm ci`、`npm run start:mac` 或 `npm run build:mac`。GitHub 普通仓库不接收本次预编译安装包和大 ZIP 的单次上传，因此 Mac 测试交付采用分片源码包；Windows 工作区中的预编译包仍保留用于本地验收。
+从 GitHub 获取 Mac 测试包时，优先按 `GITHUB_MAC_TEST.md` 使用 `scripts/download-mac-test-package.sh` 下载对应架构的预编译包。脚本会下载 6 MB 分片、拼接并校验 SHA-256；解压后直接运行“首次准备并启动.command”和“运行验收.command”。如果需要源码开发，再下载 `downloads/XYCut-restored-0.2.10-mac-source-lite.zip`，执行 `npm ci`、`npm run start:mac` 或 `npm run build:mac`。
 
 首次准备脚本会验证本地签名，并将系统版本、芯片类型和签名检查结果写入 `验收记录/mac-preparation.log`。运行 Mac 包内的 `运行验收.command`，会在同目录的 `验收记录/` 写入：
 
