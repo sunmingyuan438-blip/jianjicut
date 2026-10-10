@@ -1,0 +1,22 @@
+{
+  "build_id": "20261009-functional-r8",
+  "created_at": "2026-10-10T03:18:46.846Z",
+  "artifacts": [
+    {
+      "name": "XYCut-restored-0.2.10-Windows-x64-Setup.exe",
+      "bytes": 189227313,
+      "sha256": "bd4da8535060ae3cd5a72b71bc355f5f1c42764f6d26f0a10033efb5a43020ac"
+    },
+    {
+      "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip",
+      "bytes": 180438845,
+      "sha256": "4b5b283c778d5240e01ce5e47c7fa6c8015cdad964c4629b8c806b56e8168156"
+    },
+    {
+      "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip",
+      "bytes": 208178050,
+      "sha256": "0cc1b5e750b23b5b2da1ab471f2275a3f635f224a4b1ab1809f6becb82169cec"
+    }
+  ],
+  "source_archive_checksum": "dist/SHA256SUMS.txt; generated after this evidence file to avoid a circular checksum"
+}

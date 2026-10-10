@@ -1,0 +1,841 @@
+{
+  "build_id": "20261009-functional-r8",
+  "app_root": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\installed-app-r8\\resources\\app.asar",
+  "resources": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\installed-app-r8\\resources\\xycut",
+  "ok": true,
+  "requirements": [
+    "F-21",
+    "F-20"
+  ],
+  "ai_recommended_install": {
+    "theme": "standard-hei",
+    "fixture_catalog_count": 2,
+    "downloaded_count": 2,
+    "installed_command_count": 2,
+    "disk_preset_count": 2,
+    "favorite_count": 2,
+    "downloaded_count_matches_disk": true,
+    "downloaded_count_matches_favorites": true,
+    "paths_exist": true
+  },
+  "material_head_trim": {
+    "selected_ms": 1000,
+    "local_storage_saved": true,
+    "agent_context_saved": true,
+    "apply_to": "matched_broll_video"
+  },
+  "paid_or_live_provider_calls": false,
+  "https_fixture_only": true,
+  "https_requests": [
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/app/ffmpeg-runtime",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/app/ai-runtime",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/pay/products",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/app-config",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/presets/filter-options",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/update",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/app/ffmpeg-runtime",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/app/ai-runtime",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/pay/products",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/app-config",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/presets/filter-options",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/update",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/video-templates",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/presets",
+      "method": "GET"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/templates/download",
+      "method": "POST"
+    },
+    {
+      "host": "yushe.neirongpai.com",
+      "path": "/api/templates/download",
+      "method": "POST"
+    }
+  ],
+  "fixture_downloads": [
+    {
+      "slug": "fixture-ai-standard-hei-01",
+      "method": "GET"
+    },
+    {
+      "slug": "fixture-ai-standard-hei-02",
+      "method": "GET"
+    }
+  ],
+  "commands": [
+    {
+      "name": "list_recent_workbench_tasks",
+      "args": {
+        "limit": 5
+      }
+    },
+    {
+      "name": "scan_local_presets",
+      "args": {
+        "customDir": null
+      }
+    },
+    {
+      "name": "scan_builtin_presets",
+      "args": {}
+    },
+    {
+      "name": "scan_online_preset_cache",
+      "args": {}
+    },
+    {
+      "name": "load_local_favorite_preset_index",
+      "args": {}
+    },
+    {
+      "name": "get_agent_api_context",
+      "args": {}
+    },
+    {
+      "name": "get_sucai_db_status",
+      "args": {}
+    },
+    {
+      "name": "get_ffmpeg_runtime_status",
+      "args": {}
+    },
+    {
+      "name": "get_sucai_storage_status",
+      "args": {}
+    },
+    {
+      "name": "get_ai_runtime_status",
+      "args": {}
+    },
+    {
+      "name": "plugin:window|scale_factor",
+      "args": {
+        "label": "main"
+      }
+    },
+    {
+      "name": "save_agent_context_file",
+      "args": {
+        "input": {
+          "preset_dir": "",
+          "draft_output_dir": "",
+          "hot_template_skill_version": "0.1.28",
+          "video_template_skill_version": "0.2.41",
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 500,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          },
+          "third_party_apis": [],
+          "sucai_context": null
+        }
+      }
+    },
+    {
+      "name": "update_agent_api_context",
+      "args": {
+        "input": {
+          "ai_editing_enabled": true,
+          "draft_output_dir": "",
+          "auth_token": "",
+          "api_base_urls": [
+            "https://yushe.neirongpai.com"
+          ],
+          "membership_enabled": true,
+          "favorite_index": {
+            "schema_version": 1,
+            "default_group_id": "default",
+            "groups": [
+              {
+                "id": "default",
+                "name": "默认收藏",
+                "preset_ids": [],
+                "created_at": 1791601608785,
+                "updated_at": 1791601608785
+              }
+            ],
+            "presets": []
+          },
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 500,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "plugin:window|inner_size",
+      "args": {
+        "label": "main"
+      }
+    },
+    {
+      "name": "get_agent_api_context",
+      "args": {}
+    },
+    {
+      "name": "plugin:window|set_size",
+      "args": {
+        "label": "main",
+        "value": {
+          "Logical": {
+            "width": 660,
+            "height": 902
+          }
+        }
+      }
+    },
+    {
+      "name": "list_recent_workbench_tasks",
+      "args": {
+        "limit": 5
+      }
+    },
+    {
+      "name": "scan_local_presets",
+      "args": {
+        "customDir": null
+      }
+    },
+    {
+      "name": "scan_builtin_presets",
+      "args": {}
+    },
+    {
+      "name": "scan_online_preset_cache",
+      "args": {}
+    },
+    {
+      "name": "load_local_favorite_preset_index",
+      "args": {}
+    },
+    {
+      "name": "get_agent_api_context",
+      "args": {}
+    },
+    {
+      "name": "get_sucai_db_status",
+      "args": {}
+    },
+    {
+      "name": "get_ffmpeg_runtime_status",
+      "args": {}
+    },
+    {
+      "name": "get_sucai_storage_status",
+      "args": {}
+    },
+    {
+      "name": "get_ai_runtime_status",
+      "args": {}
+    },
+    {
+      "name": "plugin:window|scale_factor",
+      "args": {
+        "label": "main"
+      }
+    },
+    {
+      "name": "save_agent_context_file",
+      "args": {
+        "input": {
+          "preset_dir": "",
+          "draft_output_dir": "",
+          "hot_template_skill_version": "0.1.28",
+          "video_template_skill_version": "0.2.41",
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 500,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          },
+          "third_party_apis": [],
+          "sucai_context": null
+        }
+      }
+    },
+    {
+      "name": "plugin:window|inner_size",
+      "args": {
+        "label": "main"
+      }
+    },
+    {
+      "name": "update_agent_api_context",
+      "args": {
+        "input": {
+          "ai_editing_enabled": true,
+          "draft_output_dir": "",
+          "auth_token": "",
+          "api_base_urls": [
+            "https://yushe.neirongpai.com"
+          ],
+          "membership_enabled": true,
+          "favorite_index": {
+            "schema_version": 1,
+            "default_group_id": "default",
+            "groups": [
+              {
+                "id": "default",
+                "name": "默认收藏",
+                "preset_ids": [],
+                "created_at": 1791601608785,
+                "updated_at": 1791601608785
+              }
+            ],
+            "presets": []
+          },
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 500,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "plugin:window|set_size",
+      "args": {
+        "label": "main",
+        "value": {
+          "Logical": {
+            "width": 660,
+            "height": 903
+          }
+        }
+      }
+    },
+    {
+      "name": "get_agent_api_context",
+      "args": {}
+    },
+    {
+      "name": "scan_video_template_cache",
+      "args": {}
+    },
+    {
+      "name": "save_agent_context_file",
+      "args": {
+        "input": {
+          "preset_dir": "",
+          "draft_output_dir": "",
+          "hot_template_skill_version": "0.1.28",
+          "video_template_skill_version": "0.2.41",
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 500,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          },
+          "third_party_apis": [],
+          "sucai_context": null
+        }
+      }
+    },
+    {
+      "name": "update_agent_api_context",
+      "args": {
+        "input": {
+          "ai_editing_enabled": true,
+          "draft_output_dir": "",
+          "auth_token": "",
+          "api_base_urls": [
+            "https://yushe.neirongpai.com"
+          ],
+          "membership_enabled": true,
+          "favorite_index": {
+            "schema_version": 1,
+            "default_group_id": "ai-editing-presets",
+            "groups": [
+              {
+                "id": "default",
+                "name": "默认收藏",
+                "preset_ids": [],
+                "created_at": 1791601608785,
+                "updated_at": 1791601608785
+              },
+              {
+                "id": "ai-editing-presets",
+                "name": "AI 剪辑预设",
+                "preset_ids": [],
+                "created_at": 1791601609374,
+                "updated_at": 1791601609374
+              }
+            ],
+            "presets": []
+          },
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 500,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "install_online_preset",
+      "args": {
+        "downloadUrl": "http://127.0.0.1:62903/fixture-ai-standard-hei-01",
+        "sha256": "135cf462be1fc6d3473bd6e3d6559b3edfd64f8b239e7ed0d2aba325fb666f2b",
+        "folderName": "fixture-ai-standard-hei-01",
+        "customDir": null,
+        "syncToJianying": false,
+        "installKind": "preset"
+      }
+    },
+    {
+      "name": "get_agent_api_context",
+      "args": {}
+    },
+    {
+      "name": "update_agent_api_context",
+      "args": {
+        "input": {
+          "ai_editing_enabled": true,
+          "draft_output_dir": "",
+          "auth_token": "",
+          "api_base_urls": [
+            "https://yushe.neirongpai.com"
+          ],
+          "membership_enabled": true,
+          "favorite_index": {
+            "schema_version": 1,
+            "default_group_id": "ai-editing-presets",
+            "groups": [
+              {
+                "id": "default",
+                "name": "默认收藏",
+                "preset_ids": [],
+                "created_at": 1791601608785,
+                "updated_at": 1791601608785
+              },
+              {
+                "id": "ai-editing-presets",
+                "name": "AI 剪辑预设",
+                "preset_ids": [
+                  "online:fixture-ai-standard-hei-01"
+                ],
+                "created_at": 1791601609374,
+                "updated_at": 1791601609406
+              }
+            ],
+            "presets": [
+              {
+                "preset_id": "online:fixture-ai-standard-hei-01",
+                "name": "AI 黑体重点字幕 01",
+                "preset_path": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\ai-settings-ui\\469670ac-6f9e-48b2-a32c-a6a4abb5c846\\data\\presets\\fixture-ai-standard-hei-01",
+                "style_level": "01",
+                "slot_count": 0,
+                "slot_max_chars": [],
+                "duration_ms": 0,
+                "tags": [
+                  "AI适配标准黑",
+                  "AI剪辑",
+                  "fixture"
+                ],
+                "ai_editing_ready": true,
+                "category_ids": [
+                  "free"
+                ],
+                "favorite_group_ids": [
+                  "ai-editing-presets"
+                ]
+              }
+            ]
+          },
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 500,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "install_online_preset",
+      "args": {
+        "downloadUrl": "http://127.0.0.1:62903/fixture-ai-standard-hei-02",
+        "sha256": "1997fc3026e1265904bf52f57be6d689eb280ed4d3d7d529851b1775400829a3",
+        "folderName": "fixture-ai-standard-hei-02",
+        "customDir": null,
+        "syncToJianying": false,
+        "installKind": "preset"
+      }
+    },
+    {
+      "name": "get_agent_api_context",
+      "args": {}
+    },
+    {
+      "name": "scan_online_preset_cache",
+      "args": {}
+    },
+    {
+      "name": "update_agent_api_context",
+      "args": {
+        "input": {
+          "ai_editing_enabled": true,
+          "draft_output_dir": "",
+          "auth_token": "",
+          "api_base_urls": [
+            "https://yushe.neirongpai.com"
+          ],
+          "membership_enabled": true,
+          "favorite_index": {
+            "schema_version": 1,
+            "default_group_id": "ai-editing-presets",
+            "groups": [
+              {
+                "id": "default",
+                "name": "默认收藏",
+                "preset_ids": [],
+                "created_at": 1791601608785,
+                "updated_at": 1791601608785
+              },
+              {
+                "id": "ai-editing-presets",
+                "name": "AI 剪辑预设",
+                "preset_ids": [
+                  "online:fixture-ai-standard-hei-01",
+                  "online:fixture-ai-standard-hei-02"
+                ],
+                "created_at": 1791601609374,
+                "updated_at": 1791601609425
+              }
+            ],
+            "presets": [
+              {
+                "preset_id": "online:fixture-ai-standard-hei-01",
+                "name": "AI 黑体重点字幕 01",
+                "preset_path": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\ai-settings-ui\\469670ac-6f9e-48b2-a32c-a6a4abb5c846\\data\\presets\\fixture-ai-standard-hei-01",
+                "style_level": "01",
+                "slot_count": 0,
+                "slot_max_chars": [],
+                "duration_ms": 0,
+                "tags": [
+                  "AI适配标准黑",
+                  "AI剪辑",
+                  "fixture"
+                ],
+                "ai_editing_ready": true,
+                "category_ids": [
+                  "free"
+                ],
+                "favorite_group_ids": [
+                  "ai-editing-presets"
+                ]
+              },
+              {
+                "preset_id": "online:fixture-ai-standard-hei-02",
+                "name": "AI 黑体重点字幕 02",
+                "preset_path": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\ai-settings-ui\\469670ac-6f9e-48b2-a32c-a6a4abb5c846\\data\\presets\\fixture-ai-standard-hei-02",
+                "style_level": "02",
+                "slot_count": 0,
+                "slot_max_chars": [],
+                "duration_ms": 0,
+                "tags": [
+                  "AI适配标准黑",
+                  "AI剪辑",
+                  "fixture"
+                ],
+                "ai_editing_ready": true,
+                "category_ids": [
+                  "free"
+                ],
+                "favorite_group_ids": [
+                  "ai-editing-presets"
+                ]
+              }
+            ]
+          },
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 500,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "update_agent_api_context",
+      "args": {
+        "input": {
+          "ai_editing_enabled": true,
+          "draft_output_dir": "",
+          "auth_token": "",
+          "api_base_urls": [
+            "https://yushe.neirongpai.com"
+          ],
+          "membership_enabled": true,
+          "favorite_index": {
+            "schema_version": 1,
+            "default_group_id": "ai-editing-presets",
+            "groups": [
+              {
+                "id": "default",
+                "name": "默认收藏",
+                "preset_ids": [],
+                "created_at": 1791601608785,
+                "updated_at": 1791601608785
+              },
+              {
+                "id": "ai-editing-presets",
+                "name": "AI 剪辑预设",
+                "preset_ids": [
+                  "online:fixture-ai-standard-hei-01",
+                  "online:fixture-ai-standard-hei-02"
+                ],
+                "created_at": 1791601609374,
+                "updated_at": 1791601609425
+              }
+            ],
+            "presets": [
+              {
+                "preset_id": "online:fixture-ai-standard-hei-01",
+                "name": "AI 黑体重点字幕 01",
+                "preset_path": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\ai-settings-ui\\469670ac-6f9e-48b2-a32c-a6a4abb5c846\\data\\presets\\fixture-ai-standard-hei-01",
+                "style_level": "01",
+                "slot_count": 0,
+                "slot_max_chars": [],
+                "duration_ms": 0,
+                "tags": [
+                  "AI适配标准黑",
+                  "AI剪辑",
+                  "fixture"
+                ],
+                "ai_editing_ready": true,
+                "category_ids": [
+                  "free"
+                ],
+                "favorite_group_ids": [
+                  "ai-editing-presets"
+                ]
+              },
+              {
+                "preset_id": "online:fixture-ai-standard-hei-02",
+                "name": "AI 黑体重点字幕 02",
+                "preset_path": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\ai-settings-ui\\469670ac-6f9e-48b2-a32c-a6a4abb5c846\\data\\presets\\fixture-ai-standard-hei-02",
+                "style_level": "02",
+                "slot_count": 0,
+                "slot_max_chars": [],
+                "duration_ms": 0,
+                "tags": [
+                  "AI适配标准黑",
+                  "AI剪辑",
+                  "fixture"
+                ],
+                "ai_editing_ready": true,
+                "category_ids": [
+                  "free"
+                ],
+                "favorite_group_ids": [
+                  "ai-editing-presets"
+                ]
+              }
+            ]
+          },
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 500,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "get_agent_api_context",
+      "args": {}
+    },
+    {
+      "name": "get_agent_api_context",
+      "args": {}
+    },
+    {
+      "name": "update_agent_api_context",
+      "args": {
+        "input": {
+          "ai_editing_enabled": true,
+          "draft_output_dir": "",
+          "auth_token": "",
+          "api_base_urls": [
+            "https://yushe.neirongpai.com"
+          ],
+          "membership_enabled": true,
+          "favorite_index": {
+            "schema_version": 1,
+            "default_group_id": "ai-editing-presets",
+            "groups": [
+              {
+                "id": "default",
+                "name": "默认收藏",
+                "preset_ids": [],
+                "created_at": 1791601608785,
+                "updated_at": 1791601608785
+              },
+              {
+                "id": "ai-editing-presets",
+                "name": "AI 剪辑预设",
+                "preset_ids": [
+                  "online:fixture-ai-standard-hei-01",
+                  "online:fixture-ai-standard-hei-02"
+                ],
+                "created_at": 1791601609374,
+                "updated_at": 1791601609425
+              }
+            ],
+            "presets": [
+              {
+                "preset_id": "online:fixture-ai-standard-hei-01",
+                "name": "AI 黑体重点字幕 01",
+                "preset_path": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\ai-settings-ui\\469670ac-6f9e-48b2-a32c-a6a4abb5c846\\data\\presets\\fixture-ai-standard-hei-01",
+                "style_level": "01",
+                "slot_count": 0,
+                "slot_max_chars": [],
+                "duration_ms": 0,
+                "tags": [
+                  "AI适配标准黑",
+                  "AI剪辑",
+                  "fixture"
+                ],
+                "ai_editing_ready": true,
+                "category_ids": [
+                  "free"
+                ],
+                "favorite_group_ids": [
+                  "ai-editing-presets"
+                ]
+              },
+              {
+                "preset_id": "online:fixture-ai-standard-hei-02",
+                "name": "AI 黑体重点字幕 02",
+                "preset_path": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\ai-settings-ui\\469670ac-6f9e-48b2-a32c-a6a4abb5c846\\data\\presets\\fixture-ai-standard-hei-02",
+                "style_level": "02",
+                "slot_count": 0,
+                "slot_max_chars": [],
+                "duration_ms": 0,
+                "tags": [
+                  "AI适配标准黑",
+                  "AI剪辑",
+                  "fixture"
+                ],
+                "ai_editing_ready": true,
+                "category_ids": [
+                  "free"
+                ],
+                "favorite_group_ids": [
+                  "ai-editing-presets"
+                ]
+              }
+            ]
+          },
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 1000,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "save_agent_context_file",
+      "args": {
+        "input": {
+          "preset_dir": "",
+          "draft_output_dir": "",
+          "hot_template_skill_version": "0.1.28",
+          "video_template_skill_version": "0.2.41",
+          "video_editing_settings": {
+            "source_trim": {
+              "video_head_ms": 1000,
+              "apply_to": "matched_broll_video",
+              "note": "仅用于匹配到的 B-roll 视频素材，不影响主视频、口播 A-roll 和图片素材。"
+            }
+          },
+          "third_party_apis": [],
+          "sucai_context": null
+        }
+      }
+    },
+    {
+      "name": "get_agent_api_context",
+      "args": {}
+    }
+  ],
+  "command_errors": [],
+  "console_errors": []
+}

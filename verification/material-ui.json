@@ -1,0 +1,55 @@
+{
+  "build_id": "20261009-functional-r8",
+  "ok": true,
+  "requirements": [
+    "F-23",
+    "F-26",
+    "F-31",
+    "F-32"
+  ],
+  "recursive_batches": 2,
+  "imported": 3,
+  "completed_materials": 2,
+  "edited_materials": 1,
+  "clear_pending": {
+    "cancel_kept": 1,
+    "confirmed_removed": 1,
+    "completed_kept": 2
+  },
+  "batch_reset": {
+    "cancel_unchanged": true,
+    "confirmed": 2
+  },
+  "batch_delete": {
+    "cancel_unchanged": true,
+    "confirmed": 2,
+    "copies_removed": 2,
+    "original_files_unchanged": 3
+  },
+  "index_backend_fixture_only": true,
+  "paid_or_live_provider_calls": false,
+  "console_errors": [],
+  "capture_errors": [],
+  "command_counts": {
+    "list_recent_workbench_tasks": 1,
+    "scan_local_presets": 1,
+    "scan_builtin_presets": 1,
+    "scan_online_preset_cache": 1,
+    "load_local_favorite_preset_index": 1,
+    "get_agent_api_context": 2,
+    "get_sucai_db_status": 2,
+    "get_ffmpeg_runtime_status": 2,
+    "get_sucai_storage_status": 2,
+    "get_ai_runtime_status": 1,
+    "plugin:window|scale_factor": 1,
+    "save_agent_context_file": 12,
+    "update_agent_api_context": 1,
+    "plugin:window|inner_size": 1,
+    "plugin:window|set_size": 1,
+    "import_sucai_materials": 2,
+    "clear_sucai_pending_sources": 1,
+    "update_sucai_material": 1,
+    "reset_sucai_material_analysis": 2,
+    "delete_sucai_material": 2
+  }
+}

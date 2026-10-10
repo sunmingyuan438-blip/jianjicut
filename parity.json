@@ -1,0 +1,356 @@
+{
+  "version": "0.2.10",
+  "build_id": "20261009-functional-r8",
+  "updated_at": "2026-10-10T03:18:46.842Z",
+  "goal_complete": false,
+  "windows": {
+    "installer_built": true,
+    "installer_installed": true,
+    "packaged_desktop_smoke_pass": true,
+    "desktop_page_count": 8,
+    "functional_cases": {
+      "tests": 74,
+      "pass": 74,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "real_templates_passed": 2,
+    "real_template_core_comparisons_equal": true,
+    "workbench_ui_pass": true,
+    "template_ui_pass": true,
+    "desktop_tray_pass": true,
+    "ai_settings_ui_pass": true,
+    "standalone_preview_pass": true,
+    "doubao_connection_contract_offline_pass": true,
+    "doubao_live_provider_tested": false,
+    "agent_api_switch_ui_pass": true,
+    "material_lifecycle_ui_pass": true,
+    "source_isolated_npm_ci_pass": true,
+    "source_isolated_tests_pass": true,
+    "source_isolated_windows_build_pass": true,
+    "jianying_open_edit_tested": false,
+    "preview_screenshot_error": null
+  },
+  "macos": {
+    "arm64_bundle_created": true,
+    "x64_bundle_created": true,
+    "minimum_macos": "13.0",
+    "binary_architectures_checked": true,
+    "device_tested": false,
+    "jianying_open_edit_tested": false,
+    "native_build_script_tested": false
+  },
+  "native_commands": [
+    {
+      "name": "clear_ai_runtime",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "clear_cache",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "clear_ffmpeg_runtime",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "clear_sucai_pending_sources",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "create_sucai_library",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "delete_local_hot_template",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "delete_local_video_template",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "delete_sucai_library",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "delete_sucai_material",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "download_and_open_update",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "get_agent_api_context",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "get_ai_runtime_status",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "get_cache_dir",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "get_ffmpeg_runtime_status",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "get_sucai_db_status",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "get_sucai_storage_status",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "import_sucai_materials",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "index_sucai_classified_directory",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "install_ai_runtime",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "install_builtin_preset",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "install_ffmpeg_runtime",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "install_imported_presets",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "install_online_preset",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "list_local_hot_templates",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "list_local_video_templates",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "list_recent_workbench_tasks",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "list_sucai_embedding_items",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "load_local_favorite_preset_index",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "open_local_folder",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "pack_template_folder",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "reset_local_data",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "reset_sucai_material_analysis",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "restart_jianying",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "save_agent_context_file",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "save_hot_template_config",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "save_local_preset_as_hot_template",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "save_local_preset_as_video_template",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "save_sucai_embeddings",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "save_video_template_config",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "scan_builtin_presets",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "scan_hot_template_cache",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "scan_local_presets",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "scan_online_preset_cache",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "scan_video_template_cache",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "test_ai_service_api",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "test_template_zip",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "update_agent_api_context",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "update_sucai_material",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "update_sucai_storage_dir",
+      "implemented": true,
+      "windows_status": "covered_by_functional_test",
+      "macos_status": "pending_device_test"
+    },
+    {
+      "name": "upload_share_source",
+      "implemented": true,
+      "windows_status": "implemented_pending_full_behavior_validation",
+      "macos_status": "pending_device_test"
+    }
+  ],
+  "handoff_status_file": "verification/handoff-status.json",
+  "source_rebuild_report": "verification/source-rebuild-r8.json",
+  "remaining": [
+    "Mac 实机启动及核心验收",
+    "Windows/Mac 剪映打开和编辑生成的草稿",
+    "其余模板和完整交互流程对照原软件验收",
+    "原服务账号、会员、计费、AI 服务、分享上传与自动更新的真实场景验收",
+    "原 Rust/TSX 和服务端源码未完整找回；部分源码通过重新实现替代"
+  ],
+  "online_note": "公开模板目录和免费模板已验证。原客户端生成 API 一次核对返回扣除 5 积分，已告知用户并停止调用；其他自动生成验证调用离线恢复核心，没有上传或购买。"
+}

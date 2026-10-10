@@ -1,0 +1,33 @@
+{
+  "name": "xycut-restored-desktop",
+  "version": "0.2.10",
+  "description": "XYCut desktop restoration for Windows and macOS",
+  "private": true,
+  "main": "desktop/main.cjs",
+  "author": "XYCut",
+  "scripts": {
+    "prepare:resources": "node scripts/prepare-resources.cjs",
+    "start": "electron .",
+    "start:mac": "node scripts/start-native-mac.cjs",
+    "test:mac": "node scripts/start-native-mac.cjs --test",
+    "test": "node --test tests/*.test.cjs",
+    "test:desktop": "electron . --smoke-test",
+    "prebuild:win": "node scripts/prepare-resources.cjs",
+    "build:win": "electron-builder --win nsis --x64 --publish never",
+    "build:mac": "node scripts/build-native-mac.cjs"
+  },
+  "dependencies": { "adm-zip": "0.5.16" },
+  "devDependencies": { "electron": "44.7.0", "electron-builder": "26.15.3" },
+  "build": {
+    "appId": "com.xycut.restored",
+    "productName": "XYCut 恢复版",
+    "asar": true,
+    "electronDist": "node_modules/electron/dist",
+    "directories": { "output": "dist" },
+    "files": ["desktop/**", "backend/**", "tests/desktop*.cjs", "package.json", "node_modules/**"],
+    "extraResources": [{ "from": "resources", "to": "xycut", "filter": ["**/*", "!**/__pycache__/**"] }],
+    "win": { "target": "nsis", "icon": "resources/frontend/icon.ico", "signExecutable": false },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true, "artifactName": "XYCut-restored-${version}-Windows-${arch}-Setup.${ext}" },
+    "mac": { "target": "zip", "icon": "resources/frontend/icon.icns", "category": "public.app-category.video", "identity": null, "hardenedRuntime": false, "artifactName": "XYCut-restored-${version}-macOS-${arch}.${ext}" }
+  }
+}

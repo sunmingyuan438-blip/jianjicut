@@ -1,0 +1,774 @@
+{
+  "build_id": "20261009-functional-r8",
+  "updated_at": "2026-10-10T03:18:46.845Z",
+  "scope": "Windows 和 macOS 全部功能等价；实现存在或静态打包检查不视为完整验收通过。",
+  "source": {
+    "name": "XYCut开发对接资料包_v1.0_2026-10-09.zip",
+    "sha256": "bf78b4957a383d8c046c3766014faad5b2533a5d2066cf2e8989c17a9551659d",
+    "requirement_count": 40,
+    "acceptance_case_count": 12,
+    "contents": "说明、截图、要求、既有验证快照和提议补丁；没有新增原 Rust/TSX/服务器源码。",
+    "embedded_patch_executed": false
+  },
+  "goal_complete": false,
+  "requirements": [
+    {
+      "id": "F-01",
+      "name": "剪映路径配置",
+      "acceptance": "分别保存两个目录，重启恢复版后仍保持；草稿写入配置目录。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "NreYddkD3oekLxxW5wTchDwan4f"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "中文/空格剪映预设目录和草稿目录分别保存，重启 Service 后真实生成草稿。",
+      "evidence_files": [
+        "preset-paths.test.cjs",
+        "service-tests.xml"
+      ],
+      "remaining": "Windows/Mac 剪映实开编辑保存。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-02",
+      "name": "特殊预设目录定位",
+      "acceptance": "自定义盘符、含中文/空格路径、非默认安装位置均能发现/保存预设目录。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "K80OdCVJMoYmPWxHPnKcfJIZnZd"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "选择安装根目录可自动定位 Combination/Presets，直接目录、非默认路径和无效路径保护均通过。",
+      "evidence_files": [
+        "preset-paths.test.cjs"
+      ],
+      "remaining": "Windows/Mac 实机全量预设回归。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-03",
+      "name": "AI 剪辑开关",
+      "acceptance": "开关状态影响 Agent 调用；提示词中的运行端口与真实监听端口一致。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "IvhjdRMMKoZ4NrxRJMHc7n4vnPg"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "Windows 原设置界面关闭/开启，关闭时生成接口返回 403；重启配置及真实端口测试通过。",
+      "evidence_files": [
+        "windows-installed-desktop.json",
+        "service-tests.xml"
+      ],
+      "remaining": "Mac 实机、复制提示词的完整流程。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-04",
+      "name": "运行环境安装与维护",
+      "acceptance": "未安装→安装→刷新→打开目录→重装→清空，各状态和实际 Python 可用性一致。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "UB3LdqXWHo4j57xcrKxct2Dwnac"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "Windows Python 清空/重装、实际 SQLite 与 Pillow 调用通过。",
+      "evidence_files": [
+        "service-tests.xml",
+        "windows-installed-desktop.json"
+      ],
+      "remaining": "首次在线安装和完整维护界面、Mac 实机。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-05",
+      "name": "爆款模板筛选与复制提示词",
+      "acceptance": "选择在线/本地模板，点击复制自动安装并复制有效提示词，取消/失败给出真实反馈。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "VA9UdzikSokn7mxPnWncZrtkn8f"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "离线 Electron UI 夹具覆盖线上爆款模板列表、安装、复制提示词、失败反馈；配置路径和上下文文件真实存在。",
+      "evidence_files": [
+        "template-ui.json",
+        "preset-installation.test.cjs"
+      ],
+      "remaining": "公开线上目录全量筛选与真实下载、Mac。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-06",
+      "name": "Agent 上下文",
+      "acceptance": "复制出的路径指向真实上下文、模板参数和工具；迁移目录/改端口后不遗留旧路径。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "DNnzd22T6ouN1XxK7GLcNgjcnvd"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "Agent 上下文保留默认素材库和预设路径，更新监听端口；不同 KEY 写法识别通过。",
+      "evidence_files": [
+        "service-tests.xml"
+      ],
+      "remaining": "复制提示词后外部 Agent 的完整交互及 Mac。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-07",
+      "name": "自建模板",
+      "acceptance": "本地剪映模板转成参数配置，嵌套草稿、文字与素材槽位可读并能正确替换。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "M5OudmZBQoYBxZxTyW6c0Ltnnec"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "内置预设转视频/爆款模板并调用草稿核心通过。",
+      "evidence_files": [
+        "service-tests.xml",
+        "windows-installed-desktop.json"
+      ],
+      "remaining": "全部嵌套模板及两端剪映使用。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-08",
+      "name": "模板文字与素材替换",
+      "acceptance": "新闻/卡点模板全部槽位替换；图片/视频/音频路径、方向、时长正确。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "DNnzd22T6ouN1XxK7GLcNgjcnvd"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "两个公开真实模板生成且全部媒体路径存在，原保护核心与恢复核心规范化 JSON 一致。",
+      "evidence_files": [
+        "real-template-drafts.json",
+        "original-core-comparison.json"
+      ],
+      "remaining": "其余模板全部槽位及剪映实开。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-09",
+      "name": "模板字数判断",
+      "acceptance": "中英混合、空白、标点、emoji、换行和多段文字的字数策略与原版及 Agent 校验一致。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "K80OdCVJMoYmPWxHPnKcfJIZnZd"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "转换字数匹配四份原 Agent 原脚本，覆盖 Unicode/空白/ASCII/emoji/多段及边界；原 UI 和核心的独立规则保持原样。",
+      "evidence_files": [
+        "template-chars-contract.json",
+        "service-tests.xml"
+      ],
+      "remaining": "原 native 自动转换 suggest_chars 区间取整规则、完整双端交互。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-10",
+      "name": "草稿同步与可编辑性",
+      "acceptance": "实际在两端剪映打开草稿，标题/字幕/音视频可编辑，保存再打开仍完整。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "VJVOdd5H1oGCPlxpKjucNSM0nSc"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "有实际草稿 JSON、媒体路径和原核心对比证据。",
+      "evidence_files": [
+        "real-template-drafts.json",
+        "original-core-comparison.json"
+      ],
+      "remaining": "两端剪映打开、编辑、保存并重新打开。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-11",
+      "name": "AI 剪辑模板与样式",
+      "acceptance": "在线/本地模板的标题坐标、持续时长和字幕样式保持模板语义。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "V4XWdoPo5opxoTxVVBTcgQgcnph"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "离线 Electron UI 夹具覆盖视频模板列表、安装、复制 Agent 提示词和失败反馈，并保留审核配置。",
+      "evidence_files": [
+        "template-ui.json",
+        "preset-installation.test.cjs"
+      ],
+      "remaining": "公开线上目录全量筛选与真实下载、剪映和 Mac。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-12",
+      "name": "字幕预设匹配",
+      "acceptance": "普通、强调和多段文字预设被正确匹配，实际字体、样式与时间线正确。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BPVvdeTfOoqbvRxuj4Ccegkfnmd"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "本地字幕预设匹配命令按普通/重点 style_level、槽位字数和收藏组返回匹配及候选原因。",
+      "evidence_files": [
+        "service-tests.xml",
+        "local-preset-and-subtitle.test.cjs"
+      ],
+      "remaining": "真实剪映字体、样式、时间线和全量预设回归。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-13",
+      "name": "文本生成配音",
+      "acceptance": "有用户配置后生成音频及时间戳，草稿字幕时序与音频对齐。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "HUJOdfsPLo3IkOxjzpecqdyInIE"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "本地 HTTP 夹具验证 TTS 2.0 参数数组、资源 ID、音频及时间戳输出；缺 KEY、无音频和 HTTP 错误有清理/失败契约。",
+      "evidence_files": [
+        "speech-contract.test.cjs"
+      ],
+      "remaining": "用户配置的真实 TTS 服务和剪映音频对齐。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-14",
+      "name": "声音克隆",
+      "acceptance": "使用用户已开通的复刻音色生成配音，失败/权限/配额状态可解释。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "PG38diYvpolEfcxPzvxcAlQsnHb"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "本地 HTTP 夹具验证复刻命令必须显式音色 ID并输出同一音频/时间戳契约；权限错误保留。",
+      "evidence_files": [
+        "speech-contract.test.cjs"
+      ],
+      "remaining": "用户已开通复刻音色的真实权限/配额。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-15",
+      "name": "口播识别与气口剪辑",
+      "acceptance": "ASR→逐词审阅→删词/保护区→重排→生成，已删除内容不再进入字幕、素材或音视频。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "QyL8d8Y0CodC7Ex6NbccFHgNnIg"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "原工作台删词、保护区和实际波形通过；词范围全删不复活，毫秒/秒目标时刻同步，多父行和文本坐标投影通过。",
+      "evidence_files": [
+        "workbench-ui.json",
+        "service-tests.xml"
+      ],
+      "remaining": "真实 ASR 完整流程、全部组合及两端剪映。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-16",
+      "name": "划重点和双语字幕",
+      "acceptance": "重点词与次级语言字幕具有独立可编辑层，删词后两者仍与主字幕正确对应。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "I8l6dKjxwoks2QxJ4kOcKviknsc"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "实际核心两槽03、重复汉字按词编号保留槽位、Unicode强调移位及主副字幕删除/时段一致通过。",
+      "evidence_files": [
+        "workbench-ui.json",
+        "service-tests.xml"
+      ],
+      "remaining": "03整槽删空后的自动重选、部分删词后译文语义更新、全部预设组合及两端剪映各层编辑。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-17",
+      "name": "本地素材语义匹配",
+      "acceptance": "文本向量、素材向量使用同一模型；能检索已分析库，排除失效文件及低质量片段。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "Hk8DdTSGBoSVIPx4HRlcPyNLnZe"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "同模型向量检索保留高质量素材，按质量阈值排除低质量素材，文件失效后不再返回。",
+      "evidence_files": [
+        "service-tests.xml",
+        "material-search-quality.test.cjs"
+      ],
+      "remaining": "真实模型构建/语义检索、原 Agent 直接重新分析的旧向量失效语义、Mac。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-18",
+      "name": "Pexels 素材",
+      "acceptance": "用户 API Key 保存/测试成功，搜索、下载、路径回填后草稿素材可读取。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "JRHMdC62joC1nmx0oTncu6hLn1e"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "本地 Pexels HTTP 夹具验证搜索、下载和素材路径回填；没有旧 app 目录时仍可完成。",
+      "evidence_files": [
+        "service-tests.xml",
+        "network-materials.test.cjs"
+      ],
+      "remaining": "真实 Pexels API Key、搜索、下载及草稿素材可读取。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-19",
+      "name": "GPT 图片及即梦视频接入",
+      "acceptance": "外部 Agent 生成素材后，应用能接受其真实路径并保留可编辑剪映草稿。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "HCfidFqFLoilBnxA0PccamZcnlh"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "外部 Agent 提供的本地图片/视频路径进入真实剪映草稿 JSON，媒体槽通过 material_id 保持可编辑引用。",
+      "evidence_files": [
+        "service-tests.xml",
+        "material-generation.test.cjs"
+      ],
+      "remaining": "真实 Agent 交付流程和剪映实开编辑保存。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-20",
+      "name": "可选 AI 服务与素材开头跳过",
+      "acceptance": "主文档图片 10 显示 Pexels/即梦/Minimax/音乐/视频接口，以及默认 0.5 秒素材开头跳过；实际生成采用设置。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BoshdtKoroEskAxp1L8cI8I1nqb"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "视频模板设置保存素材开头跳过毫秒值并同步 Agent context；默认 500、自定义、关闭 0 均验证只影响 B-roll 视频。",
+      "evidence_files": [
+        "service-tests.xml",
+        "material-generation.test.cjs",
+        "ai-settings-ui.json"
+      ],
+      "remaining": "Mac 实机设置交互及更多外部素材服务组合。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-21",
+      "name": "AI 推荐文字预设",
+      "acceptance": "图片 10 的推荐预设入口一键安装，已下载数量和文件结果一致。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "FBvNdH3vfonpnjxyllechZDznRd"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "AI 剪辑推荐预设入口离线夹具完成一键安装，下载数量、磁盘预设和 AI 收藏组数量一致且路径存在。",
+      "evidence_files": [
+        "ai-settings-ui.json"
+      ],
+      "remaining": "公开推荐目录和真实下载服务。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-22",
+      "name": "素材库创建与默认库",
+      "acceptance": "创建、选择、设为默认；名称及待整理/已整理/可匹配计数实时反映数据。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "XLWGdEiwFo1Merx3GWxcjXtSnCh"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "创建/删除库及 SQLite 状态验证通过。",
+      "evidence_files": [
+        "service-tests.xml",
+        "windows-installed-desktop.json"
+      ],
+      "remaining": "默认库选择和全部界面计数。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-23",
+      "name": "素材拖入与目录递归",
+      "acceptance": "多文件、多层文件夹可分批拖入，进入待整理队列，重复素材去重且保留来源。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "F6jadQY48oN1dqx7NX4cuEdxn4M"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "原界面两批拖入三层目录、跨批去重通过，原始文件内容保持。",
+      "evidence_files": [
+        "material-ui.json",
+        "service-tests.xml"
+      ],
+      "remaining": "Mac 实机、多文件格式及更大批次交互。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-24",
+      "name": "批次分析与继续处理",
+      "acceptance": "开始分析只提交未完成素材；中断后继续处理，不重复消耗已完成素材。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "HwvGdrYV0oiCaJxp9rgciPn3nEf"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "分析批次只提交未完成来源，保存第一批后下一批自动从剩余来源继续，不重复处理已完成来源。",
+      "evidence_files": [
+        "service-tests.xml",
+        "network-materials.test.cjs"
+      ],
+      "remaining": "Mac 实机和真实模型中断后继续处理。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-25",
+      "name": "分析结果与预览编辑",
+      "acceptance": "主文档图片 14/15 的描述、标签、质量、预览及已理解/可匹配状态反映真实分析结果。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "HPlVd0jEPoL0mRx9ktvcshlXnjb"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "编辑描述/标签/质量及重启后素材访问测试通过。",
+      "evidence_files": [
+        "service-tests.xml"
+      ],
+      "remaining": "真实分析产生的预览和全部状态。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-26",
+      "name": "更新索引",
+      "acceptance": "分析完成后构建索引，requested/saved 数量及 embedding_status 正确；修改描述后失效并重建。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "AHogd4V3qoROZYxE2ZlcbkE9nLb"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "原 Agent 互通completed计数，编辑失效、异步旧向量拒绝/整批回滚及重复索引排除通过；模型参数与用户KEY模式验证通过。",
+      "evidence_files": [
+        "material-ui.json",
+        "service-tests.xml"
+      ],
+      "remaining": "真实模型构建/语义检索、原 Agent 直接重新分析的旧向量失效语义、Mac。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-27",
+      "name": "添加已整理素材",
+      "acceptance": "不再调用多模态分析，对既有分类素材创建可用索引。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "WhIHd8JJmohrgcxtimmcPO9knQ9"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "分类目录索引有功能测试。",
+      "evidence_files": [
+        "service-tests.xml"
+      ],
+      "remaining": "完整界面及真实模型检索。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-28",
+      "name": "原始素材保护",
+      "acceptance": "复制进独立库；删除库/编辑分析/移动保存目录后原始文件内容与位置保持。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "PePydt0NSok4HcxLJ99cUGAinJf"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "导入复制、删除库及目录迁移保留原文件测试通过。",
+      "evidence_files": [
+        "service-tests.xml"
+      ],
+      "remaining": "全部批量维护组合及 Mac。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-29",
+      "name": "素材库保存目录及迁移",
+      "acceptance": "迁移更新库、素材、片段及向量引用的路径，重启后可读且原始素材不被修改。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "PePydt0NSok4HcxLJ99cUGAinJf"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "目录迁移更新数据库路径并保留原目录测试通过。",
+      "evidence_files": [
+        "service-tests.xml"
+      ],
+      "remaining": "片段/向量的全部关联及两端重启后完整界面。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-30",
+      "name": "FFmpeg 视频组件",
+      "acceptance": "安装/清空/重装后 FFmpeg、FFprobe 可执行；两种 Mac 架构使用对应二进制。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "EFS6dqjkFoGBYyxanTMcKlIjnhf"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "Windows 实际 FFmpeg/FFprobe 及清空/重装通过；两种 Mac 二进制架构检查通过。",
+      "evidence_files": [
+        "service-tests.xml",
+        "windows-installed-desktop.json",
+        "mac-bundle-inspection.json"
+      ],
+      "remaining": "Mac 执行和首次在线安装完整流程。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-31",
+      "name": "未处理素材清空",
+      "acceptance": "仅清理待处理队列，不删已完成库素材或原始来源文件。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "原界面待处理清空取消保留，确认只移除pending；已完成素材和原始文件保留。",
+      "evidence_files": [
+        "material-ui.json",
+        "service-tests.xml"
+      ],
+      "remaining": "Mac 实机、异常/并发处理组合。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-32",
+      "name": "素材表格批量处理",
+      "acceptance": "多选编辑/重置/删除的选择与结果逐项一致，取消操作保留数据。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "原界面多选重置/删除取消无写入，确认逐项生效；清空片段与索引，删除受控副本且原始来源保持。",
+      "evidence_files": [
+        "material-ui.json",
+        "service-tests.xml"
+      ],
+      "remaining": "Mac 实机、更多分页/部分失败组合。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-33",
+      "name": "手动预设筛选",
+      "acceptance": "图片 18 的专题、字体风格、字幕字数、比例、标签筛选/搜索/排序结果符合原版。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "LQARde58EoZfGtxEHWwcFqeFnlt"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "本地预设支持专题标签、字体风格、字幕字数、比例、时长筛选和稳定排序，并规范剪映微秒时长。",
+      "evidence_files": [
+        "service-tests.xml",
+        "local-preset-and-subtitle.test.cjs"
+      ],
+      "remaining": "Mac 实机完整筛选/搜索/排序交互及全部预设数据。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-34",
+      "name": "预设安装到草稿与个人预设",
+      "acceptance": "两个目录都出现正确结构与素材；重开剪映后在个人预设和草稿中可使用。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "ZefwdHcyBoRwiNxAO0KcgW78nxg"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "在线模板安装返回原界面所需路径，模板配置写入并保留审核槽位；预设缓存和个人剪映目录结构均通过。",
+      "evidence_files": [
+        "template-ui.json",
+        "preset-installation.test.cjs"
+      ],
+      "remaining": "两个目录都出现正确结构与素材；重开剪映后在个人预设和草稿中可使用。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-35",
+      "name": "重启剪映",
+      "acceptance": "Windows/Mac 均找到实际安装的剪映，关闭/重启后新预设可见。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "SiRgdBax8oARAbx1T4gcxDk1nnc"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "Windows/Mac 剪映路径发现只返回存在的配置或常见安装路径；重启使用解析后的实际路径。",
+      "evidence_files": [
+        "lifecycle-cleanup.test.cjs"
+      ],
+      "remaining": "Windows/Mac 实机关闭、重启并确认新预设可见。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-36",
+      "name": "首页 AI 剪辑记录",
+      "acceptance": "生成/打开工作台记录保存在首页，重启后可重新打开对应任务。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "首页工作台记录磁盘持久化，重启后 URL 使用当前监听端口；清理后旧记录不会从内存复活。",
+      "evidence_files": [
+        "lifecycle-cleanup.test.cjs"
+      ],
+      "remaining": "打包应用重启后完整 UI 回归。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-37",
+      "name": "缓存清理",
+      "acceptance": "选择的缓存类型确实删除，已生成草稿、素材库和用户原始文件保留。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "缓存按勾选分类删除，草稿、素材库和用户原始文件保留。",
+      "evidence_files": [
+        "lifecycle-cleanup.test.cjs"
+      ],
+      "remaining": "Windows/Mac UI 全量取消/确认组合。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-38",
+      "name": "软件数据清理",
+      "acceptance": "按界面说明清理对应数据；取消保留，完成状态与实际磁盘/数据库一致。",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "软件数据按勾选目录重置并同步 Python/FFmpeg disabled 状态，取消/未选目录保持。",
+      "evidence_files": [
+        "lifecycle-cleanup.test.cjs"
+      ],
+      "remaining": "Windows/Mac UI 全量取消/确认组合。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-39",
+      "name": "豆包仅 Key 配置与连接测试",
+      "acceptance": "只填 KEY，测试走多模态向量接口并带默认模型；必须返回有效向量才成功。",
+      "source_document": "volcengine-setup/full-document.md",
+      "source_block_ids": [
+        "ZAwudfO0uoqbbfxLxZ5cXrN2nOc"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "原界面仅 KEY 测试通过；默认模型/向量接口、空 KEY 不请求、无效向量拒绝及服务错误保留通过。全部使用隔离模拟响应。",
+      "evidence_files": [
+        "windows-installed-desktop.json",
+        "service-tests.xml"
+      ],
+      "remaining": "真实账号有效/失效/无权限场景和 Mac 实机。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    },
+    {
+      "id": "F-40",
+      "name": "豆包语音三个能力",
+      "acceptance": "分别验证语音合成 2.0、声音复刻 2.0、录音文件识别 2.0；TTS 成功不能证明 ASR/克隆权限可用。",
+      "source_document": "volcengine-setup/full-document.md",
+      "source_block_ids": [
+        "BkWndtdQlof04uxPNOHcSTSvnJf"
+      ],
+      "windows_status": "partially_verified",
+      "current_evidence": "本地 HTTP 夹具分别验证 TTS、复刻音色、ASR 2.0 的独立 Key/资源 ID/输出；缺 KEY、权限、无结果均可解释且临时凭据清理。",
+      "evidence_files": [
+        "speech-contract.test.cjs"
+      ],
+      "remaining": "真实语音服务三项权限和 Mac 实机。",
+      "macos_status": "pending_device_test",
+      "fully_verified": false
+    }
+  ],
+  "acceptance_cases": [
+    {
+      "id": "AT-01",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-02",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-03",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-04",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-05",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-06",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-07",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-08",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-09",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-10",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-11",
+      "status": "pending_complete_dual_platform_validation"
+    },
+    {
+      "id": "AT-12",
+      "status": "pending_complete_dual_platform_validation"
+    }
+  ]
+}

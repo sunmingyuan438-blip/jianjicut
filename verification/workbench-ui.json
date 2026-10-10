@@ -1,0 +1,224 @@
+{
+  "build_id": "20261009-functional-r8",
+  "pass": true,
+  "platform": "win32",
+  "hardware_acceleration": false,
+  "steps": [
+    {
+      "step": "cut",
+      "status": "波形已生成",
+      "text": "00:00\n第一句验证字幕\n00:01\n第二句验证字幕",
+      "buttons": [],
+      "words": [
+        {
+          "text": "第",
+          "idx": "0"
+        },
+        {
+          "text": "一",
+          "idx": "1"
+        },
+        {
+          "text": "句",
+          "idx": "2"
+        },
+        {
+          "text": "验",
+          "idx": "3"
+        },
+        {
+          "text": "证",
+          "idx": "4"
+        },
+        {
+          "text": "字",
+          "idx": "5"
+        },
+        {
+          "text": "幕",
+          "idx": "6"
+        },
+        {
+          "text": "第",
+          "idx": "100"
+        },
+        {
+          "text": "二",
+          "idx": "101"
+        },
+        {
+          "text": "句",
+          "idx": "102"
+        },
+        {
+          "text": "验",
+          "idx": "103"
+        },
+        {
+          "text": "证",
+          "idx": "104"
+        },
+        {
+          "text": "字",
+          "idx": "105"
+        },
+        {
+          "text": "幕",
+          "idx": "106"
+        }
+      ],
+      "titles": []
+    },
+    {
+      "step": "material",
+      "status": "已保存",
+      "text": "01\n第句验证字幕\n添加\n02\n第二句验证字幕\n添加",
+      "buttons": [
+        {
+          "text": "添加",
+          "id": "",
+          "className": ""
+        },
+        {
+          "text": "添加",
+          "id": "",
+          "className": ""
+        }
+      ],
+      "words": [],
+      "titles": []
+    },
+    {
+      "step": "draft",
+      "status": "未保存",
+      "text": "标题和模板\nxycut_kb_005\n字幕和预设编排\n普通 2 · 强调 0 · 重点 0 · 素材 1\n第 1 句\n普通默认\n普通强调\n重点预设\n无...\n第 2 句\n普通默认\n普通强调\n重点预设\n无...\n口播剪辑\n0 行 / 1 字已标记删除\n素材匹配\n1 条素材安排\n分析文件\nC:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\workbench-ui\\task\\output\\video_template_analysis.json",
+      "buttons": [],
+      "words": [],
+      "titles": [
+        "工作台主标题",
+        "工作台副标题",
+        "可编辑说明文案"
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:53311/xycut/d0cd28dd1d0f942a",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/workbench/assets/workbench.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/workbench/assets/app-icon.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/workbench/assets/workbench.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/workbench/api/task?task_id=d0cd28dd1d0f942a",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/file?path=C%3A%5CUsers%5CAdministrator%5CDocuments%5CChatGPT%5C%E5%B7%A5%E4%BD%9C1%5Cxycut-desktop%5C.test-data%5Cworkbench-ui%5Ctask%5Cinput%5Csource.mp4",
+      "status": 206
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/workbench/api/media-analysis?task_id=d0cd28dd1d0f942a",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/workbench/api/state",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/video-template/analysis?analysis_file=C%3A%5CUsers%5CAdministrator%5CDocuments%5CChatGPT%5C%E5%B7%A5%E4%BD%9C1%5Cxycut-desktop%5C.test-data%5Cworkbench-ui%5Ctask%5Coutput%5Cvideo_template_analysis.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/video-template/save-analysis",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/file?path=C%3A%5CUsers%5CAdministrator%5CDocuments%5CChatGPT%5C%E5%B7%A5%E4%BD%9C1%5Cxycut-desktop%5Cresources%5Cfrontend%5Cbackground.jpg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/file?path=C%3A%5CUsers%5CAdministrator%5CDocuments%5CChatGPT%5C%E5%B7%A5%E4%BD%9C1%5Cxycut-desktop%5C.test-data%5Ce2e%5Cdata%5Cvideo-templates%5Cxycut_kb_005%5Cxycut_kb_005.jpeg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/workbench/api/state",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/video-template/save-analysis",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/generate",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/video-template/preview?analysis_file=C%3A%5CUsers%5CAdministrator%5CDocuments%5CChatGPT%5C%E5%B7%A5%E4%BD%9C1%5Cxycut-desktop%5C.test-data%5Cworkbench-ui%5Ctask%5Coutput%5Cvideo_template_analysis.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/file?path=C%3A%5CUsers%5CAdministrator%5CDocuments%5CChatGPT%5C%E5%B7%A5%E4%BD%9C1%5Cxycut-desktop%5C.test-data%5Ce2e%5Cdata%5Cvideo-templates%5Cxycut_kb_005%5Cxycut_kb_005.jpeg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/video-template/save-analysis",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/video-template/save-analysis",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:53311/ai-editing/generate",
+      "status": 200
+    }
+  ],
+  "console_errors": [],
+  "console_warnings": [],
+  "capture_errors": [
+    {
+      "step": "cut",
+      "error": "UnknownVizError"
+    },
+    {
+      "step": "standalone-preview",
+      "error": "UnknownVizError"
+    }
+  ],
+  "generated": {
+    "draft_dir": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\workbench-ui\\generated-drafts\\xycut_1009230133",
+    "duration_us": 2800000,
+    "material_count": 1,
+    "deleted_word_indices": [
+      1
+    ]
+  },
+  "standalone_preview": {
+    "title": "视频模板分析预览",
+    "title_inputs": 3,
+    "subtitle_inputs": 2,
+    "saved": true,
+    "highlight_terms": [
+      "预览"
+    ],
+    "draft_dir": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\workbench-ui\\generated-drafts\\xycut_1009230133_1",
+    "duration_us": 2800000,
+    "texts": [
+      "预览窗口修改的字幕",
+      "第二句验证字幕",
+      "独立预览改字验收",
+      "工作台副标题",
+      "可编辑说明文案"
+    ]
+  }
+}

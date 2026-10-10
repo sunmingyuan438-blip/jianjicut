@@ -1,0 +1,68 @@
+[
+  {
+    "file": "dist\\XYCut-restored-0.2.10-macOS-arm64-TEST.zip",
+    "build_id": "20261009-functional-r8",
+    "zip_crc_pass": true,
+    "macos_minimum": "13.0",
+    "shared_asar_sha256": "53432ff88a0f263f1667c01f12d942bed4dd5b95466f287a594aba8e859c0922",
+    "preview_resource_checked": true,
+    "preparation_script_checked": true,
+    "pillow_extension_count": 8,
+    "tools": {
+      "MacOS/Electron": {
+        "cpu_type": "0x100000c",
+        "mode": "0o100755",
+        "bytes": 33968
+      },
+      "Resources/xycut/python/bin/python3.9": {
+        "cpu_type": "0x100000c",
+        "mode": "0o100775",
+        "bytes": 49968
+      },
+      "Resources/xycut/ffmpeg/ffmpeg": {
+        "cpu_type": "0x100000c",
+        "mode": "0o100755",
+        "bytes": 36766920
+      },
+      "Resources/xycut/ffmpeg/ffprobe": {
+        "cpu_type": "0x100000c",
+        "mode": "0o100755",
+        "bytes": 18187448
+      }
+    },
+    "macos_tested": false
+  },
+  {
+    "file": "dist\\XYCut-restored-0.2.10-macOS-x64-TEST.zip",
+    "build_id": "20261009-functional-r8",
+    "zip_crc_pass": true,
+    "macos_minimum": "13.0",
+    "shared_asar_sha256": "53432ff88a0f263f1667c01f12d942bed4dd5b95466f287a594aba8e859c0922",
+    "preview_resource_checked": true,
+    "preparation_script_checked": true,
+    "pillow_extension_count": 8,
+    "tools": {
+      "MacOS/Electron": {
+        "cpu_type": "0x1000007",
+        "mode": "0o100755",
+        "bytes": 13076
+      },
+      "Resources/xycut/python/bin/python3.9": {
+        "cpu_type": "0x1000007",
+        "mode": "0o100775",
+        "bytes": 16652
+      },
+      "Resources/xycut/ffmpeg/ffmpeg": {
+        "cpu_type": "0x1000007",
+        "mode": "0o100755",
+        "bytes": 70990320
+      },
+      "Resources/xycut/ffmpeg/ffprobe": {
+        "cpu_type": "0x1000007",
+        "mode": "0o100755",
+        "bytes": 78740780
+      }
+    },
+    "macos_tested": false
+  }
+]

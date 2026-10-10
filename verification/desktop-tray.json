@@ -1,0 +1,16 @@
+{
+  "build_id": "20261009-functional-r8",
+  "platform": "win32",
+  "packaged_code": true,
+  "checks": {
+    "native_tray_created": true,
+    "tray_click": true,
+    "tray_menu": true,
+    "dock_activate": true,
+    "second_instance": true,
+    "restore_minimized": true,
+    "quit_menu": true,
+    "tray_disposed": true
+  },
+  "ok": true
+}

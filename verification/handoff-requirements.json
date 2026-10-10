@@ -1,0 +1,448 @@
+{
+  "target_thread_id": "01a11c0c-6b70-7472-a096-9eda676c5732",
+  "date": "2026-10-09",
+  "requirement_count": 40,
+  "scope_note": "原开发目标继续包含 Windows 与 macOS 的全部功能等价；本矩阵增加文档证据，不缩减原目标。实现存在不等于端到端验收通过。",
+  "requirements": [
+    {
+      "id": "F-01",
+      "name": "剪映路径配置",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "NreYddkD3oekLxxW5wTchDwan4f"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "有实现，双端交互待验收",
+      "acceptance": "分别保存两个目录，重启恢复版后仍保持；草稿写入配置目录。"
+    },
+    {
+      "id": "F-02",
+      "name": "特殊预设目录定位",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "K80OdCVJMoYmPWxHPnKcfJIZnZd"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "待回归",
+      "acceptance": "自定义盘符、含中文/空格路径、非默认安装位置均能发现/保存预设目录。"
+    },
+    {
+      "id": "F-03",
+      "name": "AI 剪辑开关",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "IvhjdRMMKoZ4NrxRJMHc7n4vnPg"
+      ],
+      "implementation": "xycut-desktop/backend/server.cjs",
+      "current_evidence": "有实现，需端到端确认",
+      "acceptance": "开关状态影响 Agent 调用；提示词中的运行端口与真实监听端口一致。"
+    },
+    {
+      "id": "F-04",
+      "name": "运行环境安装与维护",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "UB3LdqXWHo4j57xcrKxct2Dwnac"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "已有部分测试证据",
+      "acceptance": "未安装→安装→刷新→打开目录→重装→清空，各状态和实际 Python 可用性一致。"
+    },
+    {
+      "id": "F-05",
+      "name": "爆款模板筛选与复制提示词",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "VA9UdzikSokn7mxPnWncZrtkn8f"
+      ],
+      "implementation": "xycut-desktop/resources/frontend",
+      "current_evidence": "已有原界面，完整链路待验收",
+      "acceptance": "选择在线/本地模板，点击复制自动安装并复制有效提示词，取消/失败给出真实反馈。"
+    },
+    {
+      "id": "F-06",
+      "name": "Agent 上下文",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "DNnzd22T6ouN1XxK7GLcNgjcnvd"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "有实现，上下文一致性待验收",
+      "acceptance": "复制出的路径指向真实上下文、模板参数和工具；迁移目录/改端口后不遗留旧路径。"
+    },
+    {
+      "id": "F-07",
+      "name": "自建模板",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "M5OudmZBQoYBxZxTyW6c0Ltnnec"
+      ],
+      "implementation": "xycut-desktop/backend/template.cjs",
+      "current_evidence": "已有部分转换测试",
+      "acceptance": "本地剪映模板转成参数配置，嵌套草稿、文字与素材槽位可读并能正确替换。"
+    },
+    {
+      "id": "F-08",
+      "name": "模板文字与素材替换",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "DNnzd22T6ouN1XxK7GLcNgjcnvd"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "两份真实模板有历史比较证据",
+      "acceptance": "新闻/卡点模板全部槽位替换；图片/视频/音频路径、方向、时长正确。"
+    },
+    {
+      "id": "F-09",
+      "name": "模板字数判断",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "K80OdCVJMoYmPWxHPnKcfJIZnZd"
+      ],
+      "implementation": "xycut-desktop/backend/template.cjs",
+      "current_evidence": "待回归",
+      "acceptance": "中英混合、空白、标点、emoji、换行和多段文字的字数策略与原版及 Agent 校验一致。"
+    },
+    {
+      "id": "F-10",
+      "name": "草稿同步与可编辑性",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "VJVOdd5H1oGCPlxpKjucNSM0nSc"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "JSON 比较有证据，剪映实开待验收",
+      "acceptance": "实际在两端剪映打开草稿，标题/字幕/音视频可编辑，保存再打开仍完整。"
+    },
+    {
+      "id": "F-11",
+      "name": "AI 剪辑模板与样式",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "V4XWdoPo5opxoTxVVBTcgQgcnph"
+      ],
+      "implementation": "xycut-desktop/backend/template.cjs",
+      "current_evidence": "有界面与核心，需组合验收",
+      "acceptance": "在线/本地模板的标题坐标、持续时长和字幕样式保持模板语义。"
+    },
+    {
+      "id": "F-12",
+      "name": "字幕预设匹配",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BPVvdeTfOoqbvRxuj4Ccegkfnmd"
+      ],
+      "implementation": "xycut-desktop/resources/agent-kit/skills/xycut-video-template-skill/scripts/match_subtitle_presets.py",
+      "current_evidence": "已有恢复脚本，未证明全量等价",
+      "acceptance": "普通、强调和多段文字预设被正确匹配，实际字体、样式与时间线正确。"
+    },
+    {
+      "id": "F-13",
+      "name": "文本生成配音",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "HUJOdfsPLo3IkOxjzpecqdyInIE"
+      ],
+      "implementation": "xycut-desktop/resources/agent-kit/skills/xycut-video-template-skill/scripts/generate_doubao_tts.py",
+      "current_evidence": "恢复脚本存在，真实服务待验收",
+      "acceptance": "有用户配置后生成音频及时间戳，草稿字幕时序与音频对齐。"
+    },
+    {
+      "id": "F-14",
+      "name": "声音克隆",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "PG38diYvpolEfcxPzvxcAlQsnHb"
+      ],
+      "implementation": "xycut-desktop/resources/agent-kit/skills/xycut-video-template-skill/scripts/generate_doubao_tts.py",
+      "current_evidence": "待真实服务验收",
+      "acceptance": "使用用户已开通的复刻音色生成配音，失败/权限/配额状态可解释。"
+    },
+    {
+      "id": "F-15",
+      "name": "口播识别与气口剪辑",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "QyL8d8Y0CodC7Ex6NbccFHgNnIg"
+      ],
+      "implementation": "xycut-desktop/backend/workbench.cjs",
+      "current_evidence": "部分剪辑测试可用，完整流程待验收",
+      "acceptance": "ASR→逐词审阅→删词/保护区→重排→生成，已删除内容不再进入字幕、素材或音视频。"
+    },
+    {
+      "id": "F-16",
+      "name": "划重点和双语字幕",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "I8l6dKjxwoks2QxJ4kOcKviknsc"
+      ],
+      "implementation": "xycut-desktop/resources/agent-kit/skills/xycut-video-template-skill",
+      "current_evidence": "待逐项确认",
+      "acceptance": "重点词与次级语言字幕具有独立可编辑层，删词后两者仍与主字幕正确对应。"
+    },
+    {
+      "id": "F-17",
+      "name": "本地素材语义匹配",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "Hk8DdTSGBoSVIPx4HRlcPyNLnZe"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "向量写入有部分测试，真实检索待验收",
+      "acceptance": "文本向量、素材向量使用同一模型；能检索已分析库，排除失效文件及低质量片段。"
+    },
+    {
+      "id": "F-18",
+      "name": "Pexels 素材",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "JRHMdC62joC1nmx0oTncu6hLn1e"
+      ],
+      "implementation": "xycut-desktop/resources/agent-kit/skills/xycut-video-template-skill/scripts/download_network_materials.py",
+      "current_evidence": "脚本和接口配置存在，外部链路待验收",
+      "acceptance": "用户 API Key 保存/测试成功，搜索、下载、路径回填后草稿素材可读取。"
+    },
+    {
+      "id": "F-19",
+      "name": "GPT 图片及即梦视频接入",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "HCfidFqFLoilBnxA0PccamZcnlh"
+      ],
+      "implementation": "xycut-desktop/resources/agent-kit/skills/xycut-video-template-skill",
+      "current_evidence": "待 Agent 与素材交付流程验收",
+      "acceptance": "外部 Agent 生成素材后，应用能接受其真实路径并保留可编辑剪映草稿。"
+    },
+    {
+      "id": "F-20",
+      "name": "可选 AI 服务与素材开头跳过",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BoshdtKoroEskAxp1L8cI8I1nqb"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "截图补充，配置传递待验收",
+      "acceptance": "主文档图片 10 显示 Pexels/即梦/Minimax/音乐/视频接口，以及默认 0.5 秒素材开头跳过；实际生成采用设置。"
+    },
+    {
+      "id": "F-21",
+      "name": "AI 推荐文字预设",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "FBvNdH3vfonpnjxyllechZDznRd"
+      ],
+      "implementation": "xycut-desktop/resources/frontend",
+      "current_evidence": "截图补充，安装结果待验收",
+      "acceptance": "图片 10 的推荐预设入口一键安装，已下载数量和文件结果一致。"
+    },
+    {
+      "id": "F-22",
+      "name": "素材库创建与默认库",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "XLWGdEiwFo1Merx3GWxcjXtSnCh"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "已有部分测试证据",
+      "acceptance": "创建、选择、设为默认；名称及待整理/已整理/可匹配计数实时反映数据。"
+    },
+    {
+      "id": "F-23",
+      "name": "素材拖入与目录递归",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "F6jadQY48oN1dqx7NX4cuEdxn4M"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "单文件导入/去重有证据，多目录交互待验收",
+      "acceptance": "多文件、多层文件夹可分批拖入，进入待整理队列，重复素材去重且保留来源。"
+    },
+    {
+      "id": "F-24",
+      "name": "批次分析与继续处理",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "HwvGdrYV0oiCaJxp9rgciPn3nEf"
+      ],
+      "implementation": "xycut-desktop/resources/agent-kit/skills/xycut-sucai-skill/scripts/prepare_analysis_batch.py",
+      "current_evidence": "恢复脚本存在，界面链路待验收",
+      "acceptance": "开始分析只提交未完成素材；中断后继续处理，不重复消耗已完成素材。"
+    },
+    {
+      "id": "F-25",
+      "name": "分析结果与预览编辑",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "HPlVd0jEPoL0mRx9ktvcshlXnjb"
+      ],
+      "implementation": "xycut-desktop/backend/core_worker.py",
+      "current_evidence": "已有部分测试证据",
+      "acceptance": "主文档图片 14/15 的描述、标签、质量、预览及已理解/可匹配状态反映真实分析结果。"
+    },
+    {
+      "id": "F-26",
+      "name": "更新索引",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "AHogd4V3qoROZYxE2ZlcbkE9nLb"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "数据库写入有证据，真实构建待验收",
+      "acceptance": "分析完成后构建索引，requested/saved 数量及 embedding_status 正确；修改描述后失效并重建。"
+    },
+    {
+      "id": "F-27",
+      "name": "添加已整理素材",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "WhIHd8JJmohrgcxtimmcPO9knQ9"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "已有部分测试证据",
+      "acceptance": "不再调用多模态分析，对既有分类素材创建可用索引。"
+    },
+    {
+      "id": "F-28",
+      "name": "原始素材保护",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "PePydt0NSok4HcxLJ99cUGAinJf"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "已有部分测试证据",
+      "acceptance": "复制进独立库；删除库/编辑分析/移动保存目录后原始文件内容与位置保持。"
+    },
+    {
+      "id": "F-29",
+      "name": "素材库保存目录及迁移",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "PePydt0NSok4HcxLJ99cUGAinJf"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "已有部分迁移测试证据",
+      "acceptance": "迁移更新库、素材、片段及向量引用的路径，重启后可读且原始素材不被修改。"
+    },
+    {
+      "id": "F-30",
+      "name": "FFmpeg 视频组件",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "EFS6dqjkFoGBYyxanTMcKlIjnhf"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "Windows 组件测试有证据，Mac 实机待验收",
+      "acceptance": "安装/清空/重装后 FFmpeg、FFprobe 可执行；两种 Mac 架构使用对应二进制。"
+    },
+    {
+      "id": "F-31",
+      "name": "未处理素材清空",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "有命令，完整行为待验收",
+      "acceptance": "仅清理待处理队列，不删已完成库素材或原始来源文件。"
+    },
+    {
+      "id": "F-32",
+      "name": "素材表格批量处理",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "implementation": "xycut-desktop/resources/frontend",
+      "current_evidence": "原界面可用，批量链路待验收",
+      "acceptance": "多选编辑/重置/删除的选择与结果逐项一致，取消操作保留数据。"
+    },
+    {
+      "id": "F-33",
+      "name": "手动预设筛选",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "LQARde58EoZfGtxEHWwcFqeFnlt"
+      ],
+      "implementation": "xycut-desktop/resources/frontend",
+      "current_evidence": "原界面可用，全部筛选待验收",
+      "acceptance": "图片 18 的专题、字体风格、字幕字数、比例、标签筛选/搜索/排序结果符合原版。"
+    },
+    {
+      "id": "F-34",
+      "name": "预设安装到草稿与个人预设",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "ZefwdHcyBoRwiNxAO0KcgW78nxg"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "部分预设复制有证据，实际剪映待验收",
+      "acceptance": "两个目录都出现正确结构与素材；重开剪映后在个人预设和草稿中可使用。"
+    },
+    {
+      "id": "F-35",
+      "name": "重启剪映",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "SiRgdBax8oARAbx1T4gcxDk1nnc"
+      ],
+      "implementation": "xycut-desktop/desktop/main.cjs",
+      "current_evidence": "实现存在，系统行为待验收",
+      "acceptance": "Windows/Mac 均找到实际安装的剪映，关闭/重启后新预设可见。"
+    },
+    {
+      "id": "F-36",
+      "name": "首页 AI 剪辑记录",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "implementation": "xycut-desktop/backend/workbench.cjs",
+      "current_evidence": "记录实现存在，持久化待验收",
+      "acceptance": "生成/打开工作台记录保存在首页，重启后可重新打开对应任务。"
+    },
+    {
+      "id": "F-37",
+      "name": "缓存清理",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "实现存在，分类行为待验收",
+      "acceptance": "选择的缓存类型确实删除，已生成草稿、素材库和用户原始文件保留。"
+    },
+    {
+      "id": "F-38",
+      "name": "软件数据清理",
+      "source_document": "full-document.md",
+      "source_block_ids": [
+        "BGNndacrBoA9WIxGh55cSWvwnig"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "实现存在，范围待验收",
+      "acceptance": "按界面说明清理对应数据；取消保留，完成状态与实际磁盘/数据库一致。"
+    },
+    {
+      "id": "F-39",
+      "name": "豆包仅 Key 配置与连接测试",
+      "source_document": "volcengine-setup/full-document.md",
+      "source_block_ids": [
+        "ZAwudfO0uoqbbfxLxZ5cXrN2nOc"
+      ],
+      "implementation": "xycut-desktop/backend/service.cjs",
+      "current_evidence": "已离线复现不符，补丁已隔离验证",
+      "acceptance": "只填 KEY，测试走多模态向量接口并带默认模型；必须返回有效向量才成功。"
+    },
+    {
+      "id": "F-40",
+      "name": "豆包语音三个能力",
+      "source_document": "volcengine-setup/full-document.md",
+      "source_block_ids": [
+        "BkWndtdQlof04uxPNOHcSTSvnJf"
+      ],
+      "implementation": "xycut-desktop/resources/agent-kit/skills/xycut-video-template-skill",
+      "current_evidence": "TTS 脚本存在，ASR/复刻权限待实测",
+      "acceptance": "分别验证语音合成 2.0、声音复刻 2.0、录音文件识别 2.0；TTS 成功不能证明 ASR/克隆权限可用。"
+    }
+  ]
+}

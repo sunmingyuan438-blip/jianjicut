@@ -1,0 +1,84 @@
+{
+  "cases": [
+    {
+      "kind": "video_template",
+      "slug": "xycut_kb_005",
+      "ok": true,
+      "draft_dir": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\e2e\\drafts\\xycut_1009104317",
+      "draft_content": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\e2e\\drafts\\xycut_1009104317\\draft_content.json",
+      "duration_us": 3000000,
+      "tracks": [
+        {
+          "type": "video",
+          "segments": 1
+        },
+        {
+          "type": "video",
+          "segments": 0
+        },
+        {
+          "type": "sticker",
+          "segments": 1
+        },
+        {
+          "type": "text",
+          "segments": 2
+        },
+        {
+          "type": "video",
+          "segments": 1
+        }
+      ],
+      "texts": [
+        "第一句验证字幕",
+        "第二句验证字幕",
+        "真实模板第一行标题",
+        "真实模板第二行标题",
+        "第三行说明文案"
+      ],
+      "missing_media": []
+    },
+    {
+      "kind": "hot_template",
+      "slug": "xycut_news_017",
+      "ok": true,
+      "draft_dir": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\e2e\\drafts\\xycut_1009104317_1",
+      "draft_content": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\e2e\\drafts\\xycut_1009104317_1\\draft_content.json",
+      "duration_us": 14833333,
+      "tracks": [
+        {
+          "type": "video",
+          "segments": 3
+        },
+        {
+          "type": "effect",
+          "segments": 1
+        },
+        {
+          "type": "text",
+          "segments": 1
+        },
+        {
+          "type": "text",
+          "segments": 1
+        },
+        {
+          "type": "text",
+          "segments": 1
+        },
+        {
+          "type": "audio",
+          "segments": 1
+        }
+      ],
+      "texts": [
+        "这是标题简要说明一",
+        "这是关于副标题的正文说明文字可以用稍微长一点的文字",
+        "这是关于这个事件的详细信息内容。这是所有的资料信息，全部写出来，让人更加清楚这个事件的整个过程"
+      ],
+      "missing_media": []
+    }
+  ],
+  "jianying_open_tested": false,
+  "macos_tested": false
+}

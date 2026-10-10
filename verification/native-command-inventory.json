@@ -1,0 +1,342 @@
+{
+  "native_command_count": 50,
+  "native_commands": [
+    {
+      "name": "clear_ai_runtime",
+      "javascript_offset": 399067,
+      "call_context": "U(\"clear_ai_runtime\");li(r),A(\"AI 运行环境已清空，可以重新安装。\")}catch(r){M(r instanceof Error?r.message:String(r)),await xi()}}function pu(){if(mn?.installed&&!mc){On(\"reinstall_runtime\");return}Pr()}function gu(){if(ve(\"\"),ht>0){On(\"reinstall_recommended\");return}va(!0)}function ef(){const r=ua;if(On(null),r===\"reinstall_runtime\"){Pr();return}if(r===\"clear_runtime\"){mu();return}r===\"reinstall_recommended\"&&("
+    },
+    {
+      "name": "clear_cache",
+      "javascript_offset": 400187,
+      "call_context": "U(\"clear_cache\",{options:Qa});Qa.agent_context&&await Gr(),A(r),Xi(await U(\"get_cache_dir\")),yn(!1)}catch(r){M(r instanceof Error?r.message:String(r))}finally{Qi(!1)}}async function Gr(){const r=ue?.preset_dir?.trim()||Aa.trim(),g=await U(\"save_agent_context_file\",{input:{preset_dir:r,draft_output_dir:ba.trim(),hot_template_skill_version:Ub,video_template_skill_version:Bb,video_editing_settings:Bg"
+    },
+    {
+      "name": "clear_ffmpeg_runtime",
+      "javascript_offset": 334516,
+      "call_context": "U(\"clear_ffmpeg_runtime\");B(te),b(\"FFmpeg 运行组件已清空，可以重新安装。\"),await N()}catch(te){A(te instanceof Error?te.message:String(te)),await E()}}async function Q(){try{const te=O?.runtime_dir;if(!te){A(\"还没有检测到视频组件目录。\");return}await U(\"open_local_folder\",{path:te})}catch(te){A(te instanceof Error?te.message:String(te))}}async function W(){try{const te=pe?.library_base_dir;if(!te){A(\"还没有检测到素材库保存目录。\");return}"
+    },
+    {
+      "name": "clear_sucai_pending_sources",
+      "javascript_offset": 336252,
+      "call_context": "U(\"clear_sucai_pending_sources\",{libraryId:te.id});return re.status?le(re.status):await E(),b(`已清除 ${re.cleared_count||0} 个待整理素材。`),{clearedCount:re.cleared_count||0}}catch(re){return A(re instanceof Error?re.message:String(re)),null}}async function ge(te,re,Ee,Le){A(\"\");try{const nt=await U(\"update_sucai_material\",{materialId:te,summary:re,keywords:Ee,qualityScore:Le});return nt.status?le(nt.stat"
+    },
+    {
+      "name": "create_sucai_library",
+      "javascript_offset": 335562,
+      "call_context": "U(\"create_sucai_library\",{name:te});return re.status?le(re.status):await E(),re.library_id&&($(re.library_id),localStorage.setItem(Wc,re.library_id)),b(\"素材库已创建，可以进入详情页添加素材。\"),re.library_id||\"\"}catch(re){return A(re instanceof Error?re.message:String(re)),\"\"}}async function K(te){if(!te?.id)return A(\"没有找到要删除的素材库。\"),!1;A(\"\");try{const re=await U(\"delete_sucai_library\",{libraryId:te.id});return re.st"
+    },
+    {
+      "name": "delete_local_hot_template",
+      "javascript_offset": 411677,
+      "call_context": "U(\"delete_local_hot_template\",{slug:r.slug});qa(g.templates||[]),A(\"本地爆款模板已删除。\")}catch(g){M(g instanceof Error?g.message:String(g))}finally{be(null),ge(null)}}async function hl(r,g=\"已复制。\"){const S=r.trim();if(!S)return!1;try{return await navigator.clipboard.writeText(S),A(g),!0}catch{return A(\"复制失败，请手动选择文本复制。\"),!1}}const Yl=kt?.referral,Ms=Yl?.invite_code||kt?.user.invite_code||\"\",Rc=Yl?.rewards,a"
+    },
+    {
+      "name": "delete_local_video_template",
+      "javascript_offset": 411478,
+      "call_context": "U(\"delete_local_video_template\",{slug:r.slug});Me(g.templates||[]),A(\"本地视频模板已删除。\")}catch(g){M(g instanceof Error?g.message:String(g))}finally{Te(null),J(null)}}async function ku(r){try{const g=await U(\"delete_local_hot_template\",{slug:r.slug});qa(g.templates||[]),A(\"本地爆款模板已删除。\")}catch(g){M(g instanceof Error?g.message:String(g))}finally{be(null),ge(null)}}async function hl(r,g=\"已复制。\"){const S=r.tr"
+    },
+    {
+      "name": "delete_sucai_library",
+      "javascript_offset": 335906,
+      "call_context": "U(\"delete_sucai_library\",{libraryId:te.id});return re.status?le(re.status):await E(),G===te.id&&($(\"\"),ee(\"\"),localStorage.removeItem(Wc),localStorage.removeItem(er)),b(`已删除素材库：${te.name}`),!0}catch(re){return A(re instanceof Error?re.message:String(re)),!1}}async function V(te){if(!te?.id)return A(\"没有找到要清除的素材库。\"),null;A(\"\");try{const re=await U(\"clear_sucai_pending_sources\",{libraryId:te.id});ret"
+    },
+    {
+      "name": "delete_sucai_material",
+      "javascript_offset": 337083,
+      "call_context": "U(\"delete_sucai_material\",{materialId:te.id});return re.status?le(re.status):await E(),b(`已删除素材：${te.file_name||te.id}`),!0}catch(re){return A(re instanceof Error?re.message:String(re)),!1}}async function we(te,re){if(!te?.id)return A(\"没有找到要导入的素材库。\"),null;A(\"\");try{const Ee=await U(\"import_sucai_materials\",{libraryId:te.id,sourcePaths:re});return Ee.status?le(Ee.status):await E(),b(`已添加 ${Ee.impor"
+    },
+    {
+      "name": "download_and_open_update",
+      "javascript_offset": 405106,
+      "call_context": "U(\"download_and_open_update\",{url:Qe.downloadUrl,fileName:Qe.fileName,sha256:Qe.sha256||null}),el(\"更新包已打开，请按安装向导完成更新。\")}catch(r){M(r instanceof Error?r.message:String(r)),el(\"\")}finally{Zt(!1)}}function zc(){Qe?.mandatory||(Na(Qe?.latestVersion||\"\"),ta(!1))}async function _u(){await Mc()}async function Su(r){const g=`video:${r.slug}`,S=ty(r);if(!ws(`正在下载并安装：${r.name||r.slug}`))return null;M(\"\"),A("
+    },
+    {
+      "name": "get_agent_api_context",
+      "javascript_offset": 384186,
+      "call_context": "U(\"get_agent_api_context\"))}catch{ui(null)}}async function xi(){try{const[r,g]=await Promise.all([U(\"get_ai_runtime_status\"),Ha(\"/api/app/ai-runtime\").catch(()=>null)]);li(r),Cl(g)}catch{li(null)}}async function rl(){const r=ns.trim();if(!/^\\d{11}$/.test(r)){Jt(\"请输入 11 位手机号。\");return}lc(!0),Jt(\"\");try{await Ha(\"/api/auth/sms/send-code\",{method:\"POST\",headers:{\"Content-Type\":\"application/json\"},bod"
+    },
+    {
+      "name": "get_ai_runtime_status",
+      "javascript_offset": 384284,
+      "call_context": "U(\"get_ai_runtime_status\"),Ha(\"/api/app/ai-runtime\").catch(()=>null)]);li(r),Cl(g)}catch{li(null)}}async function rl(){const r=ns.trim();if(!/^\\d{11}$/.test(r)){Jt(\"请输入 11 位手机号。\");return}lc(!0),Jt(\"\");try{await Ha(\"/api/auth/sms/send-code\",{method:\"POST\",headers:{\"Content-Type\":\"application/json\"},body:JSON.stringify({phone:r})}),Jt(\"验证码已发送，请查看手机短信。\")}catch(g){Jt(g instanceof Error?g.message:Strin"
+    },
+    {
+      "name": "get_cache_dir",
+      "javascript_offset": 398294,
+      "call_context": "U(\"get_cache_dir\");Xi(r),await U(\"open_local_folder\",{path:r})}catch(r){M(r instanceof Error?r.message:String(r))}}async function hu(){try{const r=mn?.runtime_dir;if(!r){M(\"还没有检测到 AI 运行环境目录。\");return}await U(\"open_local_folder\",{path:r})}catch(r){M(r instanceof Error?r.message:String(r))}}async function Pr(){ii(!0),M(\"\"),A(\"\");try{const r=await Ha(\"/api/app/ai-runtime\");Cl(r);const g=r.download_ur"
+    },
+    {
+      "name": "get_ffmpeg_runtime_status",
+      "javascript_offset": 333653,
+      "call_context": "U(\"get_ffmpeg_runtime_status\"),U(\"get_sucai_storage_status\"),f(\"/api/app/ffmpeg-runtime\").catch(()=>null)]);le(te),B(re),ce(Ee),F(Le),G&&!te.libraries.some(nt=>nt.id===G)&&($(\"\"),localStorage.removeItem(Wc)),Y&&!te.libraries.some(nt=>nt.id===Y)&&(M(\"\"),localStorage.removeItem(zh)),se&&!te.collections.some(nt=>nt.id===se)&&(ee(\"\"),localStorage.removeItem(er))}catch(te){A(te instanceof Error?te.mess"
+    },
+    {
+      "name": "get_sucai_db_status",
+      "javascript_offset": 333628,
+      "call_context": "U(\"get_sucai_db_status\"),U(\"get_ffmpeg_runtime_status\"),U(\"get_sucai_storage_status\"),f(\"/api/app/ffmpeg-runtime\").catch(()=>null)]);le(te),B(re),ce(Ee),F(Le),G&&!te.libraries.some(nt=>nt.id===G)&&($(\"\"),localStorage.removeItem(Wc)),Y&&!te.libraries.some(nt=>nt.id===Y)&&(M(\"\"),localStorage.removeItem(zh)),se&&!te.collections.some(nt=>nt.id===se)&&(ee(\"\"),localStorage.removeItem(er))}catch(te){A(te"
+    },
+    {
+      "name": "get_sucai_storage_status",
+      "javascript_offset": 333684,
+      "call_context": "U(\"get_sucai_storage_status\"),f(\"/api/app/ffmpeg-runtime\").catch(()=>null)]);le(te),B(re),ce(Ee),F(Le),G&&!te.libraries.some(nt=>nt.id===G)&&($(\"\"),localStorage.removeItem(Wc)),Y&&!te.libraries.some(nt=>nt.id===Y)&&(M(\"\"),localStorage.removeItem(zh)),se&&!te.collections.some(nt=>nt.id===se)&&(ee(\"\"),localStorage.removeItem(er))}catch(te){A(te instanceof Error?te.message:String(te))}}async function"
+    },
+    {
+      "name": "import_sucai_materials",
+      "javascript_offset": 337364,
+      "call_context": "U(\"import_sucai_materials\",{libraryId:te.id,sourcePaths:re});return Ee.status?le(Ee.status):await E(),b(`已添加 ${Ee.imported_count??Ee.copied_count??0} 个待整理素材，跳过 ${Ee.skipped_count||0} 个重复或无效素材。`),{importedCount:Ee.imported_count??Ee.copied_count??0,skippedCount:Ee.skipped_count||0}}catch(Ee){return A(Ee instanceof Error?Ee.message:String(Ee)),null}}function be(){return ye?.collections.find(te=>te.i"
+    },
+    {
+      "name": "index_sucai_classified_directory",
+      "javascript_offset": 338918,
+      "call_context": "U(\"index_sucai_classified_directory\",{libraryId:te.id,libraryName:te.name,rootPath:Ee});return Le.status?le(Le.status):await E(),b(`已生成素材索引文件：${Le.scan?.total||0} 个素材。`),{total:Le.scan?.total||0,cachePath:Le.scan?.cache_path||\"\"}}catch(Le){return A(Le instanceof Error?Le.message:String(Le)),null}}async function St(){if(!c){A(\"请先登录后再生成素材向量。\"),_(\"account\");return}fe(!0),A(\"\");try{const re=(await U(\""
+    },
+    {
+      "name": "install_ai_runtime",
+      "javascript_offset": 398768,
+      "call_context": "U(\"install_ai_runtime\",{downloadUrl:g,sha256:r.sha256||null});li(S);const D=await vr();A(D?\"AI 运行环境和视频处理组件安装完成，后续生成草稿会优先使用这个运行环境。\":\"AI 运行环境安装完成；视频处理组件未安装成功，可稍后重新安装运行环境。\")}catch(r){M(r instanceof Error?r.message:String(r)),await xi()}finally{ii(!1)}}async function mu(){M(\"\"),A(\"\");try{const r=await U(\"clear_ai_runtime\");li(r),A(\"AI 运行环境已清空，可以重新安装。\")}catch(r){M(r instanceof Error?r.message:String(r)"
+    },
+    {
+      "name": "install_builtin_preset",
+      "javascript_offset": 401831,
+      "call_context": "U(\"install_builtin_preset\",{folderName:r.folderName,customDir:Aa.trim()||null})).target_path}async function Ec(r,g={}){if(r.source===\"local\")return;const S=g.syncToJianying??!0;if(r.source===\"online\"&&S&&!js()){Fi(r);return}if(ws(S?`正在下载并安装：${r.name}`:`正在下载到 XYCut ：${r.name}`)){M(\"\"),A(\"\"),wa(r.key);try{const D=await Ac(r,{syncToJianying:S});if(D){const me=Eo(r,D);Fe(xe=>({...xe,presets:xe.presets"
+    },
+    {
+      "name": "install_ffmpeg_runtime",
+      "javascript_offset": 334263,
+      "call_context": "U(\"install_ffmpeg_runtime\",{downloadUrl:re,sha256:te.sha256||null});return B(Ee),b(\"FFmpeg 视频处理组件安装完成。\"),await N(),!0}catch(te){return A(te instanceof Error?te.message:String(te)),await E(),!1}finally{de(!1)}}async function L(){A(\"\");try{const te=await U(\"clear_ffmpeg_runtime\");B(te),b(\"FFmpeg 运行组件已清空，可以重新安装。\"),await N()}catch(te){A(te instanceof Error?te.message:String(te)),await E()}}async funct"
+    },
+    {
+      "name": "install_imported_presets",
+      "javascript_offset": 407957,
+      "call_context": "U(\"install_imported_presets\",{paths:g,customDir:Aa.trim()||null});tl(S);const D=S.filter(me=>me.ok).length;D?(await Hn({clearNotice:!0}),A(`已导入 ${D} 个预设。`)):M(S[0]?.message||\"没有导入成功的预设。\")}catch(S){M(S instanceof Error?S.message:String(S))}finally{ai(!1)}}async function nf(){const r=si.trim();if(!r){M(\"请先拖入或填写模板文件夹目录。\");return}Oo(!0),sr(null),M(\"\"),A(\"\");try{const g=await U(\"pack_template_folder\",{"
+    },
+    {
+      "name": "install_online_preset",
+      "javascript_offset": 401471,
+      "call_context": "U(\"install_online_preset\",{downloadUrl:xe.download_url,sha256:xe.sha256||r.sha256||null,folderName:r.folderName||r.name,customDir:S&&Aa.trim()||null,syncToJianying:S,installKind:\"preset\"}),Ut=He.cache_path||He.target_path;return la(ha=>({...ha,[r.key]:Ut,...r.folderName?{[r.folderName]:Ut}:{}})),Ut}if(!r.folderName)throw new Error(\"未找到内置预设目录。\");return(await U(\"install_builtin_preset\",{folderName:r"
+    },
+    {
+      "name": "list_local_hot_templates",
+      "javascript_offset": 347349,
+      "call_context": "U(\"list_local_hot_templates\");p(be.templates||[])}catch(be){console.warn(\"Failed to load local hot templates\",be),p([])}}async function K({force:be=!1,category:_e=Y}={}){if(!be){const Te=Oh(md,_e);if(Te){const Be=Te.templates||[];Se(Be),A(Te.category_options||[]),je(Be);return}}fe(!0);try{const Te=new URLSearchParams({page:\"1\",page_size:\"100\"});_e&&Te.set(\"category\",_e);const Be=await o(`/api/vide"
+    },
+    {
+      "name": "list_local_video_templates",
+      "javascript_offset": 348095,
+      "call_context": "U(\"list_local_video_templates\");$(be.templates||[])}catch(be){console.warn(\"Failed to load local video templates\",be),$([])}}async function ge(be=f){try{const _e=await U(\"scan_hot_template_cache\");ce(Te=>{const Be={...Te};for(const Xe of be){const Je=Xg(Xe),St=_e[Je]||_e[Xe.slug];if(!St?.template_path)continue;const it=St.template_path,Fe=Te[Xe.slug];Be[Xe.slug]={templatePath:it,configPath:St.conf"
+    },
+    {
+      "name": "list_recent_workbench_tasks",
+      "javascript_offset": 326210,
+      "call_context": "U(\"list_recent_workbench_tasks\",{limit:5});N(ie)}catch{N([])}finally{_(!1)}}return v.useEffect(()=>{F()},[]),l.jsxs(\"section\",{className:\"content-list home-page\",children:[l.jsxs(\"div\",{className:\"home-banner\",children:[l.jsx(\"img\",{src:\"/xycut-banner.gif\",alt:\"小圆 XYCut\"}),l.jsxs(\"div\",{className:\"home-brand-links\",children:[l.jsx(\"button\",{type:\"button\",onClick:()=>{c&&h(c)},children:\"xycut.com\"}"
+    },
+    {
+      "name": "list_sucai_embedding_items",
+      "javascript_offset": 339315,
+      "call_context": "U(\"list_sucai_embedding_items\",{libraryId:_e()?.id||null,collectionId:se||null,limit:100})).items||[];if(!re.length){b(\"没有需要向量化的素材。\");return}const Ee=`sucai-material-${Date.now()}-${Math.random().toString(16).slice(2)}`,Le=await f(\"/api/sucai/embeddings\",{method:\"POST\",headers:{\"Content-Type\":\"application/json\",...u(c)},body:JSON.stringify({request_id:Ee,purpose:\"material_index\",items:re.map(({id:"
+    },
+    {
+      "name": "load_local_favorite_preset_index",
+      "javascript_offset": 386138,
+      "call_context": "U(\"load_local_favorite_preset_index\").then(r=>Fe(ky(r))).catch(r=>{console.warn(\"Failed to load local favorite preset index\",r),Fe($n())}).finally(()=>te(!0))},[]),v.useEffect(()=>{Oe&&U(\"update_agent_api_context\",{input:{ai_editing_enabled:vn,draft_output_dir:ba,auth_token:qe,api_base_urls:Ls,membership_enabled:Ve,favorite_index:it,video_editing_settings:Bg(fn)}}).then(()=>Nn()).catch(r=>console."
+    },
+    {
+      "name": "open_local_folder",
+      "javascript_offset": 334739,
+      "call_context": "U(\"open_local_folder\",{path:te})}catch(te){A(te instanceof Error?te.message:String(te))}}async function W(){try{const te=pe?.library_base_dir;if(!te){A(\"还没有检测到素材库保存目录。\");return}await U(\"open_local_folder\",{path:te})}catch(te){A(te instanceof Error?te.message:String(te))}}async function x(te){const re=te.trim();if(!re)return A(\"请先填写素材库保存目录。\"),{ok:!1,error:\"请先填写素材库保存目录。\"};Se(!0),A(\"\");try{const Ee=a"
+    },
+    {
+      "name": "pack_template_folder",
+      "javascript_offset": 408331,
+      "call_context": "U(\"pack_template_folder\",{input:{presetDir:r}});sr(g),g.zip_path&&Ro(g.zip_path),A(g.message||\"模板 zip 已生成。\")}catch(g){M(g instanceof Error?g.message:String(g))}finally{Oo(!1)}}async function Au(){const r=Is.trim();if(!r){M(\"请先拖入模板 zip 或模板文件夹，或粘贴完整路径。\");return}if(!ba.trim()){M(\"请先在剪映路径设置中填写草稿保存位置。\");return}if(al===\"video_template\"){if(!cr.trim()){M(\"视频模板测试需要填写测试视频 MP4。\");return}if(!Zs.trim()){M(\"视频"
+    },
+    {
+      "name": "reset_local_data",
+      "javascript_offset": 400829,
+      "call_context": "U(\"reset_local_data\",{options:Zi});A(r),Xi(await U(\"get_cache_dir\")),Tl(!1),lr(null),Xs(Uh),await xi(),await cs()}catch(r){M(r instanceof Error?r.message:String(r))}finally{sa(!1)}}async function Ac(r,g={}){const S=g.syncToJianying??!0;if(r.source===\"local\")return r.folderPath||\"\";if(r.source===\"online\"){const me=!!r.memberOnly;if(me&&!qe)throw o(\"account\"),new Error(`请先登录${us}后再下载在线预设。`);if(me&&!"
+    },
+    {
+      "name": "reset_sucai_material_analysis",
+      "javascript_offset": 336807,
+      "call_context": "U(\"reset_sucai_material_analysis\",{materialId:te});return re.status?le(re.status):await E(),b(\"素材已改为待分析，可重新发送给 Agent 处理。\"),!0}catch(re){return A(re instanceof Error?re.message:String(re)),!1}}async function J(te){if(!te?.id)return A(\"没有找到要删除的素材。\"),!1;A(\"\");try{const re=await U(\"delete_sucai_material\",{materialId:te.id});return re.status?le(re.status):await E(),b(`已删除素材：${te.file_name||te.id}`),!0}"
+    },
+    {
+      "name": "restart_jianying",
+      "javascript_offset": 399876,
+      "call_context": "U(\"restart_jianying\");A(r),Js(!1)}catch(r){M(r instanceof Error?r.message:String(r))}finally{Ho(!1)}}async function Tc(){const r=Ye.current;if(r){if(r.paused){try{await r.play()}catch(g){_r(!1),M(g instanceof Error?g.message:String(g))}return}r.pause()}}async function wc(){M(\"\"),A(\"\"),Qi(!0);try{const r=await U(\"clear_cache\",{options:Qa});Qa.agent_context&&await Gr(),A(r),Xi(await U(\"get_cache_dir"
+    },
+    {
+      "name": "save_agent_context_file",
+      "javascript_offset": 400424,
+      "call_context": "U(\"save_agent_context_file\",{input:{preset_dir:r,draft_output_dir:ba.trim(),hot_template_skill_version:Ub,video_template_skill_version:Bb,video_editing_settings:Bg(fn),third_party_apis:Wi,sucai_context:jn()}});ui(S=>({...S||{},agent_context_file:g.agent_context_file}))}function Xr(r,g){Ii(S=>({...S,[r]:g}))}function tf(r,g){Xs(S=>({...S,[r]:g}))}async function bu(){M(\"\"),A(\"\"),sa(!0);try{const r=a"
+    },
+    {
+      "name": "save_hot_template_config",
+      "javascript_offset": 404553,
+      "call_context": "U(\"save_hot_template_config\",{slug:S,templateName:r.name||S,templateDir:xe,templateConfigJson:JSON.stringify(r.template_config||{})}),Ut={templatePath:xe,configPath:He.config_path,toolDir:He.tool_dir,skillDir:He.skill_dir};return cn(ha=>({...ha,[r.slug]:Ut})),await dn([r]),A(\"模板已下载到 XYCut ，复制 Agent 提示词后即可开始创作。\"),Ut}catch(D){return M(D instanceof Error?D.message:String(D)),null}finally{wa(\"\"),As()}"
+    },
+    {
+      "name": "save_local_preset_as_hot_template",
+      "javascript_offset": 407145,
+      "call_context": "U(\"save_local_preset_as_hot_template\",{presetDir:r.folderPath,templateName:r.name});qa(S=>[g,...S.filter(D=>D.slug!==g.slug)]),Va(\"local\"),o(\"hotTemplates\"),A(\"已保存为本地爆款模板。\")}catch(g){M(g instanceof Error?g.message:String(g))}finally{K(null)}}}async function wu(r){if(!(r.source!==\"local\"||!r.folderPath)){if(!$a){M(\"保存为模板是会员功能，请开通会员后使用。\"),K(null);return}try{const g=await U(\"save_local_preset_as_vide"
+    },
+    {
+      "name": "save_local_preset_as_video_template",
+      "javascript_offset": 407517,
+      "call_context": "U(\"save_local_preset_as_video_template\",{presetDir:r.folderPath,templateName:r.name});Me(S=>[g,...S.filter(D=>D.slug!==g.slug)]),Yt(\"local\"),o(\"videoTemplates\"),A(\"已保存为本地视频模板。\")}catch(g){M(g instanceof Error?g.message:String(g))}finally{K(null)}}}async function af(r){const g=r.map(S=>String(S||\"\").trim().replace(/^\"|\"$/g,\"\")).filter(Boolean);if(!g.length){M(\"没有读取到导入路径，可以直接粘贴或重新拖入 zip / 文件夹。\");retu"
+    },
+    {
+      "name": "save_sucai_embeddings",
+      "javascript_offset": 339959,
+      "call_context": "U(\"save_sucai_embeddings\",{provider:Le.provider,model:Le.model,items:st}),Le.wallet&&await y(),b(`已生成 ${st.length} 条素材向量，扣除 ${Le.credit_cost||0} 积分。`),await E()}catch(te){A(te instanceof Error?te.message:String(te)),await y()}finally{fe(!1)}}function it(te){$(te),ee(\"\"),te?localStorage.setItem(Wc,te):localStorage.removeItem(Wc),localStorage.removeItem(er)}function Fe(te){M(te),localStorage.setItem"
+    },
+    {
+      "name": "save_video_template_config",
+      "javascript_offset": 405872,
+      "call_context": "U(\"save_video_template_config\",{slug:S,templateName:r.name||S,templateDir:xe,templateConfigJson:JSON.stringify(r.template_config||{})}),Ut={templatePath:xe,configPath:He.config_path,toolDir:He.tool_dir,skillDir:He.skill_dir};return Dn(ha=>({...ha,[r.slug]:Ut})),await Wn([r]),A(`视频模板“${r.name||r.slug}”已下载到 XYCut 。`),Ut}catch(D){return M(D instanceof Error?D.message:String(D)),null}finally{wa(\"\"),As"
+    },
+    {
+      "name": "scan_builtin_presets",
+      "javascript_offset": 380593,
+      "call_context": "U(\"scan_builtin_presets\"),bi()]);Se(r),$(g);const S=Aa.trim(),D=r.preset_dir.trim();S&&r.exists&&D&&D!==S&&(localStorage.setItem(yd,D),Ws(D))}catch(r){M(r instanceof Error?r.message:String(r))}finally{ee(!1)}}async function bi(){const r=await U(\"scan_online_preset_cache\");la(r||{});const g=new Set(Object.values(r||{}));return Fe(S=>({...S,presets:S.presets.map(D=>{if(!D.preset_id.startsWith(\"onlin"
+    },
+    {
+      "name": "scan_hot_template_cache",
+      "javascript_offset": 348263,
+      "call_context": "U(\"scan_hot_template_cache\");ce(Te=>{const Be={...Te};for(const Xe of be){const Je=Xg(Xe),St=_e[Je]||_e[Xe.slug];if(!St?.template_path)continue;const it=St.template_path,Fe=Te[Xe.slug];Be[Xe.slug]={templatePath:it,configPath:St.config_path||Fe?.configPath,toolDir:Fe?.toolDir,skillDir:Fe?.skillDir}}return Be})}catch(_e){console.warn(\"Failed to refresh hot template install paths\",_e),ce({})}}async f"
+    },
+    {
+      "name": "scan_local_presets",
+      "javascript_offset": 380541,
+      "call_context": "U(\"scan_local_presets\",{customDir:Aa.trim()||null}),U(\"scan_builtin_presets\"),bi()]);Se(r),$(g);const S=Aa.trim(),D=r.preset_dir.trim();S&&r.exists&&D&&D!==S&&(localStorage.setItem(yd,D),Ws(D))}catch(r){M(r instanceof Error?r.message:String(r))}finally{ee(!1)}}async function bi(){const r=await U(\"scan_online_preset_cache\");la(r||{});const g=new Set(Object.values(r||{}));return Fe(S=>({...S,presets"
+    },
+    {
+      "name": "scan_online_preset_cache",
+      "javascript_offset": 380836,
+      "call_context": "U(\"scan_online_preset_cache\");la(r||{});const g=new Set(Object.values(r||{}));return Fe(S=>({...S,presets:S.presets.map(D=>{if(!D.preset_id.startsWith(\"online:\")||!Vh(D.preset_path)||g.has(D.preset_path||\"\"))return D;const{preset_path:me,cover_path:xe,preview_path:He,...Ut}=D;return Ut})})),r||{}}async function Hn({clearNotice:r=!1,presetDir:g=Aa}={}){ee(!0),M(\"\"),r&&A(\"\");try{const S=await U(\"sca"
+    },
+    {
+      "name": "scan_video_template_cache",
+      "javascript_offset": 348700,
+      "call_context": "U(\"scan_video_template_cache\");ne(Te=>{const Be={...Te};for(const Xe of be){const Je=Xg(Xe),St=_e[Je]||_e[Xe.slug];if(!St?.template_path)continue;const it=St.template_path,Fe=Te[Xe.slug];Be[Xe.slug]={templatePath:it,configPath:St.config_path||Fe?.configPath,toolDir:Fe?.toolDir,skillDir:Fe?.skillDir}}return Be})}catch(_e){console.warn(\"Failed to refresh video template install paths\",_e),ne({})}}fun"
+    },
+    {
+      "name": "test_ai_service_api",
+      "javascript_offset": 342951,
+      "call_context": "U(\"test_ai_service_api\",{input:{service_type:O.type,parameters:L}});le(W.message||(W.ok?\"测试成功。\":\"测试失败。\"))}catch(W){le(W instanceof Error?W.message:String(W))}finally{de(!1)}}function E(){if(!O)return;const L=O.name.trim();if(!L){c(\"请填写服务名称。\");return}const Q=O.parameters.map(T=>({...T,key:T.key.trim(),value:T.value.trim()})).filter(T=>T.key||T.value);if(O.type===\"custom\"&&Q.some(T=>!T.key||!T.value"
+    },
+    {
+      "name": "test_template_zip",
+      "javascript_offset": 408805,
+      "call_context": "U(\"test_template_zip\",{input:{templateType:al,zipPath:r,draftOutputDir:ba,materialDir:al===\"hot_template\"?Uo.trim():null,mp4File:al===\"video_template\"?cr.trim():null,srtFile:al===\"video_template\"?Zs.trim():null}});rr(g),A(\"测试草稿已生成，请打开剪映查看实际效果。\")}catch(g){M(g instanceof Error?g.message:String(g))}finally{$s(!1)}}async function Es(r){const g=r?.trim();if(g)try{await U(\"open_local_folder\",{path:g})}c"
+    },
+    {
+      "name": "update_agent_api_context",
+      "javascript_offset": 386323,
+      "call_context": "U(\"update_agent_api_context\",{input:{ai_editing_enabled:vn,draft_output_dir:ba,auth_token:qe,api_base_urls:Ls,membership_enabled:Ve,favorite_index:it,video_editing_settings:Bg(fn)}}).then(()=>Nn()).catch(r=>console.warn(\"Failed to sync Agent API context\",r))},[vn,ba,qe,Ve,it,Oe,fn]),v.useEffect(()=>{Nn();const r=window.setInterval(()=>{Nn()},5e3);return()=>window.clearInterval(r)},[]),v.useEffect("
+    },
+    {
+      "name": "update_sucai_material",
+      "javascript_offset": 336543,
+      "call_context": "U(\"update_sucai_material\",{materialId:te,summary:re,keywords:Ee,qualityScore:Le});return nt.status?le(nt.status):await E(),b(\"素材修改已保存，后续需要重新更新索引。\"),!0}catch(nt){return A(nt instanceof Error?nt.message:String(nt)),!1}}async function je(te){A(\"\");try{const re=await U(\"reset_sucai_material_analysis\",{materialId:te});return re.status?le(re.status):await E(),b(\"素材已改为待分析，可重新发送给 Agent 处理。\"),!0}catch(re){"
+    },
+    {
+      "name": "update_sucai_storage_dir",
+      "javascript_offset": 335144,
+      "call_context": "U(\"update_sucai_storage_dir\",{newBaseDir:re});return Ee.storage&&ce(Ee.storage),Ee.status&&le(Ee.status),await N(),b(Ee.warnings?.length?`素材库保存目录已更新，有 ${Ee.warnings.length} 条提醒，可检查原目录。`:Number(Ee.moved||0)?\"素材库保存目录已更新，已有素材已复制到新目录。\":\"素材库保存目录已更新。\"),{ok:!0}}catch(Ee){const Le=Ee instanceof Error?Ee.message:String(Ee);return A(Le),await E(),{ok:!1,error:Le}}finally{Se(!1)}}async function T(te){A(\"\");t"
+    },
+    {
+      "name": "upload_share_source",
+      "javascript_offset": 352679,
+      "call_context": "U(\"upload_share_source\",{path:x,apiBaseUrl:V,authToken:c,note:O,isOriginal:X}),T=!0,Q+=1;break}catch(ge){K=ge}T||W.push(`${x.split(/[\\\\/]/).filter(Boolean).pop()||x}：${K instanceof Error?K.message:String(K)}`)}Q>0&&(_([]),B(\"\"),F(!1),await oe()),ce(W.length?`已上传 ${Q} 个，失败 ${W.length} 个：${W.slice(0,2).join(\"；\")}`:`已上传 ${Q} 个，等待管理员整理采用。`)}catch(x){ce(x instanceof Error?x.message:String(x))}finally{l"
+    }
+  ],
+  "plugin_commands": [
+    "plugin:dialog|open",
+    "plugin:event|emit",
+    "plugin:event|emit_to",
+    "plugin:event|listen",
+    "plugin:event|unlisten",
+    "plugin:image|from_bytes",
+    "plugin:image|from_path",
+    "plugin:image|new",
+    "plugin:image|rgba",
+    "plugin:image|size",
+    "plugin:opener|open_url",
+    "plugin:resources|close",
+    "plugin:window|activity_name",
+    "plugin:window|center",
+    "plugin:window|close",
+    "plugin:window|create",
+    "plugin:window|destroy",
+    "plugin:window|get_all_windows",
+    "plugin:window|hide",
+    "plugin:window|inner_position",
+    "plugin:window|inner_size",
+    "plugin:window|is_always_on_top",
+    "plugin:window|is_closable",
+    "plugin:window|is_decorated",
+    "plugin:window|is_enabled",
+    "plugin:window|is_focused",
+    "plugin:window|is_fullscreen",
+    "plugin:window|is_maximizable",
+    "plugin:window|is_maximized",
+    "plugin:window|is_minimizable",
+    "plugin:window|is_minimized",
+    "plugin:window|is_resizable",
+    "plugin:window|is_visible",
+    "plugin:window|maximize",
+    "plugin:window|minimize",
+    "plugin:window|outer_position",
+    "plugin:window|outer_size",
+    "plugin:window|request_user_attention",
+    "plugin:window|scale_factor",
+    "plugin:window|scene_identifier",
+    "plugin:window|set_always_on_bottom",
+    "plugin:window|set_always_on_top",
+    "plugin:window|set_background_color",
+    "plugin:window|set_badge_count",
+    "plugin:window|set_badge_label",
+    "plugin:window|set_closable",
+    "plugin:window|set_content_protected",
+    "plugin:window|set_cursor_grab",
+    "plugin:window|set_cursor_icon",
+    "plugin:window|set_cursor_position",
+    "plugin:window|set_cursor_visible",
+    "plugin:window|set_decorations",
+    "plugin:window|set_effects",
+    "plugin:window|set_enabled",
+    "plugin:window|set_focus",
+    "plugin:window|set_focusable",
+    "plugin:window|set_fullscreen",
+    "plugin:window|set_icon",
+    "plugin:window|set_ignore_cursor_events",
+    "plugin:window|set_max_size",
+    "plugin:window|set_maximizable",
+    "plugin:window|set_min_size",
+    "plugin:window|set_minimizable",
+    "plugin:window|set_overlay_icon",
+    "plugin:window|set_position",
+    "plugin:window|set_progress_bar",
+    "plugin:window|set_resizable",
+    "plugin:window|set_shadow",
+    "plugin:window|set_simple_fullscreen",
+    "plugin:window|set_size",
+    "plugin:window|set_size_constraints",
+    "plugin:window|set_skip_taskbar",
+    "plugin:window|set_theme",
+    "plugin:window|set_title",
+    "plugin:window|set_title_bar_style",
+    "plugin:window|set_visible_on_all_workspaces",
+    "plugin:window|show",
+    "plugin:window|start_dragging",
+    "plugin:window|start_resize_dragging",
+    "plugin:window|theme",
+    "plugin:window|title",
+    "plugin:window|toggle_maximize",
+    "plugin:window|unmaximize",
+    "plugin:window|unminimize"
+  ],
+  "note": "Recovered call sites only; native implementations are not recovered."
+}

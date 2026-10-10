@@ -1,0 +1,88 @@
+{
+  "report_version": "r5-source-rebuild-1",
+  "completed_at_utc": "2026-10-09T12:38:48.840343+08:00",
+  "build_id": "20261009-timeline-material-r5",
+  "isolation": {
+    "root": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r5\\xycut-desktop",
+    "source_inputs_count": 566,
+    "source_inputs_bytes": 248142606,
+    "input_aggregate_sha256": "85c8a4599add1f89d11898095cce8f8dc796a0203ced4a47e73ee29f9e92432f",
+    "copy_matches_manifest": true,
+    "root_input_hash_drift": [
+      "scripts/write-handoff-status.cjs"
+    ],
+    "sibling_recovery_present": false,
+    "copied_node_modules": false,
+    "copied_root_test_data": false,
+    "copied_root_dist": false,
+    "copied_reference": false
+  },
+  "npm_ci": {
+    "exit_code": 0,
+    "started_at_utc": "2026-10-09T04:33:22.3466697Z",
+    "command": "npm ci --prefer-offline --no-audit --fund=false",
+    "finished_at_utc": "2026-10-09T04:33:24.8440546Z",
+    "copied_node_modules": false,
+    "log": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r5\\npm-ci.log",
+    "network_policy": "prefer-offline; npm cache/network implementation not instrumented"
+  },
+  "prepare_resources": {
+    "command": "npm run prepare:resources",
+    "exit_code": 0,
+    "finished_at_utc": "2026-10-09T04:33:51.9619145Z"
+  },
+  "electron_bootstrap": {
+    "command": "python scripts/bootstrap-electron.py",
+    "sha256_verified": true,
+    "used_isolated_cache": true,
+    "official_archive": "electron-v44.7.0-win32-x64.zip",
+    "network_provider_calls": 0,
+    "archive_cache_path": "isolated .test-data/source-rebuild-r5/xycut-desktop/.test-data/downloads/electron-v44.7.0-win32-x64.zip",
+    "external_download_possible": true
+  },
+  "tests": {
+    "started_at_utc": "2026-10-09T04:33:52.2452155Z",
+    "resources": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r5\\xycut-desktop\\resources",
+    "command": "node --test tests/*.test.cjs (spec+junit reporters)",
+    "exit_code": 0,
+    "junit": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r5\\tests.xml",
+    "finished_at_utc": "2026-10-09T04:33:58.0831571Z",
+    "test_count": 48,
+    "passed": 48,
+    "failed": 0,
+    "skipped": 0,
+    "junit_sha256": "3b6b54cdaa30c73559398c48716edcd913352f7d5e32887531b6511f9995f286"
+  },
+  "windows_build": {
+    "exit_code": 0,
+    "installed": false,
+    "command": "npm run build:win",
+    "finished_at_utc": "2026-10-09T04:37:11.4281515Z",
+    "electron_builder_cache": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r5\\builder-cache",
+    "log": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r5\\build-r5.log",
+    "resources": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r5\\xycut-desktop\\resources",
+    "started_at_utc": "2026-10-09T04:36:17.8970029Z",
+    "artifact": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r5\\xycut-desktop\\dist\\XYCut-restored-0.2.10-Windows-x64-Setup.exe",
+    "artifact_bytes": 189193791,
+    "artifact_sha256": "55de7c067db704df93e4e07095170a40c7fb3abac6862a8e706782c1ebc3f0de",
+    "root_dist_untouched": true,
+    "log_contains_build_complete": true
+  },
+  "real_ai_provider_calls": 0,
+  "real_uploads": 0,
+  "root_code_edited_during_rebuild": true,
+  "verification_scope": [
+    "source copy hash",
+    "npm ci without copied node_modules",
+    "official Electron checksum bootstrap",
+    "prepare resources",
+    "48 local Node tests",
+    "Windows NSIS package build only"
+  ],
+  "not_proven": [
+    "Mac runtime startup",
+    "Windows installer installation",
+    "full original protected-core comparison in isolated copy",
+    "real provider/account/payment flows"
+  ]
+}

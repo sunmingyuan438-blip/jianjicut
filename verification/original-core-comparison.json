@@ -1,0 +1,16 @@
+{
+  "cases": [
+    {
+      "kind": "video_template",
+      "equal": true,
+      "differences": []
+    },
+    {
+      "kind": "hot_template",
+      "equal": true,
+      "differences": []
+    }
+  ],
+  "normalization": "UUID identities, output-root paths, generated draft names and creation/update timestamps only",
+  "macos_tested": false
+}

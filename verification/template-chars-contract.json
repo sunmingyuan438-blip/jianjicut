@@ -1,0 +1,105 @@
+{
+  "requirement": "F-09",
+  "partial": true,
+  "native_auto_conversion_verified": false,
+  "source_scripts": [
+    {
+      "path": "resources\\agent-kit\\skills\\xycut-hot-template-skill\\scripts\\generate_from_template.py",
+      "line_start": 204,
+      "line_end": 242,
+      "sha256": "f2efdab51af78a87d4c954165afbe8fc24f251706b7792ec51443c9fa4103ed5"
+    },
+    {
+      "path": "resources\\agent-kit\\skills\\xycut-video-template-skill\\scripts\\analyze_video_template_plan.py",
+      "line_start": 122,
+      "line_end": 132,
+      "sha256": "07df4c86e5ae615b5b5f9086a3e58cee0688fd0cb29131c6368daa86f8dacb7f"
+    },
+    {
+      "path": "resources\\agent-kit\\skills\\xycut-video-template-skill\\scripts\\validate_video_template_plan.py",
+      "line_start": 43,
+      "line_end": 56,
+      "sha256": "d5a19557323565886629f6154e88403827dbed7716afc0610b8d466814d27b13"
+    },
+    {
+      "path": "resources\\agent-kit\\skills\\xycut-video-template-skill\\scripts\\match_subtitle_presets.py",
+      "line_start": 35,
+      "line_end": 45,
+      "sha256": "b2973d3f33cf76bb5221c6b4a15513c416e9254b271994e59194c2ede846d35f"
+    }
+  ],
+  "agent_contract": {
+    "whitespace": "Python 3.9 str.isspace(), 29 code points; JS \\s differs",
+    "units": "ASCII code point <128 =>1, remaining non-whitespace code points =>2",
+    "result": "floor(sum_units/2), non-empty minimum1, whitespace-only0",
+    "punctuation": "included",
+    "emoji": "Unicode code points, not grapheme clusters",
+    "line_counting": "Each string counted separately; multi-line text is concatenated logically by ignoring whitespace"
+  },
+  "ui_contract": {
+    "source": "resources/agent-kit/tools/editing-workbench/public/workbench.js",
+    "sha256": "45b3725cea92c703ac20aaaed7dbc5576e807f004991972bb381c381d00c9b65",
+    "source_expression": "Array.from(String(t||\"\").replace(/\\s+/g,\"\")).length",
+    "preserved": true,
+    "rule": "UI uses one per code point after JS whitespace stripping; it intentionally remains distinct from Agent planning"
+  },
+  "native_core_contract": {
+    "source": "../xycut-recovered-0.2.10/analysis/python-disassembly/xycut_core.shared.simple_draft.apply_template_video_content.txt",
+    "primary_fallback": "len(text.replace(\"\\n\", \"\"))",
+    "secondary_fallback": "len(secondary_text)",
+    "preserved": true,
+    "note": "Recovered core keeps its original variant fallback; explicit Agent variant is preferred"
+  },
+  "original_video_parameter_evidence": [
+    {
+      "sample_text": "这是第一行标题样式",
+      "original_sample_chars": 9,
+      "computed_agent_chars": 9,
+      "original_suggest_chars": "8-9字"
+    },
+    {
+      "sample_text": "这是第二行标题\n标题内容可以自动替换",
+      "original_sample_chars": 17,
+      "computed_agent_chars": 17,
+      "original_suggest_chars": "15-17字"
+    },
+    {
+      "sample_text": "这里是小文案说明\n可以让AI任意替换，这里只做展示",
+      "original_sample_chars": 23,
+      "computed_agent_chars": 23,
+      "original_suggest_chars": "20-23字"
+    }
+  ],
+  "known_original_hot_manual_config": {
+    "source": ".test-data/e2e/data/hot-templates/xycut_news_017/template-config.json",
+    "analysis_source": "admin",
+    "example_chars": 25,
+    "suggest_chars": "23-25字",
+    "note": "Reviewed admin configuration does not prove native default range rounding; keep existing imported configurations"
+  },
+  "implemented": {
+    "file": "backend/template.cjs",
+    "function": "visibleChars(value)",
+    "template_sample_chars": "uses Agent units instead of raw code-point count",
+    "suggest_chars": "pending native default range evidence"
+  },
+  "tests": {
+    "file": "tests/template-chars.test.cjs",
+    "junit": ".test-data/template-chars-tests.xml",
+    "count": 4,
+    "pass": 4,
+    "network_calls": 0,
+    "live_original_generation_calls": 0,
+    "verified": [
+      "four original Agent script functions",
+      "ASCII punctuation CJK newline emoji ZWJ combining-mark cases",
+      "all Python3.9 whitespace characters and JS differences",
+      "01/02 15-unit and03 8-unit validation boundaries",
+      "multiline and nested template metadata"
+    ],
+    "unverified": [
+      "original native converter interval rounding",
+      "all F-09 GUI/editor paths on Windows and Mac"
+    ]
+  }
+}

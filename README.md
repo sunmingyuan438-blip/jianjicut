@@ -10,6 +10,8 @@ Windows 使用 `dist/XYCut-restored-0.2.10-Windows-x64-Setup.exe`，或解压后
 
 Mac 需要 **macOS 13 或更高版本**。M 系列芯片使用 `macOS-arm64-TEST.zip`，Intel 使用 `macOS-x64-TEST.zip`。将 ZIP 复制到 Mac 本机目录并解压；先运行 `首次准备并启动.command`，它会为同目录的测试应用进行本地开发签名并打开应用。这些包尚未经过 Mac 运行验证，也没有 Developer ID 发布签名或公证。
 
+从 GitHub 获取源码并在 Mac 上测试时，使用仓库中的 `downloads/XYCut-restored-0.2.10-mac-source-lite.zip`，按 `GITHUB_MAC_TEST.md` 执行 `npm ci`、`npm run start:mac` 或 `npm run build:mac`。GitHub 普通仓库不接收超过单文件限制的预编译安装包，因此仓库内的 Mac 测试交付采用源码包；Windows 工作区中的预编译包仍保留用于本地验收。
+
 首次准备脚本会验证本地签名，并将系统版本、芯片类型和签名检查结果写入 `验收记录/mac-preparation.log`。运行 Mac 包内的 `运行验收.command`，会在同目录的 `验收记录/` 写入：
 
 - `desktop-smoke.json`：8 个主页面、独立模板预览、豆包连接测试的模拟响应、AI 剪辑开关、SQLite、Pillow、FFmpeg 和真实草稿核心的执行结果，包含本次构建编号。
@@ -93,6 +95,5 @@ npm run build:mac
 验收状态见 `parity.json`，本次证据见 `verification/`。只有全部必需功能通过两个系统的验收后，才能将恢复目标标记完成。
 
 2026-10-09 收到的开发对接资料包包含 40 项功能要求、12 个验收场景、截图及旧验证快照，没有新增原 Rust、TSX 或服务端源码。资料中的提议补丁未直接执行；工程按现有代码和原界面实现修复。当前逐项证据与未完成项见 `verification/handoff-status.md` 和 `verification/handoff-status.json`；其中的“部分验证”不表示完整等价。
-
 
 

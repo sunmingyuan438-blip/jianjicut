@@ -1,0 +1,103 @@
+{
+  "started_at_utc": "2026-10-09T05:29:39.752187+00:00",
+  "build_id": "20261009-cross-platform-r6",
+  "source_root": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop",
+  "isolated_root": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r6\\xycut-desktop",
+  "input_aggregate_sha256": "da32b8fd7e2cbe3025e18c6423947cda59924668596ef270d167004e9372d17d",
+  "input_file_count": 610,
+  "input_bytes": 251334718,
+  "input_copy_verified": true,
+  "included_dirs": [
+    "desktop",
+    "backend",
+    "scripts",
+    "tests",
+    "resources",
+    "recovered-ui",
+    "verification"
+  ],
+  "included_files": [
+    "package.json",
+    "package-lock.json",
+    "restoration-build.json",
+    "parity.json",
+    "README.md",
+    ".gitignore"
+  ],
+  "sibling_recovery_exists": false,
+  "copied_node_modules": false,
+  "copied_root_test_data": false,
+  "copied_root_dist": false,
+  "copied_reference": false,
+  "isolation": {
+    "copy_matches_manifest": true,
+    "sibling_recovery_present": false,
+    "copied_node_modules": false,
+    "copied_root_test_data": false,
+    "copied_root_dist": false,
+    "copied_reference": false,
+    "file_count": 610,
+    "bytes": 251334718,
+    "aggregate_sha256": "da32b8fd7e2cbe3025e18c6423947cda59924668596ef270d167004e9372d17d"
+  },
+  "npm_ci": {
+    "copied_node_modules": false,
+    "started_at_utc": "2026-10-09T05:30:26.8467759Z",
+    "finished_at_utc": "2026-10-09T05:30:29.4853939Z",
+    "network_policy": "prefer-offline; not instrumented",
+    "exit_code": 0,
+    "command": "npm ci --prefer-offline --no-audit --fund=false",
+    "log": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r6\\npm-ci-r6.log"
+  },
+  "prepare_resources": {
+    "log": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r6\\prepare-r6.log",
+    "started_at_utc": "2026-10-09T05:30:55.7061358Z",
+    "exit_code": 0,
+    "command": "npm run prepare:resources",
+    "finished_at_utc": "2026-10-09T05:30:56.1553469Z"
+  },
+  "electron_bootstrap": {
+    "finished_at_utc": "2026-10-09T05:32:51.4358342Z",
+    "exit_code": 0,
+    "command": "python scripts/bootstrap-electron.py",
+    "log": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r6\\bootstrap-electron-r6.log",
+    "started_at_utc": "2026-10-09T05:32:35.3416490Z",
+    "sha256_verified": true
+  },
+  "tests": {
+    "exit_code": 0,
+    "started_at_utc": "2026-10-09T05:31:33.5210632Z",
+    "command": "node --test tests/*.test.cjs",
+    "junit": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r6\\tests-r6.xml",
+    "test_count": 63,
+    "resources": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r6\\xycut-desktop\\resources",
+    "copied_node_modules": false,
+    "finished_at_utc": "2026-10-09T05:31:39.3473017Z",
+    "junit_sha256": "bd2eb795e32b120b3866d778cf2b00ba3dd4567432f97843d42fb5fc3bc5b3b5",
+    "passed": 63,
+    "failed": 0,
+    "skipped": 0
+  },
+  "windows_build": {
+    "started_at_utc": "2026-10-09T05:38:52.9876856Z",
+    "command": "npm run build:win",
+    "log": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r6\\build-r6-retry.log",
+    "finished_at_utc": "2026-10-09T05:39:18.6391461Z",
+    "electron_builder_cache": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r6\\xycut-desktop\\.test-data\\builder-cache",
+    "exit_code": 0,
+    "installed": false,
+    "resources": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r6\\xycut-desktop\\resources",
+    "artifact": ".test-data\\source-rebuild-r6\\xycut-desktop\\dist\\XYCut-restored-0.2.10-Windows-x64-Setup.exe",
+    "artifact_bytes": 189203119,
+    "artifact_sha256": "9354b50d6888c884f388603176fa0e8e4cf0eaa8a03979fb66b1a9c060a136f6"
+  },
+  "real_ai_provider_calls": 0,
+  "real_uploads": 0,
+  "external_download_possible": true,
+  "mac_runtime_tested": false,
+  "notes": [
+    "Initial isolated NSIS build encountered ECONNRESET after checksum-verified cache download; retry used only the isolated builder cache and exited 0.",
+    "Windows artifact was built but not installed.",
+    "No real provider calls or uploads were made."
+  ]
+}

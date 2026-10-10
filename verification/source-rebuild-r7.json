@@ -1,0 +1,93 @@
+{
+  "report_version": "r7-source-rebuild-1",
+  "started_at_utc": "2026-10-09T07:22:20.214Z",
+  "build_id": "20261009-functional-r7",
+  "source_root": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop",
+  "isolated_root": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r7\\xycut-desktop",
+  "input_aggregate_sha256": "5aa226b4eadce285ae280d0b27303c234043fa7c2d41618c1c1119c593f5f9fd",
+  "input_file_count": 642,
+  "input_bytes": 251627552,
+  "input_copy_verified": true,
+  "included_dirs": [
+    "desktop",
+    "backend",
+    "scripts",
+    "tests",
+    "resources",
+    "recovered-ui",
+    "verification"
+  ],
+  "included_files": [
+    "package.json",
+    "package-lock.json",
+    "restoration-build.json",
+    "parity.json",
+    "README.md",
+    ".gitignore"
+  ],
+  "sibling_recovery_exists": false,
+  "copied_node_modules": false,
+  "copied_root_test_data": false,
+  "copied_root_dist": false,
+  "copied_reference": false,
+  "isolation": {
+    "copy_matches_manifest": true,
+    "sibling_recovery_present": false,
+    "copied_node_modules": false,
+    "copied_root_test_data": false,
+    "copied_root_dist": false,
+    "copied_reference": false,
+    "file_count": 642,
+    "bytes": 251627552,
+    "aggregate_sha256": "5aa226b4eadce285ae280d0b27303c234043fa7c2d41618c1c1119c593f5f9fd"
+  },
+  "npm_ci": {
+    "copied_node_modules": false,
+    "exit_code": 0,
+    "command": "npm ci --prefer-offline --no-audit --fund=false",
+    "log": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r7\\npm-ci-r7.log"
+  },
+  "prepare_resources": {
+    "exit_code": 0,
+    "command": "npm run prepare:resources",
+    "log": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r7\\prepare-r7.log"
+  },
+  "electron_bootstrap": {
+    "exit_code": 0,
+    "command": "use checksum-verified Electron 44.7.0 runtime already prepared in the workspace",
+    "runtime": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r7\\xycut-desktop\\node_modules\\electron\\dist",
+    "runtime_executable_sha256": "2529b494f4123f152bce346051f7bd855ef95006424a561953cf17c49a3d1ba8"
+  },
+  "tests": {
+    "exit_code": 0,
+    "command": "node --test --test-reporter=junit --test-reporter-destination=.test-data/tests-r7.xml tests/*.test.cjs",
+    "junit": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r7\\xycut-desktop\\.test-data\\tests-r7.xml",
+    "test_count": 67,
+    "passed": 67,
+    "failed": 0,
+    "skipped": 0,
+    "resources": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r7\\xycut-desktop\\resources",
+    "copied_node_modules": false,
+    "junit_sha256": "e1b2ebd02e5af332a2a8558f21a8ee47af98a4b589591d33b76893a0b7611149"
+  },
+  "windows_build": {
+    "exit_code": 0,
+    "command": "npm run build:win",
+    "installed": false,
+    "resources": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r7\\xycut-desktop\\resources",
+    "artifact": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\source-rebuild-r7\\xycut-desktop\\dist\\XYCut-restored-0.2.10-Windows-x64-Setup.exe",
+    "artifact_bytes": 189225354,
+    "artifact_sha256": "150ea299cdac1580f2358dd6c2e726f5b1a1976046062c7cb5ee3839cca0741b",
+    "electron_builder_cache": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\.test-data\\builder-cache-r7"
+  },
+  "real_ai_provider_calls": 0,
+  "real_uploads": 0,
+  "external_download_possible": true,
+  "mac_runtime_tested": false,
+  "notes": [
+    "The source was copied into an isolated directory without node_modules, root test data, root dist, reference files, or sibling recovery directories.",
+    "npm ci, resource preparation, 67 functional tests, and an isolated NSIS Windows build completed successfully.",
+    "The Electron runtime was reused from the checksum-verified workspace runtime; the isolated build did not use the root dist output.",
+    "The Windows artifact was built but not installed. No real provider calls or uploads were made."
+  ]
+}

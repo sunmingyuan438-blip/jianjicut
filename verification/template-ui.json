@@ -1,0 +1,270 @@
+{
+  "build_id": "20261009-functional-r8",
+  "app_root": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop",
+  "resources": "C:\\Users\\Administrator\\Documents\\ChatGPT\\工作1\\xycut-desktop\\resources",
+  "ok": true,
+  "cases": [
+    {
+      "kind": "hot_template",
+      "prompt_config_exists": true,
+      "prompt_context_exists": true,
+      "reviewed_config_preserved": true,
+      "failed_download_did_not_copy": true
+    },
+    {
+      "kind": "video_template",
+      "prompt_config_exists": true,
+      "prompt_context_exists": true,
+      "reviewed_config_preserved": true,
+      "failed_download_did_not_copy": true
+    }
+  ],
+  "local_conversion_without_login": true,
+  "local_conversion_ui": [
+    {
+      "kind": "hot_template",
+      "ui_invoked": true,
+      "config_exists": true
+    },
+    {
+      "kind": "video_template",
+      "ui_invoked": true,
+      "config_exists": true
+    }
+  ],
+  "remote_membership_enabled_in_fixture": true,
+  "paid_or_live_provider_calls": false,
+  "command_errors": [
+    {
+      "name": "install_online_preset",
+      "message": "下载失败：HTTP 404"
+    },
+    {
+      "name": "install_online_preset",
+      "message": "下载失败：HTTP 404"
+    }
+  ],
+  "commands": [
+    {
+      "name": "list_recent_workbench_tasks"
+    },
+    {
+      "name": "scan_local_presets"
+    },
+    {
+      "name": "scan_builtin_presets"
+    },
+    {
+      "name": "scan_online_preset_cache"
+    },
+    {
+      "name": "load_local_favorite_preset_index"
+    },
+    {
+      "name": "get_agent_api_context"
+    },
+    {
+      "name": "get_sucai_db_status"
+    },
+    {
+      "name": "get_ffmpeg_runtime_status"
+    },
+    {
+      "name": "get_sucai_storage_status"
+    },
+    {
+      "name": "get_ai_runtime_status"
+    },
+    {
+      "name": "plugin:window|scale_factor"
+    },
+    {
+      "name": "save_agent_context_file"
+    },
+    {
+      "name": "update_agent_api_context"
+    },
+    {
+      "name": "plugin:window|inner_size"
+    },
+    {
+      "name": "get_agent_api_context"
+    },
+    {
+      "name": "plugin:window|set_size"
+    },
+    {
+      "name": "list_recent_workbench_tasks"
+    },
+    {
+      "name": "scan_local_presets"
+    },
+    {
+      "name": "scan_builtin_presets"
+    },
+    {
+      "name": "scan_online_preset_cache"
+    },
+    {
+      "name": "load_local_favorite_preset_index"
+    },
+    {
+      "name": "get_agent_api_context"
+    },
+    {
+      "name": "get_sucai_db_status"
+    },
+    {
+      "name": "get_ffmpeg_runtime_status"
+    },
+    {
+      "name": "get_sucai_storage_status"
+    },
+    {
+      "name": "get_ai_runtime_status"
+    },
+    {
+      "name": "plugin:window|scale_factor"
+    },
+    {
+      "name": "save_agent_context_file"
+    },
+    {
+      "name": "update_agent_api_context"
+    },
+    {
+      "name": "plugin:window|inner_size"
+    },
+    {
+      "name": "get_agent_api_context"
+    },
+    {
+      "name": "plugin:window|set_size"
+    },
+    {
+      "name": "save_agent_context_file"
+    },
+    {
+      "name": "scan_hot_template_cache"
+    },
+    {
+      "name": "install_online_preset"
+    },
+    {
+      "name": "save_hot_template_config"
+    },
+    {
+      "name": "scan_hot_template_cache"
+    },
+    {
+      "name": "install_online_preset"
+    },
+    {
+      "name": "scan_video_template_cache"
+    },
+    {
+      "name": "install_online_preset"
+    },
+    {
+      "name": "save_video_template_config"
+    },
+    {
+      "name": "scan_video_template_cache"
+    },
+    {
+      "name": "install_online_preset"
+    },
+    {
+      "name": "scan_local_presets"
+    },
+    {
+      "name": "save_local_preset_as_hot_template"
+    },
+    {
+      "name": "list_local_hot_templates"
+    },
+    {
+      "name": "scan_local_presets"
+    },
+    {
+      "name": "save_local_preset_as_video_template"
+    },
+    {
+      "name": "list_local_video_templates"
+    }
+  ],
+  "requests": [
+    {
+      "path": "/api/app/ffmpeg-runtime",
+      "method": "GET"
+    },
+    {
+      "path": "/api/app/ai-runtime",
+      "method": "GET"
+    },
+    {
+      "path": "/api/pay/products",
+      "method": "GET"
+    },
+    {
+      "path": "/api/app-config",
+      "method": "GET"
+    },
+    {
+      "path": "/api/presets/filter-options",
+      "method": "GET"
+    },
+    {
+      "path": "/api/update",
+      "method": "GET"
+    },
+    {
+      "path": "/api/app/ffmpeg-runtime",
+      "method": "GET"
+    },
+    {
+      "path": "/api/app/ai-runtime",
+      "method": "GET"
+    },
+    {
+      "path": "/api/pay/products",
+      "method": "GET"
+    },
+    {
+      "path": "/api/app-config",
+      "method": "GET"
+    },
+    {
+      "path": "/api/presets/filter-options",
+      "method": "GET"
+    },
+    {
+      "path": "/api/update",
+      "method": "GET"
+    },
+    {
+      "path": "/api/hot-templates",
+      "method": "GET"
+    },
+    {
+      "path": "/api/templates/download",
+      "method": "POST"
+    },
+    {
+      "path": "/api/templates/download",
+      "method": "POST"
+    },
+    {
+      "path": "/api/video-templates",
+      "method": "GET"
+    },
+    {
+      "path": "/api/templates/download",
+      "method": "POST"
+    },
+    {
+      "path": "/api/templates/download",
+      "method": "POST"
+    }
+  ]
+}
