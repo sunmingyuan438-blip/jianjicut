@@ -1,0 +1,48 @@
+{
+  "archive": "XYCut-restored-0.2.10-mac-source-lite.zip",
+  "part_size": 700000,
+  "bytes": 5299663,
+  "sha256": "e5e8056c48015aba6a748073a207791234f59ed909d222192e51d08cd5fdef5b",
+  "parts": [
+    {
+      "name": "XYCut-restored-0.2.10-mac-source-lite.zip.part00",
+      "bytes": 700000,
+      "sha256": "f3e6cd8987ecd0247a7d46458383881ed4f90b69944dfe47d5eff215af8371db"
+    },
+    {
+      "name": "XYCut-restored-0.2.10-mac-source-lite.zip.part01",
+      "bytes": 700000,
+      "sha256": "c9ffeefb1105a436888f7d385f7576f689f5084982ad2f26ffafb97a44fe03ce"
+    },
+    {
+      "name": "XYCut-restored-0.2.10-mac-source-lite.zip.part02",
+      "bytes": 700000,
+      "sha256": "a3b39a3e80a7f54c6aeae804c221893e83cb58398a74fe720d540a472cb06a5e"
+    },
+    {
+      "name": "XYCut-restored-0.2.10-mac-source-lite.zip.part03",
+      "bytes": 700000,
+      "sha256": "d5335b7acba6ae96cfccc041155442291a4fc6501b86d613f01ad12c08849551"
+    },
+    {
+      "name": "XYCut-restored-0.2.10-mac-source-lite.zip.part04",
+      "bytes": 700000,
+      "sha256": "f7b245caa897f7c525a353387571e75bd308f45297e7870c0a216dcdddc143c3"
+    },
+    {
+      "name": "XYCut-restored-0.2.10-mac-source-lite.zip.part05",
+      "bytes": 700000,
+      "sha256": "b4e9a311c56d22a1ae0d37c4e68f20a14b8c8428f0bc401d218f5206dafa4768"
+    },
+    {
+      "name": "XYCut-restored-0.2.10-mac-source-lite.zip.part06",
+      "bytes": 700000,
+      "sha256": "0ee3eeeacd0900b495dc112874a7e9d7c9a81d1756c3b75bf9fb3e68fe82e84d"
+    },
+    {
+      "name": "XYCut-restored-0.2.10-mac-source-lite.zip.part07",
+      "bytes": 399663,
+      "sha256": "640ef02cbff4f6f2bfbba4dea07c55fca39b732c4422d862356a5faf6cd122f5"
+    }
+  ]
+}

@@ -2,14 +2,23 @@
 
 GitHub 仓库：<https://github.com/sunmingyuan438-blip/jianjicut>
 
-## 推荐方式：下载 Mac 源码测试包
+## 推荐方式：下载并拼接 Mac 源码测试包
 
-仓库中的 `downloads/XYCut-restored-0.2.10-mac-source-lite.zip` 是可在 Mac 上继续构建的源码包。它保留了桌面代码、前端、恢复核心、模板和测试脚本；Mac 专用的 Python、Pillow、FFmpeg 和 Electron 会由脚本按 Apple Silicon 或 Intel 架构自动准备。
+仓库中的 `downloads/XYCut-restored-0.2.10-mac-source-lite.zip.part00` 至 `part07` 是同一个源码 ZIP 的分片。GitHub 普通文件接口会截断较大的单次上传，因此需要先下载全部分片再拼接。源码包保留了桌面代码、前端、恢复核心、模板和测试脚本；Mac 专用的 Python、Pillow、FFmpeg 和 Electron 会由脚本按 Apple Silicon 或 Intel 架构自动准备。
 
-1. 在 Mac 下载并解压 `XYCut-restored-0.2.10-mac-source-lite.zip`。
-2. 打开“终端”，进入解压后的 `xycut-desktop` 目录。
-3. 安装 Node.js 22.12 或更高版本、Python 3.9 或更高版本。
-4. 执行：
+1. 在 GitHub 的 `downloads/` 目录下载 `part00` 到 `part07` 全部文件。
+2. 在终端进入分片所在目录并拼接：
+
+   ```bash
+   cat XYCut-restored-0.2.10-mac-source-lite.zip.part* > XYCut-restored-0.2.10-mac-source-lite.zip
+   shasum -a 256 XYCut-restored-0.2.10-mac-source-lite.zip
+   ```
+
+   SHA-256 以仓库 `downloads/SHA256SUMS.txt` 中的源码包记录为准。
+
+3. 解压源码 ZIP，进入解压后的 `xycut-desktop` 目录。
+4. 安装 Node.js 22.12 或更高版本、Python 3.9 或更高版本。
+5. 执行：
 
    ```bash
    npm ci
@@ -18,13 +27,13 @@ GitHub 仓库：<https://github.com/sunmingyuan438-blip/jianjicut>
 
    这个命令会准备当前 Mac 架构的运行组件并启动应用。
 
-5. 自动验收执行：
+6. 自动验收执行：
 
    ```bash
    npm run test:mac
    ```
 
-6. 如果需要生成可分发的本地测试包：
+7. 如果需要生成可分发的本地测试包：
 
    ```bash
    npm run build:mac
@@ -51,8 +60,5 @@ chmod +x "首次准备并启动.command" "运行验收.command"
 
 ## 校验
 
-源码测试包 SHA-256：
+源码测试包 SHA-256 以仓库中的 `downloads/SHA256SUMS.txt` 为准。
 
-```text
-f20303d26559b0f8e033c55d4f58340d472b79e9b460505cdb8f4c476d110f05  XYCut-restored-0.2.10-mac-source-lite.zip
-```
