@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "artifact": "XYCut-restored-0.2.10-Windows-x64-Setup.exe",
+  "bytes": 189228545,
+  "sha256": "181bfb85bc4b1754fabe3c06a9e23fcc7d2d06af6f26e46eb5ce864baef354be",
+  "part_bytes": 6291456,
+  "parts": [
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part00",
+      "bytes": 6291456,
+      "sha": "1fa7fb92f96ed3b356acf4ce155224b526c8809b"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part01",
+      "bytes": 6291456,
+      "sha": "2363145a839aed496d794c52e0b2bbe679757815"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part02",
+      "bytes": 6291456,
+      "sha": "093b66ece00df6485cd96aabedb5fcc572c8d6b7"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part03",
+      "bytes": 6291456,
+      "sha": "1d0b24cfa3fd64be04228865882d7e7c26e030c5"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part04",
+      "bytes": 6291456,
+      "sha": "497cb470732c000fa07e3cb62ce2966f7f7d5281"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part05",
+      "bytes": 6291456,
+      "sha": "41b76bac7ceb13730674b7ab220265ae4de1e807"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part06",
+      "bytes": 6291456,
+      "sha": "6d4f429f3e17549be123705939e1211acd35d0bf"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part07",
+      "bytes": 6291456,
+      "sha": "13bd8ea3504bbfa9c02cc0d6db882c4221463b78"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part08",
+      "bytes": 6291456,
+      "sha": "2a959bcad399ea9cf217b720772d1003073f558c"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part09",
+      "bytes": 6291456,
+      "sha": "d6f140866cbec954215340381fe86d903266b4fb"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part10",
+      "bytes": 6291456,
+      "sha": "0aaf1fc5b68a3aaa0270dbc7882a5925ca908ae4"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part11",
+      "bytes": 6291456,
+      "sha": "1b4c0cc552c4aafc03737f888a32049d1c3bef08"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part12",
+      "bytes": 6291456,
+      "sha": "a028f224b4791db756f8b16b1662e95201ee9501"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part13",
+      "bytes": 6291456,
+      "sha": "192bcfdc6cde29eb24ea758b21d357b27ee18a32"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part14",
+      "bytes": 6291456,
+      "sha": "c2f742689877d96475bf80e4081dba9165b2c1ea"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part15",
+      "bytes": 6291456,
+      "sha": "711704ef374403987f4694679b096e89be6ffebf"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part16",
+      "bytes": 6291456,
+      "sha": "f262a6c6d96da168aa047accc5b2c7fda4343bdd"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part17",
+      "bytes": 6291456,
+      "sha": "12a148361b80e2486ce649232e49c094397f6aad"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part18",
+      "bytes": 6291456,
+      "sha": "55ef7a9293c8a6f61eb186297b6b8c859e4fa30e"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part19",
+      "bytes": 6291456,
+      "sha": "aa44641724dc1a7b81499e6ac0c0b59ac0c99874"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part20",
+      "bytes": 6291456,
+      "sha": "ec089b1b5dce39945a7a7ebe7bca00a6a0297775"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part21",
+      "bytes": 6291456,
+      "sha": "9b8f06f362ff531af54d19271fc4d0d228f868be"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part22",
+      "bytes": 6291456,
+      "sha": "37cd7ee7c9aa6593880d91a511081bebfffa9a89"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part23",
+      "bytes": 6291456,
+      "sha": "aa09aaeb9c5b4a8014eb594ac0b06b045a45a28d"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part24",
+      "bytes": 6291456,
+      "sha": "f51593a1fb3c08648caaadadef9fbcbc7fd67b94"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part25",
+      "bytes": 6291456,
+      "sha": "d01f02995542666854474bd9d6bc17b06029b86d"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part26",
+      "bytes": 6291456,
+      "sha": "cd712a5c46e0c288f8df8b7b05c895c30a00896c"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part27",
+      "bytes": 6291456,
+      "sha": "834379bb6222acd57842c63dc05f8babdc7b379f"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part28",
+      "bytes": 6291456,
+      "sha": "c422effc0c3e39a639e226faefb603fa3711d764"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part29",
+      "bytes": 6291456,
+      "sha": "ce3eef0d6d67df0838ac34bf4795c72af0362326"
+    },
+    {
+      "file": "XYCut-restored-0.2.10-Windows-x64-Setup.exe.part30",
+      "bytes": 484865,
+      "sha": "5a16df873346d8e850da670cf42c7b9752e46ff3"
+    }
+  ]
+}
