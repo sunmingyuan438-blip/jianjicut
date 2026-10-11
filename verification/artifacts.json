@@ -4,18 +4,18 @@
   "artifacts": [
     {
       "name": "XYCut-restored-0.2.10-Windows-x64-Setup.exe",
-      "bytes": 189227313,
-      "sha256": "bd4da8535060ae3cd5a72b71bc355f5f1c42764f6d26f0a10033efb5a43020ac"
+      "bytes": 189228545,
+      "sha256": "181bfb85bc4b1754fabe3c06a9e23fcc7d2d06af6f26e46eb5ce864baef354be"
     },
     {
       "name": "XYCut-restored-0.2.10-macOS-arm64-TEST.zip",
-      "bytes": 180438845,
-      "sha256": "4b5b283c778d5240e01ce5e47c7fa6c8015cdad964c4629b8c806b56e8168156"
+      "bytes": 180440650,
+      "sha256": "d7f4103bf3fde0e6b6a037b77c15cddff77db875f4311afb37bf2338cb4cec9d"
     },
     {
       "name": "XYCut-restored-0.2.10-macOS-x64-TEST.zip",
-      "bytes": 208178050,
-      "sha256": "0cc1b5e750b23b5b2da1ab471f2275a3f635f224a4b1ab1809f6becb82169cec"
+      "bytes": 208179855,
+      "sha256": "43a9b23db1cbc60d3f423f0e20145003039784067144a2d35d8c883bbae5c35f"
     }
   ],
   "source_archive_checksum": "dist/SHA256SUMS.txt; generated after this evidence file to avoid a circular checksum"
