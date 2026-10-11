@@ -13,6 +13,23 @@ function temporary(prefix){const root=fs.mkdtempSync(path.join(os.tmpdir(),prefi
 function fixture(){const dataDir=temporary('xycut-test-');return{dataDir,service:new Service({resources,dataDir})};}
 test.after(()=>{for(const root of temporaryRoots){assert.equal(path.dirname(path.resolve(root)),path.resolve(os.tmpdir()));assert.match(path.basename(root),/^xycut-(test|source)-/);fs.rmSync(root,{recursive:true,force:true});}});
 
+test('运行环境状态统一报告 resourcesRoot、Python 和 FFmpeg 实际路径',()=>{
+  const {service}=fixture();
+  const status=service.resourceStatus();
+  assert.equal(status.resources_root,resources);
+  assert.equal(status.python_path,path.join(resources,'python','python.exe'));
+  assert.equal(status.ffmpeg_path,path.join(resources,'ffmpeg','ffmpeg.exe'));
+  assert.equal(status.ffprobe_path,path.join(resources,'ffmpeg','ffprobe.exe'));
+  assert.equal(status.exists.frontend_path,true);
+  assert.equal(status.exists.core_worker_path,true);
+});
+
+test('缺少 Python 时错误包含 resourcesRoot 和候选路径',()=>{
+  const dataDir=temporary('xycut-test-'),missing=temporary('xycut-source-');
+  const service=new Service({resources:missing,dataDir});
+  assert.throws(()=>service.python(),error=>{assert.match(error.message,/resourcesRoot=/);assert.match(error.message,/python[\\/]python\.exe/);return true;});
+});
+
 test('素材库、去重、原 Agent SQLite 索引与编辑状态共享',async()=>{
   const {service,dataDir}=fixture();
   const library=await service.invoke('create_sucai_library',{name:'测试素材库'});

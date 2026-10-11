@@ -55,7 +55,7 @@ exports.run=async({window,service,app,dataDir})=>{
       integration.preview={ok:status==='生成成功'&&result.duration===1167000&&texts.includes('双平台预览编辑验收')&&texts.includes('第句字幕'),status,draft_dir:latest.folder,duration_us:result.duration,texts:[...texts],screenshot_error:screenshotError};
     }finally{preview.destroy();}
   }catch(error){errors.push(error.stack||error.message);}
-  const report={build_id:read(path.join(service.resources,'restoration-build.json'),{}).id,pages,errors,integration,commandErrors:service.commandErrors,platform:process.platform,arch:process.arch,version:app.getVersion(),pass:pages.every(p=>p.found)&&integration.doubao?.ok===true&&integration.ai_switch?.ok===true&&integration.sqlite===true&&integration.core?.ok===true&&integration.video?.ok===true&&integration.preview?.ok===true&&errors.length===0&&service.commandErrors.length===0};
+  const report={build_id:read(path.join(service.resources,'restoration-build.json'),{}).id,pages,errors,integration,commandErrors:service.commandErrors,runtime_paths:service.resourceStatus(),platform:process.platform,arch:process.arch,version:app.getVersion(),pass:pages.every(p=>p.found)&&integration.doubao?.ok===true&&integration.ai_switch?.ok===true&&integration.sqlite===true&&integration.core?.ok===true&&integration.video?.ok===true&&integration.preview?.ok===true&&errors.length===0&&service.commandErrors.length===0};
   write(path.join(dataDir,'desktop-smoke.json'),report);console.log(JSON.stringify({report:path.join(dataDir,'desktop-smoke.json'),pass:report.pass,pages:pages.map(p=>({label:p.label,found:p.found}))}));
   app.exit(report.pass?0:1);
 };

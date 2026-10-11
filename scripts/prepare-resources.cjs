@@ -39,4 +39,3 @@ require('./patch-local-template-access.cjs').patchLocalTemplateAccess(path.join(
 const html = fs.readFileSync(htmlFile, 'utf8');
 if(!html.includes('src="/bridge.js"'))fs.writeFileSync(htmlFile, html.replace('</head>', '<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: https: blob:; media-src \'self\' https: blob:; connect-src \'self\' https:; frame-src https:; font-src \'self\' data:"><style>.titlebar{-webkit-app-region:drag}.titlebar button,.titlebar input,.titlebar select{-webkit-app-region:no-drag}</style><script src="/bridge.js"></script></head>'));
 console.log('Recovered resources prepared. Original files were preserved.');
-

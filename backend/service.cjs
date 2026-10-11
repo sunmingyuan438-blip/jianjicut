@@ -57,11 +57,36 @@ class Service {
   }
   grant(file) { if (file) this.authorized.add(path.resolve(file)); return file; }
   canRead(file) { try { const real = fs.realpathSync(file); return [...this.authorized].some(root => fs.existsSync(root) && within(fs.realpathSync(root), real)); } catch { return false; } }
+  resourceStatus() {
+    const suffix = process.platform === 'win32' ? '.exe' : '';
+    const pythonRuntime = process.platform === 'win32' ? path.join('python', 'python.exe') : path.join('python', 'bin', 'python3.9');
+    const bundledPython = path.join(this.resources, pythonRuntime);
+    const installedPython = path.join(this.dataDir, 'runtime/python', pythonRuntime);
+    const explicitPython = process.env.XYCUT_PYTHON ? path.resolve(process.env.XYCUT_PYTHON) : '';
+    const pythonPath = [explicitPython, installedPython, bundledPython].find(file => file && fs.existsSync(file)) || explicitPython || installedPython;
+    const ffmpegPath = this.tool('ffmpeg') || path.join(this.resources, 'ffmpeg', `ffmpeg${suffix}`);
+    const ffprobePath = this.tool('ffprobe') || path.join(this.resources, 'ffmpeg', `ffprobe${suffix}`);
+    const paths = {
+      resources_root: this.resources,
+      frontend_path: path.join(this.resources, 'frontend', 'index.html'),
+      core_worker_path: path.join(this.resources, 'core_worker.py'),
+      python_path: pythonPath,
+      ffmpeg_path: ffmpegPath,
+      ffprobe_path: ffprobePath,
+      agent_kit_path: path.join(this.resources, 'agent-kit'),
+      builtin_presets_path: path.join(this.resources, 'builtin-presets'),
+      draft_shell_path: path.join(this.resources, 'draft-shell'),
+      restoration_build_path: path.join(this.resources, 'restoration-build.json')
+    };
+    return {...paths, exists: Object.fromEntries(Object.entries(paths).filter(([key]) => key.endsWith('_path')).map(([key, file]) => [key, fs.existsSync(file)]))};
+  }
   python() {
     const runtime=process.platform==='win32'?'python.exe':'bin/python3.9';
     const installed=path.join(this.dataDir,'runtime/python',runtime);
-    const candidate = process.env.XYCUT_PYTHON || (fs.existsSync(installed)?installed:path.join(this.resources,'python',runtime));
-    if (!fs.existsSync(candidate)) throw new Error('缺少 CPython 3.9 运行环境，请先准备当前平台资源');
+    const bundled=path.join(this.resources,'python',runtime);
+    const candidates=[process.env.XYCUT_PYTHON,installed,bundled].filter(Boolean).map(file=>path.resolve(file));
+    const candidate=candidates.find(file=>fs.existsSync(file));
+    if (!candidate) throw new Error(`缺少 CPython 3.9 运行环境，请先准备当前平台资源。resourcesRoot=${this.resources}；候选路径=${candidates.join('; ')}`);
     return candidate;
   }
   async worker(request) {

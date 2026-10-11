@@ -2,13 +2,13 @@
 
 当前构建编号：`20261009-functional-r8`。Windows、两种 Mac 测试包及源码包使用同一份桌面服务代码；验收报告以此编号核对，防止混用旧安装包。
 
-本工程将原客户端取出的 React 界面、Agent Kit、工作台和恢复的 Python 草稿核心接入新的 Electron 桌面容器。Windows 安装包已生成并通过打包后启动检查；macOS Apple Silicon 与 Intel 测试包已生成，尚待 Mac 实机验收。原 Rust 后端使用 Node.js 重新实现，当前不能声明所有功能已经与原软件完全等价。
+本工程将原客户端取出的 React 界面、Agent Kit、工作台和恢复的 Python 草稿核心接入新的 Electron 桌面容器。Windows 安装包已按双平台资源契约重新构建并通过便携版与 NSIS 验收；macOS Apple Silicon 与 Intel 测试包的资源和功能 smoke 已由独立测试记录确认，启动脚本与 Electron 资源解析已按本次契约修复，需用新代码重新组装 Mac 包后复验。原 Rust 后端使用 Node.js 重新实现，当前不能声明所有功能已经与原软件完全等价。
 
 ## 直接运行
 
 Windows 使用 `dist/XYCut-restored-0.2.10-Windows-x64-Setup.exe`，或解压后的 `dist/win-unpacked/XYCut 恢复版.exe`。安装程序已在独立测试目录实际安装，并从安装目录运行验收成功。
 
-Mac 需要 **macOS 13 或更高版本**。M 系列芯片使用 `macOS-arm64-TEST.zip`，Intel 使用 `macOS-x64-TEST.zip`。将 ZIP 复制到 Mac 本机目录并解压；先运行 `首次准备并启动.command`，它会为同目录的测试应用进行本地开发签名并打开应用。这些包尚未经过 Mac 运行验证，也没有 Developer ID 发布签名或公证。
+Mac 需要 **macOS 13 或更高版本**。M 系列芯片使用 `macOS-arm64-TEST.zip`，Intel 使用 `macOS-x64-TEST.zip`。2026-10-11 的 M5 arm64 实测确认包内资源、8 个页面和离线核心验收均可用；此前直接启动暴露的资源根目录问题已在本次代码中修复，重新构建后的包仍没有 Developer ID 发布签名或公证。
 
 从 GitHub 获取 Mac 测试包时，优先按 `GITHUB_MAC_TEST.md` 使用 `scripts/download-mac-test-package.sh` 下载对应架构的预编译包。脚本会下载 6 MB 分片、拼接并校验 SHA-256；解压后直接运行“首次准备并启动.command”和“运行验收.command”。如果需要源码开发，再下载 `downloads/XYCut-restored-0.2.10-mac-source-lite.zip`，执行 `npm ci`、`npm run start:mac` 或 `npm run build:mac`。
 
@@ -30,7 +30,7 @@ Mac 需要 **macOS 13 或更高版本**。M 系列芯片使用 `macOS-arm64-TEST
 
 Windows 已完成以下验证：
 
-- 74 个功能用例：素材生命周期、SQLite 原 Agent 互通与目录迁移；字幕词锚点、03 多槽、Unicode 高亮、双语时间和毫秒字段；原 Agent 字数计数；向量描述失效与请求/保存数量；预设复制/转换/打包、中文空格路径、HTTP/ZIP 边界、组件维护、手动预设筛选、字幕预设匹配、在线模板路径与审核配置保留、豆包连接契约及 Agent 开关；剪映路径发现、首页记录持久化、缓存/数据清理；豆包 TTS、声音复刻、ASR 的独立输出和失败清理；外部 Agent 图片/视频路径、B-roll 素材开头跳过设置。全部使用独立夹具，外部服务采用模拟响应。
+- 83 个功能用例：素材生命周期、SQLite 原 Agent 互通与目录迁移；字幕词锚点、03 多槽、Unicode 高亮、双语时间和毫秒字段；原 Agent 字数计数；向量描述失效与请求/保存数量；预设复制/转换/打包、中文空格路径、HTTP/ZIP 边界、组件维护、手动预设筛选、字幕预设匹配、在线模板路径与审核配置保留、豆包连接契约及 Agent 开关；剪映路径发现、首页记录持久化、缓存/数据清理；豆包 TTS、声音复刻、ASR 的独立输出和失败清理；外部 Agent 图片/视频路径、B-roll 素材开头跳过设置；双平台 `resourcesRoot`、`dataRoot`、Python 和 FFmpeg 路径解析。全部使用独立夹具，外部服务采用模拟响应。
 - 开发模式与打包后的 EXE 均打开了原界面的 8 个页面，无桌面 IPC 错误；实际调用 SQLite、Pillow、FFmpeg 和恢复核心，生成图片与文字草稿、带剪辑的视频草稿，并经独立预览页改字后生成。
 - 使用原工作台实际执行删词、添加图片素材、修改标题并生成；独立预览页修改标题/字幕、设置重点词、保存并生成，草稿时长和文字与修改结果一致。证据见 `verification/workbench-ui.json` 与截图。
 - 使用公开口播模板 `xycut_kb_005` 与爆款模板 `xycut_news_017`，生成了实际视频、可编辑标题/字幕和音频轨道；检查时所有媒体文件存在。
@@ -42,7 +42,7 @@ Windows 已完成以下验证：
 - 删词后 03 字幕保留原文字槽，重复汉字按具体词编号归属；主/副字幕删除与时段一致，高亮按原核心 Unicode 码点索引重建。实际核心生成两槽重点和双语草稿通过；整槽删空后的自动重选尚未实现，当前提示在预览里重选预设或调整分段。
 - 原素材界面两批拖入三层目录、描述编辑、待处理清空、多选重置/删除的取消与确认通过；仅删除有所有权证据的受控副本，原始文件内容保持不变。索引完成计数、重复构建排除及旧向量回写拒绝通过，真实模型仍待验收。
 
-Mac 包检查了 ZIP 完整性、四个主要可执行文件的 CPU 架构、权限和应用最低系统版本。这些静态检查不代表 Mac 运行验证。生成草稿在剪映 Windows/Mac 中打开和编辑、全量模板、全部维护操作和付费服务仍在验收清单中。
+Mac 包检查了 ZIP 完整性、四个主要可执行文件的 CPU 架构、权限和应用最低系统版本；独立 Mac 测试还确认资源、8 个页面、SQLite/Pillow/FFmpeg、恢复核心、视频和预览链路可用。新包仍需在 Mac 上重新组装后复验首次启动脚本。生成草稿在剪映 Windows/Mac 中打开和编辑、全量模板、全部维护操作和付费服务仍在验收清单中。
 
 ## 从源码开发
 
@@ -57,6 +57,15 @@ npm start
 npm test
 ```
 
+Windows 便携包的资源根目录和离线验收：
+
+```powershell
+npm run prepare:resources
+powershell -ExecutionPolicy Bypass -File .\scripts\run-windows-smoke.ps1
+```
+
+验收脚本会明确设置 `XYCUT_RESOURCES=dist/win-unpacked/resources/xycut`、`XYCUT_DATA_DIR=.test-data/windows-smoke-r10`、端口 `17662` 和 `PYTHONDONTWRITEBYTECODE=1`，并在 `desktop-smoke.json` 中记录 `runtime_paths`。NSIS 安装包验收和结果回传格式见 `GITHUB_WINDOWS_TEST.md`。
+
 Mac 从源码开发和测试使用对应 CPU 的原生运行库：
 
 ```text
@@ -65,7 +74,7 @@ npm run start:mac
 npm run test:mac
 ```
 
-这两个命令自动同步共享资源、下载并校验本机架构的 Electron/Python/Pillow/媒体工具，放入 `.test-data/mac-stage-<arch>/`，通过 `XYCUT_RESOURCES` 启动或测试。源码 ZIP 保留的是 Windows 运行库，不应在 Mac 直接用通用 `npm start` 启动。Mac 源码启动/单测入口路径已静态核对，仍待 Mac 实际执行。
+这两个命令自动同步共享资源、下载并校验本机架构的 Electron/Python/Pillow/媒体工具，放入 `.test-data/mac-stage-<arch>/`，通过 `XYCUT_RESOURCES` 启动或测试。源码 ZIP 保留的是 Windows 运行库，不应在 Mac 直接用通用 `npm start` 启动；Mac 应运行 `npm run start:mac`，由脚本准备当前架构运行库，并通过 `XYCUT_RESOURCES` 和 `XYCUT_DATA_DIR` 隔离资源与数据。Mac 源码启动/单测入口已按本次双平台契约更新。
 
 Windows 构建：
 
@@ -95,6 +104,5 @@ npm run build:mac
 验收状态见 `parity.json`，本次证据见 `verification/`。只有全部必需功能通过两个系统的验收后，才能将恢复目标标记完成。
 
 2026-10-09 收到的开发对接资料包包含 40 项功能要求、12 个验收场景、截图及旧验证快照，没有新增原 Rust、TSX 或服务端源码。资料中的提议补丁未直接执行；工程按现有代码和原界面实现修复。当前逐项证据与未完成项见 `verification/handoff-status.md` 和 `verification/handoff-status.json`；其中的“部分验证”不表示完整等价。
-
 
 

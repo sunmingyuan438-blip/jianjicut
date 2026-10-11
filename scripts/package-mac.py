@@ -136,8 +136,11 @@ def build(arch):
         smoke = '''#!/bin/bash
 set -e
 cd "$(dirname "$0")"
+export XYCUT_RESOURCES="$PWD/XYCut 恢复版.app/Contents/Resources/xycut"
 export XYCUT_DATA_DIR="$PWD/验收记录"
 export XYCUT_PORT=17662
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONIOENCODING=utf-8
 /usr/bin/osascript -e 'tell application "XYCut 恢复版" to quit' >/dev/null 2>&1 || true
 for _ in {1..20}; do
   if ! /usr/bin/pgrep -f "$PWD/XYCut 恢复版.app/Contents/MacOS/Electron" >/dev/null 2>&1; then break; fi
@@ -161,4 +164,3 @@ if __name__ == "__main__":
         subprocess.run(["node", str(ROOT / "scripts/verify-mac-inputs.cjs")], cwd=ROOT, check=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         list(executor.map(inputs if "--download-only" in sys.argv else build, ["arm64", "x64"]))
-

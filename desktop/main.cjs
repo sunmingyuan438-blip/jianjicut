@@ -7,15 +7,21 @@ const {startServer}=require('../backend/server.cjs');
 const {run,write}=require('../backend/util.cjs');
 const {resolveJianying,applicationName}=require('./jianying.cjs');
 const {createTray}=require('./tray.cjs');
+const {resolveDataRoot,resolveResourcesRoot}=require('./resources.cjs');
 let window,server,service,trayController;
 const smoke=process.argv.includes('--smoke-test');
-const dataDir=process.env.XYCUT_DATA_DIR||path.join(app.getPath('appData'),'XYCut-restored');
+const dataDir=resolveDataRoot({env:process.env,appData:app.getPath('appData')});
 app.setPath('userData',path.join(dataDir,'electron'));
 if(!app.requestSingleInstanceLock()){app.quit();}else{
   app.whenReady().then(start).catch(error=>{console.error(error);dialog.showErrorBox('XYCut 启动失败',error.message);app.exit(1);});
 }
 async function start(){
-  const resources=app.isPackaged?path.join(process.resourcesPath,'xycut'):path.resolve(process.env.XYCUT_RESOURCES||path.join(__dirname,'../resources'));
+  const resolved=resolveResourcesRoot({env:process.env,resourcesPath:process.resourcesPath,appIsPackaged:app.isPackaged,desktopDir:__dirname,platform:process.platform});
+  const resources=resolved.root;
+  process.env.XYCUT_RESOURCES=resources;
+  const runtimePaths={event:'resources-resolved',resourcesRoot:resources,candidates:resolved.candidates,appIsPackaged:app.isPackaged,platform:process.platform,arch:process.arch,python:resolved.python,ffmpeg:resolved.ffmpeg,ffprobe:resolved.ffprobe,frontend:resolved.frontend,coreWorker:resolved.coreWorker,agentKit:resolved.agentKit,builtinPresets:resolved.builtinPresets,draftShell:resolved.draftShell,buildManifest:resolved.buildManifest,checks:resolved.checks};
+  write(path.join(dataDir,'runtime-paths.json'),runtimePaths);
+  console.log(JSON.stringify(runtimePaths));
   const desktop={
     openPath:async file=>{const error=await shell.openPath(file);if(error)throw new Error(error);},
     restartJianying:async()=>{
