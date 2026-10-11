@@ -2,4 +2,4 @@
 d7f4103bf3fde0e6b6a037b77c15cddff77db875f4311afb37bf2338cb4cec9d  XYCut-restored-0.2.10-macOS-arm64-TEST.zip
 43a9b23db1cbc60d3f423f0e20145003039784067144a2d35d8c883bbae5c35f  XYCut-restored-0.2.10-macOS-x64-TEST.zip
 dc28286bb93224c42c496b260e11e6cd3ba4c8a8ee7cf29deca48b6067ca1e80  XYCut-restored-0.2.10-source.zip
-324cabddb53939b5f96ea81fea171d7808a402b45728857d9e1bbc96b037596f  XYCut-restored-0.2.10-mac-source-lite.zip
+338f96e1102fc4b3b7a23ec39c0b7f46a324a38672ac7f17d5ffa189a4af4c6a  XYCut-restored-0.2.10-mac-source-lite.zip
