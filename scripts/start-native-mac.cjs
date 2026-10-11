@@ -14,7 +14,7 @@ function main(){
   const prepared=spawnSync('python3',[path.join(__dirname,'prepare-mac-runtime.py'),process.arch],{cwd:root,stdio:'inherit'});
   if(prepared.error)throw new Error('无法运行 Python 3：'+prepared.error.message);
   if(prepared.status!==0)throw new Error('Mac 原生运行组件准备失败');
-  const stage=path.join(root,'.test-data','mac-stage-'+process.arch),env={...process.env,XYCUT_RESOURCES:path.join(stage,'resources')};
+  const stage=path.join(root,'.test-data','mac-stage-'+process.arch),dataRoot=path.join(root,'.test-data','mac-data-'+process.arch),env={...process.env,XYCUT_RESOURCES:path.join(stage,'resources'),XYCUT_DATA_DIR:dataRoot,XYCUT_PORT:'17662',PYTHONDONTWRITEBYTECODE:'1',PYTHONIOENCODING:'utf-8'};
   const testing=options.includes('--test');
   const executable=testing?process.execPath:path.join(stage,'electron/Electron.app/Contents/MacOS/Electron');
   const args=testing?['--test',...fs.readdirSync(path.join(root,'tests')).filter(name=>name.endsWith('.test.cjs')).map(name=>path.join(root,'tests',name))]:[root,...options];
