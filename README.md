@@ -8,6 +8,8 @@
 
 Windows 使用 `dist/XYCut-restored-0.2.10-Windows-x64-Setup.exe`，或解压后的 `dist/win-unpacked/XYCut 恢复版.exe`。安装程序已在独立测试目录实际安装，并从安装目录运行验收成功。
 
+从 GitHub 获取 Windows 安装包时，在仓库目录运行 `powershell -ExecutionPolicy Bypass -File .\\scripts\\download-windows-test.ps1`。脚本会下载并校验 31 个分片，拼接出安装包后再核对 SHA-256；分片清单在 `downloads/XYCut-windows-package-parts.json`。
+
 Mac 需要 **macOS 13 或更高版本**。M 系列芯片使用 `macOS-arm64-TEST.zip`，Intel 使用 `macOS-x64-TEST.zip`。2026-10-11 的 M5 arm64 实测确认包内资源、8 个页面和离线核心验收均可用；此前直接启动暴露的资源根目录问题已在本次代码中修复，重新构建后的包仍没有 Developer ID 发布签名或公证。
 
 从 GitHub 获取 Mac 测试包时，优先按 `GITHUB_MAC_TEST.md` 使用 `scripts/download-mac-test-package.sh` 下载对应架构的预编译包。脚本会下载 6 MB 分片、拼接并校验 SHA-256；解压后直接运行“首次准备并启动.command”和“运行验收.command”。如果需要源码开发，再下载 `downloads/XYCut-restored-0.2.10-mac-source-lite.zip`，执行 `npm ci`、`npm run start:mac` 或 `npm run build:mac`。
