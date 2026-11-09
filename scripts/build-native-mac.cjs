@@ -13,7 +13,9 @@ async function main(){
     const prepared=spawnSync('python3',[path.join(__dirname,'prepare-mac-runtime.py'),arch],{cwd:root,stdio:'inherit'});
     if(prepared.status!==0)throw new Error('Mac 运行组件准备失败');
     const stage=path.join(root,'.test-data','mac-stage-'+arch);
-    await build({projectDir:root,targets:Platform.MAC.createTarget('zip',Arch[arch]),publish:'never',config:{electronDist:path.join(stage,'electron'),extraResources:[{from:path.join(stage,'resources'),to:'xycut',filter:['**/*','!**/__pycache__/**']}],mac:{identity:'-',hardenedRuntime:false,artifactName:'XYCut-restored-${version}-macOS-${arch}-LOCAL-TEST.${ext}'}}});
+    // electron-builder concatenates array options with package.json, so clear the
+    // shared Windows resources mapping and add only this architecture's stage.
+    await build({projectDir:root,targets:Platform.MAC.createTarget('zip',Arch[arch]),publish:'never',config:{electronDist:path.join(stage,'electron'),extraResources:null,mac:{extraResources:[{from:path.join(stage,'resources'),to:'xycut',filter:['**/*','!**/__pycache__/**']}],identity:'-',hardenedRuntime:false,artifactName:'ZhangmenCut-${version}-macOS-${arch}-LOCAL-TEST.${ext}'}}});
   }
 }
-main().catch(error=>{console.error(error);process.exitCode=1;});
+main().catch(error=>{console.error(error);process.exit(1);});

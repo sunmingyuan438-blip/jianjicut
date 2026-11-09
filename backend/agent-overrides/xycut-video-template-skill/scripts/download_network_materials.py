@@ -260,6 +260,8 @@ def main() -> int:
         context = read_json(Path(args.agent_context_file))
         if not isinstance(context, dict):
             context = {}
+        if (context.get("platform") or {}).get("provider") == "aigzm":
+            raise RuntimeError("AI 超市尚未接通素材搜索接口，无需填写个人 API Key；不会调用旧素材服务。")
         pexels = load_pexels_config(context, explicit_key=args.pexels_api_key)
         if not pexels["api_key"]:
             raise ValueError("Pexels API Key 未配置，请在 agent_context_file、环境变量 PEXELS_API_KEY 或 --pexels-api-key 中提供")

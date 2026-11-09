@@ -13,11 +13,11 @@ exports.createTray = ({app, window, resources}) => {
   const icon = nativeImage.createFromPath(path.join(resources, 'frontend', process.platform === 'win32' ? 'icon.ico' : 'icon.png'));
   const tray = new Tray(process.platform === 'darwin' ? icon.resize({width: 18, height: 18}) : icon);
   const menu = Menu.buildFromTemplate([
-    {label: '打开 XYCut', click: restore},
+    {label: '打开 掌门cut', click: restore},
     {type: 'separator'},
-    {label: '退出 XYCut', click: () => app.quit()},
+    {label: '退出 掌门cut', click: () => app.quit()},
   ]);
-  tray.setToolTip('XYCut 恢复版');
+  tray.setToolTip('掌门cut');
   tray.setContextMenu(menu);
   tray.on('click', restore);
   tray.on('double-click', restore);

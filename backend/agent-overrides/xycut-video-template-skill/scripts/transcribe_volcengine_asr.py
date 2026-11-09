@@ -82,6 +82,10 @@ def load_asr_config(context: dict[str, Any]) -> dict[str, str]:
         config["seedasr_resource_id"] = param_value(item, "resource_id", "asr_resource_id", "RESOURCE_ID") or config["seedasr_resource_id"]
         config["standard_resource_id"] = param_value(item, "fallback_resource_id", "standard_resource_id") or config["standard_resource_id"]
         config["flash_resource_id"] = param_value(item, "flash_resource_id") or config["flash_resource_id"]
+    # Older XYCut exported the flash resource into the standard-mode field.
+    # Migrate only that known invalid pairing; preserve explicit standard IDs.
+    if config["seedasr_resource_id"] == DEFAULT_FLASH_RESOURCE_ID:
+        config["seedasr_resource_id"] = DEFAULT_SEEDASR_RESOURCE_ID
     return config
 
 
@@ -435,7 +439,7 @@ def transcribe_standard(audio_path: Path, config: dict[str, str], mode: str, pol
     body = request_body(audio_path)
     submit_payload, submit_headers = post_json(config["submit_url"], config["api_key"], resource_id, request_id, body)
     status = submit_headers.get("x-api-status-code") or str(submit_payload.get("code") or "")
-    if status and status not in {"20000000", "0"}:
+    if status not in {"20000000", "0"}:
         raise RuntimeError(f"火山 ASR 提交失败：status={status}, message={submit_headers.get('x-api-message') or submit_payload.get('message') or ''}")
     log_id = submit_headers.get("x-tt-logid", "")
     last_payload: dict[str, Any] = {}
@@ -512,6 +516,11 @@ def main() -> int:
         context = read_json(Path(args.agent_context_file))
         if not isinstance(context, dict):
             context = {}
+        if (context.get("platform") or {}).get("provider") == "aigzm":
+            from aigzm_platform_client import platform_request
+            result = platform_request(context, "platform_asr_url", {"input_media": args.input_media, "output_json": args.output_json, "output_srt": args.output_srt, "output_segments_json": args.output_segments_json or str(Path(args.output_json).parent / "segments.json")})
+            print(json.dumps(result, ensure_ascii=False))
+            return 0
         config = load_asr_config(context)
         if not config["api_key"]:
             raise ValueError("缺少豆包语音 API Key，请在客户端 AI 服务接口中配置豆包语音，或在 agent_context_file.speech.asr 中提供")

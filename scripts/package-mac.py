@@ -25,14 +25,24 @@ VERSION = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))["devDe
 CHECKSUMS = json.loads((ROOT / "node_modules/electron/checksums.json").read_text(encoding="utf-8"))
 PYTHON_HASHES = {"arm64": "6292c6484ab2c96c80116f4bdb3da638d816206fe11a102e83787a2f75591b94", "x64": "eafceb263d9507ff0052ae9d6f1c415bb99299dcb202a931865b8ca044a5e40e"}
 
+
 def download(url, name, algorithm, expected):
     file = CACHE / name
     if not file.exists():
-        urllib.request.urlretrieve(url, file)
+        # Download beside the cache entry and rename only when complete, so an
+        # interrupted transfer cannot poison later builds with a short file.
+        partial = file.with_name(file.name + ".part")
+        try:
+            urllib.request.urlretrieve(url, partial)
+        except BaseException:
+            partial.unlink(missing_ok=True)
+            raise
+        partial.replace(file)
     actual = hashlib.new(algorithm, file.read_bytes()).digest()
     wanted = bytes.fromhex(expected) if algorithm == "sha256" else base64.b64decode(expected)
     if actual != wanted:
-        raise RuntimeError("Checksum mismatch: " + name)
+        file.unlink()
+        raise RuntimeError("Checksum mismatch: " + name + " (cached file removed; rerun to download again)")
     return file
 
 
@@ -71,10 +81,15 @@ def tar_entries(archive):
 
 
 def build(arch):
+    # Prevent a stale app.asar from silently entering a newer Mac bundle. The
+    # Windows build is the shared platform-neutral application payload. This
+    # check belongs here, not at import time: prepare-mac-runtime.py imports
+    # this module only for inputs() and must work without a Windows build.
+    subprocess.run(["node", str(ROOT / "scripts/verify-mac-inputs.cjs")], cwd=ROOT, check=True)
     electron, python, tools, pillow = inputs(arch)
-    app_name = "XYCut 恢复版.app"
+    app_name = "掌门cut.app"
     prefix = app_name + "/Contents/Resources/"
-    output = ROOT / "dist" / f"XYCut-restored-0.2.10-macOS-{arch}-TEST.zip"
+    output = ROOT / "dist" / f"ZhangmenCut-0.2.10-macOS-{arch}-TEST.zip"
     output.parent.mkdir(parents=True, exist_ok=True)
     added = set()
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as result:
@@ -97,7 +112,7 @@ def build(arch):
                 content = source.read(entry)
                 if relative == "Contents/Info.plist":
                     plist = plistlib.loads(content)
-                    plist.update(CFBundleIdentifier="com.xycut.restored", CFBundleName="XYCut 恢复版", CFBundleDisplayName="XYCut 恢复版", CFBundleShortVersionString="0.2.10", CFBundleVersion="0.2.10")
+                    plist.update(CFBundleIdentifier="com.xycut.restored", CFBundleName="掌门cut", CFBundleDisplayName="掌门cut", CFBundleShortVersionString="0.2.10", CFBundleVersion="0.2.10")
                     content = plistlib.dumps(plist)
                 if relative == "Contents/Resources/electron.icns":
                     content = (ROOT / "resources/frontend/icon.icns").read_bytes()
@@ -129,24 +144,24 @@ def build(arch):
                 elif name.endswith(("LICENSE", "LICENSE.txt", "README.md", "package.json")):
                     add(prefix + "xycut/ffmpeg/licenses/" + tool + "-" + Path(name).name, content)
         preparation = (ROOT / 'scripts/prepare-mac-test.command').read_text(encoding='utf-8')
-        # The preparation command intentionally opens the app so the tester can
-        # inspect it. A second Electron process cannot acquire the single
-        # instance lock while that window is open, so close this exact bundle
-        # before launching the deterministic smoke process.
+        # The preparation command launches the exact Electron binary inside the
+        # bundle so resources and data paths do not depend on LaunchServices
+        # inheriting a shell environment. The smoke command closes this exact
+        # bundle before launching its deterministic test process.
         smoke = '''#!/bin/bash
 set -e
 cd "$(dirname "$0")"
-export XYCUT_RESOURCES="$PWD/XYCut 恢复版.app/Contents/Resources/xycut"
+export XYCUT_RESOURCES="$PWD/掌门cut.app/Contents/Resources/xycut"
 export XYCUT_DATA_DIR="$PWD/验收记录"
 export XYCUT_PORT=17662
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONIOENCODING=utf-8
-/usr/bin/osascript -e 'tell application "XYCut 恢复版" to quit' >/dev/null 2>&1 || true
+/usr/bin/osascript -e 'tell application "掌门cut" to quit' >/dev/null 2>&1 || true
 for _ in {1..20}; do
-  if ! /usr/bin/pgrep -f "$PWD/XYCut 恢复版.app/Contents/MacOS/Electron" >/dev/null 2>&1; then break; fi
+  if ! /usr/bin/pgrep -f "$PWD/掌门cut.app/Contents/MacOS/Electron" >/dev/null 2>&1; then break; fi
   /bin/sleep 0.1
 done
-"$PWD/XYCut 恢复版.app/Contents/MacOS/Electron" --smoke-test
+"$PWD/掌门cut.app/Contents/MacOS/Electron" --smoke-test
 '''
         add("首次准备并启动.command", preparation.encode(), stat.S_IFREG | 0o755)
         add("运行验收.command", smoke.encode(), stat.S_IFREG | 0o755)
@@ -158,9 +173,5 @@ done
 
 
 if __name__ == "__main__":
-    # Native Mac development imports inputs()/tar_entries() only. Validate the
-    # Windows payload only when this entry point actually assembles a bundle.
-    if "--download-only" not in sys.argv:
-        subprocess.run(["node", str(ROOT / "scripts/verify-mac-inputs.cjs")], cwd=ROOT, check=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         list(executor.map(inputs if "--download-only" in sys.argv else build, ["arm64", "x64"]))

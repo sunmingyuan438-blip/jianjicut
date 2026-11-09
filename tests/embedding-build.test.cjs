@@ -21,12 +21,11 @@ test('Agent 用户 KEY 模式优先于客户端令牌，实际 Python 配置保�
   assert.equal(read(path.join(service.dataDir,'api-context.json')).third_party_apis[0].parameters[0].key,'APIKEY');
 });
 
-test('无用户 KEY 的客户端模式保留原在线向量协议和返回结果',async t=>{
-  const service=fixture(t),requests=[];await service.context({auth_token:'synthetic-client-token',api_base_urls:['https://fixture.invalid'],third_party_apis:[]});
-  const payload={provider:'fixture',model:'fixture-model',credit_cost:0,embeddings:[{id:'fixture',embedding:[.1,.2]}]};
-  t.mock.method(globalThis,'fetch',async(url,options)=>{requests.push({url,options});return new Response(JSON.stringify(payload));});
-  assert.deepEqual(await service.embeddings({purpose:'query',items:[{id:'fixture',text:'测试'}]}),payload);
-  assert.equal(requests[0].url,'https://fixture.invalid/api/sucai/embeddings');assert.equal(requests[0].options.headers.Authorization,'Bearer synthetic-client-token');assert.equal(JSON.parse(requests[0].options.body).purpose,'query');
+test('旧账户令牌不再发送到在线向量服务，不能覆盖自有 API 配置',async t=>{
+  const service=fixture(t);await service.context({auth_token:'synthetic-client-token',api_base_urls:['https://fixture.invalid'],third_party_apis:[]});
+  t.mock.method(globalThis,'fetch',async()=>{throw new Error('不应请求旧在线服务');});
+  await assert.rejects(service.embeddings({items:[]}),/配置豆包向量 API Key/);
+  assert.equal(Object.hasOwn(read(path.join(service.dataDir,'api-context.json')),'auth_token'),false);
 });
 
 test('构建索引保留请求时描述散列，修改描述后的旧向量不能回写',async t=>{

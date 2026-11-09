@@ -43,6 +43,14 @@ function startFixture() {
         const line = {code: 20000000, data: Buffer.from('fixture-audio').toString('base64'), addition: {duration: '0.7', frontend}};
         res.setHeader('Content-Type', 'application/x-ndjson'); res.end(JSON.stringify(line) + '\n'); return;
       }
+      if (req.url === '/asr-submit') {
+        res.setHeader('X-Api-Status-Code', '20000000'); res.end('{}'); return;
+      }
+      if (req.url === '/asr-query') {
+        const count = requests.filter(item => item.path === '/asr-query').length;
+        res.setHeader('X-Api-Status-Code', count === 1 ? '20000001' : '20000000');
+        res.end(JSON.stringify(count === 1 ? {} : {result: {utterances: [{text: '测试', start_time: 0, end_time: 700, words: [{word: '测试', start_time: 0, end_time: 700}]}]}})); return;
+      }
       if (req.url === '/asr') {
         res.end(JSON.stringify({result: {utterances: [{text: '测试', start_time: 0, end_time: 700, words: [{word: '测', start_time: 0, end_time: 350}, {word: '试', start_time: 350, end_time: 700}]}]}})); return;
       }
@@ -157,4 +165,25 @@ test('豆包 ASR 使用独立配置、资源 ID并输出 SRT 与逐词 segments'
     const request = fixture.requests[0]; assert.equal(request.path, '/asr'); assert.equal(request.headers['x-api-key'], 'fixture-asr-key');
     assert.equal(request.headers['x-api-resource-id'], 'volc.asr.fixture'); assert.equal(request.body.audio.format, 'mp3');
   } finally { await new Promise(resolve => fixture.server.close(resolve)); }
+});
+
+
+test('默认 ASR 迁移旧极速配置，使用 2.0 提交和轮询，保留任务 ID', async () => {
+  const root = fixtureRoot(), task = path.join(root, '中文 空格任务'), dataDir = path.join(root, 'data');
+  fs.mkdirSync(task, {recursive:true});
+  const media = path.join(task, 'input.mp3'); fs.writeFileSync(media, 'fixture-audio');
+  const fixture = startFixture(), base = await listen(fixture.server);
+  try {
+    const service = new Service({resources, dataDir});
+    const result = await service.invoke('transcribe_doubao_asr', {input: {task_dir: task, input_media: media, poll_interval: 0, max_attempts: 3,
+      speech: {asr: {resource_id:'volc.bigasr.auc_turbo', submit_url:base+'/asr-submit', query_url:base+'/asr-query'}},
+      parameters:[{key:'KEY',value:'fixture-asr-key'}]}});
+    assert.equal(result.ok,true);
+    assert.deepEqual(fixture.requests.map(r=>r.path), ['/asr-submit','/asr-query','/asr-query']);
+    assert.equal(new Set(fixture.requests.map(r=>r.headers['x-api-request-id'])).size,1);
+    for (const req of fixture.requests) assert.equal(req.headers['x-api-resource-id'],'volc.seedasr.auc');
+    assert.equal(fixture.requests[0].body.audio.data,Buffer.from('fixture-audio').toString('base64'));
+    assert.deepEqual(fixture.requests[1].body,{});
+    assert.ok(fs.statSync(result.srt_file).size>0); assertRequestsCleaned(service);
+  } finally { await new Promise(resolve=>fixture.server.close(resolve)); }
 });

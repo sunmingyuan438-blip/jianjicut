@@ -14,7 +14,15 @@ sys.stderr.reconfigure(encoding="utf-8")
 
 def within(root, target):
     try:
-        target.relative_to(root)
+        # Path.resolve() normalizes macOS /var -> /private/var symlinks.
+        # Without this, valid managed paths fail ownership checks after a
+        # storage directory is created below the system temporary directory.
+        root.resolve().relative_to(target.resolve())
+        return False
+    except ValueError:
+        pass
+    try:
+        target.resolve().relative_to(root.resolve())
         return True
     except ValueError:
         return False
@@ -116,7 +124,10 @@ def database(request):
             result["library_id"] = common.ensure_library(conn, root, arg["name"], arg["id"])
             if request.get("managed_storage_root"):
                 storage = Path(request["managed_storage_root"]).resolve()
-                if root.resolve() != storage and within(storage, root.resolve()) and root.absolute() == root.resolve():
+                # The parent may be a symlink on macOS (/var -> /private/var),
+                # while the newly-created library itself must remain a real
+                # directory owned by XYCut.
+                if root.resolve() != storage and within(storage, root.resolve()) and not root.is_symlink():
                     marker = root / ".xycut-managed-library.json"
                     ownership = {"library_id": result["library_id"], "root_path": str(root.resolve())}
                     if marker.exists() or marker.is_symlink():
@@ -229,12 +240,13 @@ def database(request):
                     conn.execute("UPDATE materials SET embedding_status='completed' WHERE id=?", (material_id,))
             result["saved_count"] = len(arg.get("items", []))
         elif action == "move_storage":
-            old_root, new_root = Path(arg["old_root"]), Path(arg["new_root"])
+            old_root, new_root = Path(arg["old_root"]).resolve(), Path(arg["new_root"]).resolve()
             def remap(value):
                 if not value:
                     return value
                 try:
-                    return str(new_root / Path(value).relative_to(old_root))
+                    resolved = Path(value).resolve()
+                    return str(new_root / resolved.relative_to(old_root))
                 except ValueError:
                     return value
             for library in conn.execute("SELECT * FROM libraries").fetchall():

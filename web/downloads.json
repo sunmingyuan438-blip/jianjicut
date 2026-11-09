@@ -1,0 +1,32 @@
+{
+  "version": "0.2.11",
+  "published_at": "2026-11-09",
+  "mandatory": false,
+  "min_supported_version": "",
+  "notes": [
+    "新增软件自动更新：以后有新版本会自动提示并一键升级",
+    "Mac 版下载校验后自动替换并重启，Windows 版打开安装向导"
+  ],
+  "releases": [
+    {
+      "platform": "darwin",
+      "arch": "arm64",
+      "status": "ready",
+      "url": "https://github.com/sunmingyuan438-blip/jianjicut/releases/download/v0.2.11/ZhangmenCut-0.2.11-macOS-arm64-AIGZM.zip",
+      "bytes": 187148109,
+      "sha256": "e76a8ff862370a05995e4cb98615460b97e95bfd4f39794ddfd4e40ba74b384e",
+      "apple_notarized": false,
+      "validation": "verified_auto_update_mac"
+    },
+    {
+      "platform": "win32",
+      "arch": "x64",
+      "status": "ready",
+      "url": "https://github.com/sunmingyuan438-blip/jianjicut/releases/download/v0.2.11/ZhangmenCut-0.2.11-Windows-x64-AIGZM-Setup.exe",
+      "bytes": 189140624,
+      "sha256": "b92ff7a489a9da7a58a8ac58a21da0a6ed1d2addc69a406c81a3cb1231968bc0",
+      "authenticode_signed": false,
+      "validation": "not_live_tested"
+    }
+  ]
+}

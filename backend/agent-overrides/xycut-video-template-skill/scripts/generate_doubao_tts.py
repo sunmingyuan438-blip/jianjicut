@@ -209,6 +209,8 @@ def main() -> int:
         context = read_json(Path(args.agent_context_file))
         if not isinstance(context, dict):
             context = {}
+        if (context.get("platform") or {}).get("provider") == "aigzm":
+            raise RuntimeError("AI 超市当前未提供可用配音模型，无需填写个人 API Key；不会调用旧语音服务。")
         config = load_tts_config(context)
         if args.voice_id:
             config["speaker"] = args.voice_id

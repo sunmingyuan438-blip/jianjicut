@@ -1,0 +1,9 @@
+{
+  "name": "zhangmen-cut-cloud",
+  "version": "0.2.10",
+  "private": true,
+  "description": "掌门cut AI超市账户、会员和用户积分模型转接服务",
+  "scripts": {"start": "node cloud.cjs"},
+  "engines": {"node": ">=20"},
+  "dependencies": {"mysql2": "3.24.6"}
+}

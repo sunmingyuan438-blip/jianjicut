@@ -1,0 +1,33 @@
+const fs=require('node:fs');
+const path=require('node:path');
+const crypto=require('node:crypto');
+const Zip=require('adm-zip');
+function build(destination,{resources=process.env.XYCUT_RESOURCES||path.resolve(__dirname,'../resources')}={}){
+  const root=path.resolve(__dirname,'..'),output=path.resolve(destination);
+  const frontend=path.join(path.resolve(resources),'frontend');
+  if(!fs.existsSync(path.join(frontend,'index.html')))throw new Error('缺少完整前端资源；请通过第二个参数指定包含 frontend 的资源目录');
+  if(fs.existsSync(output))throw new Error('输出目录已经存在，请使用新的打包目录');
+  const stage=path.join(output,'source');fs.mkdirSync(path.join(stage,'sso'),{recursive:true});fs.mkdirSync(path.join(stage,'backend'));
+  for(const name of ['broker.cjs','cloud.cjs','identity.cjs','store.cjs','web.cjs'])fs.copyFileSync(path.join(root,'sso',name),path.join(stage,'sso',name));
+  fs.copyFileSync(path.join(root,'backend/account-sso.cjs'),path.join(stage,'backend/account-sso.cjs'));
+  const manifest=JSON.parse(fs.readFileSync(path.join(root,'sso/package.json'),'utf8'));manifest.scripts={start:'node sso/cloud.cjs'};
+  fs.writeFileSync(path.join(stage,'package.json'),JSON.stringify(manifest,null,2)+'\n');fs.copyFileSync(path.join(root,'sso/package-lock.json'),path.join(stage,'package-lock.json'));
+  fs.copyFileSync(path.join(root,'docs/AI超市托管部署.md'),path.join(stage,'README.md'));
+  fs.cpSync(path.join(root,'web'),path.join(stage,'web'),{recursive:true});
+  for(const name of ['bridge.js','account-ui.js','account-ui.css','platform-ui.js','platform-ui.css','skill-ui.js','skill-ui.css'])fs.copyFileSync(path.join(root,'desktop',name),path.join(stage,'web',name));
+  fs.writeFileSync(path.join(stage,'web/skill-catalog.json'),JSON.stringify(require('../backend/skills.cjs').catalog(),null,2)+'\n');
+  fs.cpSync(frontend,path.join(stage,'web/frontend'),{recursive:true,filter:file=>!file.endsWith('.DS_Store')&&!file.endsWith('.map')});
+  const html=fs.readFileSync(path.join(frontend,'index.html'),'utf8');
+  const modules=[...html.matchAll(/<script\b([^>]*)>/g)].filter(m=>/type=["']module["']/.test(m[1])).map(m=>/src=["']([^"']+)["']/.exec(m[1])?.[1]);
+  const styles=[...html.matchAll(/<link\b([^>]*)>/g)].filter(m=>/rel=["']stylesheet["']/.test(m[1])).map(m=>/href=["']([^"']+)["']/.exec(m[1])?.[1]);
+  if(!modules.length||[...modules,...styles].some(p=>typeof p!=='string'||!/^\/assets\/[\w.-]+\.(?:js|css)$/.test(p)||!fs.existsSync(path.join(frontend,p.slice(1)))))throw new Error('前端入口清单无效，拒绝生成不完整网页包');
+  fs.writeFileSync(path.join(stage,'web/app-manifest.json'),JSON.stringify({version:require('../package.json').version,mode:'hosted-ui-local-companion',modules,styles})+'\n');
+  const zip=new Zip();zip.addLocalFolder(stage);const file=path.join(output,`ZhangmenCut-${require('../package.json').version}-AIGZM-cloud.zip`);zip.writeZip(file);
+  const bytes=fs.readFileSync(file);if(bytes.length>20000000)throw new Error('托管包超过平台 20 MB 限制');
+  const entries=new Zip(file).getEntries().map(e=>e.entryName);
+  if(!entries.includes('package.json')||!entries.includes('package-lock.json')||!entries.includes('web/index.html')||!entries.includes('web/app-manifest.json')||entries.some(e=>/(^|\/)(node_modules|\.env|\.git|\.test-data|private|account)(\/|$)/.test(e)))throw new Error('托管包内容校验失败');
+  const summary={file,bytes:bytes.length,sha256:crypto.createHash('sha256').update(bytes).digest('hex'),entries};
+  fs.writeFileSync(path.join(output,'manifest.json'),JSON.stringify(summary,null,2));return summary;
+}
+if(require.main===module)console.log(JSON.stringify(build(process.argv[2]||'',process.argv[3]?{resources:process.argv[3]}:{}),null,2));
+module.exports={build};

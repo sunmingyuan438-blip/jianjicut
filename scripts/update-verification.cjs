@@ -35,7 +35,7 @@ assert.equal(tray.build_id,build.id);assert.equal(tray.ok,true);
 assert.equal(aiSettings.build_id,build.id);assert.equal(aiSettings.ok,true);assert.equal(aiSettings.paid_or_live_provider_calls,false);assert.equal(aiSettings.ai_recommended_install.downloaded_count_matches_disk,true);assert.equal(aiSettings.ai_recommended_install.downloaded_count_matches_favorites,true);assert.equal(aiSettings.material_head_trim.agent_context_saved,true);
 assert.ok(mac.length===2&&mac.every(report=>report.build_id===build.id&&report.zip_crc_pass));
 const version=read(path.join(root,'package.json')).version;
-const artifactNames=[`XYCut-restored-${version}-Windows-x64-Setup.exe`,...['arm64','x64'].map(arch=>`XYCut-restored-${version}-macOS-${arch}-TEST.zip`)];
+const artifactNames=[`ZhangmenCut-${version}-Windows-x64-Setup.exe`,...['arm64','x64'].map(arch=>`ZhangmenCut-${version}-macOS-${arch}-TEST.zip`)];
 const artifacts=await Promise.all(artifactNames.map(async name=>{const file=path.join(root,'dist',name);return{name,bytes:fs.statSync(file).size,sha256:await digest(file)};}));
 assert.equal(artifacts[0].sha256,installation.installer_sha256);
 const realTemplates=read(path.join(dest,'real-template-drafts.json')).cases;

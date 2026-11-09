@@ -3,7 +3,7 @@ const path=require('node:path');
 const crypto=require('node:crypto');
 async function main(){
   const root=path.resolve(__dirname,'..'),version=require('../package.json').version;
-  const names=[`XYCut-restored-${version}-Windows-x64-Setup.exe`,...['arm64','x64'].map(arch=>`XYCut-restored-${version}-macOS-${arch}-TEST.zip`),`XYCut-restored-${version}-source.zip`];
+  const names=[`ZhangmenCut-${version}-Windows-x64-Setup.exe`,...['arm64','x64'].map(arch=>`ZhangmenCut-${version}-macOS-${arch}-TEST.zip`),`ZhangmenCut-${version}-source.zip`];
   const sums=await Promise.all(names.map(async name=>{const hash=crypto.createHash('sha256');for await(const bytes of fs.createReadStream(path.join(root,'dist',name)))hash.update(bytes);return hash.digest('hex')+'  '+name;}));
   fs.writeFileSync(path.join(root,'dist/SHA256SUMS.txt'),sums.join('\n')+'\n');
   console.log(sums.join('\n'));

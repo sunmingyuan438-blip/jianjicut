@@ -7,7 +7,7 @@ const {Service} = require('../backend/service.cjs');
 const {Workbench} = require('../backend/workbench.cjs');
 const {startServer} = require('../backend/server.cjs');
 const {read, write} = require('../backend/util.cjs');
-const {jianyingCandidates, resolveJianying} = require('../desktop/jianying.cjs');
+const {jianyingCandidates, resolveJianying, inspectJianying, resolveJianyingDraftDirectory} = require('../desktop/jianying.cjs');
 
 const resources = path.resolve(process.env.XYCUT_RESOURCES || path.join(__dirname, '../resources'));
 function fixture() { const root = fs.mkdtempSync(path.join(os.tmpdir(), 'xycut-lifecycle-')); const dataDir = path.join(root, 'data'); fs.mkdirSync(dataDir, {recursive:true}); return {root, dataDir, service:new Service({resources, dataDir})}; }
@@ -19,7 +19,18 @@ test('F-35 剪映发现仅解析存在的 Win/Mac 安装，不触碰进程', () 
   assert.equal(resolveJianying({platform:'win32', env:{LOCALAPPDATA:'', ProgramFiles:'', 'ProgramFiles(x86)':''}, settings:{jianying_exe:win}}), path.resolve(win));
   const mac = path.join(root, '剪映.app'); fs.mkdirSync(mac);
   assert.equal(resolveJianying({platform:'darwin', env:{HOME:''}, settings:{jianying_app:mac}}), path.resolve(mac));
-  assert.ok(jianyingCandidates({platform:'win32', env:{}, settings:{}}).every(item => path.isAbsolute(item)));
+  const chineseMac = path.join(root, '中文 路径', '剪映专业版.app'); fs.mkdirSync(chineseMac, {recursive:true});
+  assert.equal(resolveJianying({platform:'darwin', env:{HOME:''}, settings:{jianying_app:chineseMac}}), path.resolve(chineseMac));
+  const standardMac = path.join(root, 'Applications', 'VideoFusion-macOS.app'); fs.mkdirSync(standardMac, {recursive:true});
+  assert.equal(resolveJianying({platform:'darwin', env:{HOME:root}, settings:{}}), path.resolve(standardMac));
+  assert.ok(jianyingCandidates({platform:'win32', env:{}, settings:{}}).every(item => path.win32.isAbsolute(item)));
+  const draftRoot = path.join(root, 'Movies');
+  const typoDraft = path.join(draftRoot, 'JIanyingPro', 'User Data', 'Projects', 'com.lveditor.draft');
+  const canonicalDraft = path.join(draftRoot, 'JianyingPro', 'User Data', 'Projects', 'com.lveditor.draft');
+  fs.mkdirSync(typoDraft, {recursive:true}); fs.mkdirSync(canonicalDraft, {recursive:true});
+  assert.equal(resolveJianyingDraftDirectory(typoDraft, {platform:'darwin', env:{HOME:root}}), path.resolve(canonicalDraft));
+  const missing = inspectJianying({platform:'win32', env:{LOCALAPPDATA:'', APPDATA:'', ProgramFiles:'', 'ProgramFiles(x86)':''}, settings:{jianying_exe:path.join(root, 'missing.exe')}});
+  assert.equal(missing.found, false); assert.match(missing.candidates[0], /missing\.exe/);
   fs.rmSync(root, {recursive:true, force:true});
 });
 

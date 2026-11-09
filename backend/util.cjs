@@ -10,7 +10,26 @@ function write(file, value) {
   fs.writeFileSync(temp, JSON.stringify(value, null, 2));
   fs.renameSync(temp, file);
 }
-function within(root, file) { const relative = path.relative(path.resolve(root), path.resolve(file)); return relative === '' || (!relative.startsWith('..' + path.sep) && relative !== '..' && !path.isAbsolute(relative)); }
+// Compare filesystem paths after resolving symlinks. macOS exposes /var as a
+// symlink to /private/var; lexical comparisons therefore incorrectly reject
+// valid temporary/data paths. Keep a non-existent path usable by resolving
+// the nearest existing parent and appending the remaining segments.
+function canonicalPath(value) {
+  const absolute = path.resolve(String(value));
+  try { return fs.realpathSync.native(absolute); } catch {}
+  let current = absolute;
+  const missing = [];
+  while (!fs.existsSync(current) && current !== path.dirname(current)) {
+    missing.unshift(path.basename(current));
+    current = path.dirname(current);
+  }
+  try { current = fs.realpathSync.native(current); } catch {}
+  return path.join(current, ...missing);
+}
+function within(root, file) {
+  const relative = path.relative(canonicalPath(root), canonicalPath(file));
+  return relative === '' || (!relative.startsWith('..' + path.sep) && relative !== '..' && !path.isAbsolute(relative));
+}
 function safeName(name) { const result = String(name || '').replace(/[<>:"/\\|?*\x00-\x1f]/g, '_').replace(/[. ]+$/, '').trim(); if (!result || result === '.' || result === '..') throw new Error('名称不能为空'); return result.slice(0, 120); }
 function walk(root, predicate = () => true, depth = 12) {
   if (!fs.existsSync(root)) return [];

@@ -1,10 +1,10 @@
 {
   "name": "xycut-restored-desktop",
-  "version": "0.2.10",
-  "description": "XYCut desktop restoration for Windows and macOS",
+  "version": "0.2.11",
+  "description": "掌门cut 跨平台桌面剪辑工具",
   "private": true,
   "main": "desktop/main.cjs",
-  "author": "XYCut",
+  "author": "掌门cut",
   "scripts": {
     "prepare:resources": "node scripts/prepare-resources.cjs",
     "start": "electron .",
@@ -16,18 +16,64 @@
     "build:win": "electron-builder --win nsis --x64 --publish never",
     "build:mac": "node scripts/build-native-mac.cjs"
   },
-  "dependencies": { "adm-zip": "0.5.16" },
-  "devDependencies": { "electron": "44.7.0", "electron-builder": "26.15.3" },
+  "dependencies": {
+    "adm-zip": "0.5.16"
+  },
+  "devDependencies": {
+    "electron": "44.7.0",
+    "electron-builder": "26.15.3"
+  },
   "build": {
     "appId": "com.xycut.restored",
-    "productName": "XYCut 恢复版",
+    "productName": "掌门cut",
     "asar": true,
+    "protocols": [
+      {
+        "name": "掌门cut本机助手",
+        "schemes": [
+          "zhangmencut"
+        ]
+      }
+    ],
     "electronDist": "node_modules/electron/dist",
-    "directories": { "output": "dist" },
-    "files": ["desktop/**", "backend/**", "tests/desktop*.cjs", "package.json", "node_modules/**"],
-    "extraResources": [{ "from": "resources", "to": "xycut", "filter": ["**/*", "!**/__pycache__/**"] }],
-    "win": { "target": "nsis", "icon": "resources/frontend/icon.ico", "signExecutable": false },
-    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true, "artifactName": "XYCut-restored-${version}-Windows-${arch}-Setup.${ext}" },
-    "mac": { "target": "zip", "icon": "resources/frontend/icon.icns", "category": "public.app-category.video", "identity": null, "hardenedRuntime": false, "artifactName": "XYCut-restored-${version}-macOS-${arch}.${ext}" }
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "desktop/**",
+      "backend/**",
+      "tests/desktop*.cjs",
+      "package.json",
+      "node_modules/**"
+    ],
+    "extraResources": [
+      {
+        "from": "resources",
+        "to": "xycut",
+        "filter": [
+          "**/*",
+          "!**/__pycache__/**"
+        ]
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "resources/frontend/icon.ico",
+      "signExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "artifactName": "ZhangmenCut-${version}-Windows-${arch}-Setup.${ext}"
+    },
+    "mac": {
+      "target": "zip",
+      "icon": "resources/frontend/icon.icns",
+      "category": "public.app-category.video",
+      "identity": null,
+      "hardenedRuntime": false,
+      "artifactName": "ZhangmenCut-${version}-macOS-${arch}.${ext}"
+    }
   }
 }

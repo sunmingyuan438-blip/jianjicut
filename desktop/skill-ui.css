@@ -1,0 +1,38 @@
+#zm-skill-dialog{width:min(1100px,92vw);height:min(850px,88vh);max-width:94vw;max-height:90vh;border:1px solid #ecdcdc;border-radius:16px;padding:0;color:#2b2224;background:#fbf7f7;box-shadow:0 24px 80px #3d141433}
+#zm-skill-dialog::backdrop{background:#2a0f1055}
+.zm-skill-library{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;padding:24px;box-sizing:border-box;color:#2b2224;max-width:1280px;margin:auto}
+.zm-skill-heading{position:relative;padding-right:72px;margin-bottom:18px}
+.zm-skill-eyebrow{display:inline-block;padding:3px 10px;border-radius:999px;background:#fbe0e1;color:#a3191d;font-size:12px;font-weight:600;letter-spacing:.04em}
+.zm-skill-heading h1{font-size:25px;margin:10px 0 8px}
+.zm-skill-heading p{margin:0;font-size:13px;color:#7a6a6c;line-height:1.65}
+.zm-skill-close{position:absolute;right:0;top:0}
+.zm-skill-library button,.zm-skill-library input,.zm-skill-library select{font:inherit;border:1px solid #ecd6d7;border-radius:8px;padding:8px 12px;background:#fff;color:#3d2f31}
+.zm-skill-library button{cursor:pointer}
+.zm-skill-filters{display:flex;gap:12px;margin:0 0 12px}
+.zm-skill-filters input{flex:1;min-width:0}
+.zm-skill-filters[hidden]{display:none}
+.zm-skill-count{font-size:13px;color:#7a6a6c;margin:0 0 12px}
+.zm-skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:18px}
+.zm-skill-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid #ecdcdc;border-radius:12px;background:#fff;box-shadow:0 6px 18px #3d14140d}
+.zm-skill-media{position:relative;aspect-ratio:16/10;display:grid;place-items:center;background:linear-gradient(135deg,#d7262b,#8f171b)}
+.zm-skill-media img,.zm-skill-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#1a0b0c}
+.zm-skill-monogram{color:#fff;font-size:34px;font-weight:700;letter-spacing:.06em}
+.zm-skill-play{position:absolute;left:12px;bottom:12px;padding:6px 12px!important;border:0!important;background:#000000a6!important;color:#fff!important;font-size:12px}
+.zm-skill-badge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:999px;background:#fff;color:#a3191d;font-size:12px;font-weight:600}
+.zm-skill-body{display:flex;flex-direction:column;gap:8px;padding:14px 16px 16px;flex:1}
+.zm-skill-body h2{margin:0;font-size:16px}
+.zm-skill-summary{margin:0;font-size:13px;line-height:1.6;color:#5f5153}
+.zm-skill-tags{display:flex;flex-wrap:wrap;gap:6px}
+.zm-skill-tags span{padding:2px 8px;border-radius:6px;background:#fbf0f0;color:#8f171b;font-size:12px}
+.zm-skill-tags .zm-skill-version{background:#f3f3f5;color:#6b6b75}
+.zm-skill-library .zm-skill-primary{margin-top:auto;border-color:#d7262b;background:#d7262b;color:#fff;font-weight:600}
+.zm-skill-library .zm-skill-primary:hover{background:#b81d22}
+.zm-skill-empty{grid-column:1/-1;display:grid;justify-items:center;gap:8px;padding:72px 24px;border:1px dashed #ecc8ca;border-radius:14px;background:#fff;text-align:center}
+.zm-skill-empty-icon{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#fbe0e1;color:#d7262b;font-size:24px}
+.zm-skill-empty h2{margin:6px 0 0;font-size:18px}
+.zm-skill-empty p{margin:0;color:#7a6a6c;font-size:13px}
+.zm-skill-none{color:#7a6a6c;font-size:13px}
+.zm-skill-icon{display:inline-grid;place-items:center;width:20px;color:inherit;font-size:15px}
+body.zm-skill-standalone{margin:0;background:#fbf7f7}
+.zm-skill-back{display:inline-block;margin:20px 24px 0;color:#a3191d;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px}
+@media (max-width:640px){.zm-skill-library{padding:16px}.zm-skill-heading{padding-right:0}.zm-skill-close{position:static;margin-top:12px}.zm-skill-filters{flex-direction:column}}

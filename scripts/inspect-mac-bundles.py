@@ -15,8 +15,8 @@ build_id = json.loads((root / "restoration-build.json").read_text(encoding="utf-
 asar_hash = hashlib.sha256((root / "dist/win-unpacked/resources/app.asar").read_bytes()).hexdigest()
 reports = []
 for arch, cpu in [("arm64", 0x0100000C), ("x64", 0x01000007)]:
-    file = root / "dist" / f"XYCut-restored-0.2.10-macOS-{arch}-TEST.zip"
-    prefix = "XYCut 恢复版.app/Contents/"
+    file = root / "dist" / f"ZhangmenCut-0.2.10-macOS-{arch}-TEST.zip"
+    prefix = "掌门cut.app/Contents/"
     with zipfile.ZipFile(file) as archive:
         if archive.testzip():
             raise RuntimeError("Mac ZIP CRC check failed")

@@ -6,7 +6,7 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 version = json.loads((root / "package.json").read_text(encoding="utf-8"))["version"]
-output = root / "dist" / ("XYCut-restored-" + version + "-source.zip")
+output = root / "dist" / ("ZhangmenCut-" + version + "-source.zip")
 directories = ["desktop", "backend", "scripts", "tests", "resources", "recovered-ui", "verification"]
 files = ["package.json", "package-lock.json", "README.md", "MAC_TEST_PROMPT.md", "parity.json", "restoration-build.json", ".gitignore"]
 paths = [root / name for name in files]

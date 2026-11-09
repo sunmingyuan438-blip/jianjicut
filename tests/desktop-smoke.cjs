@@ -9,6 +9,10 @@ exports.run=async({window,service,app,dataDir})=>{
   window.webContents.on('render-process-gone',(_e,d)=>errors.push(d.reason));
   await new Promise(resolve=>setTimeout(resolve,2000));
   await window.webContents.executeJavaScript(`document.querySelectorAll('button').forEach(e=>{if(e.textContent==='稍后提醒')e.click();})`);
+  const local_features=await window.webContents.executeJavaScript(`(()=>{
+    const labels=[...document.querySelectorAll('.rail-nav-bottom button')].map(e=>e.textContent.trim());
+    return {labels,pass:labels.length===1&&labels[0]==='重启剪映'&&!document.body.innerText.includes('会员中心')};
+  })()`);
   const pages=[];
   for(const label of ['首页','AI剪辑','爆款模板','素材库','在线预设','本地预设','收藏','设置']){
     const result=await window.webContents.executeJavaScript(`(()=>{const items=[...document.querySelectorAll('button')];const element=items.find(e=>e.textContent.replace(/\\s/g,'')===${JSON.stringify(label)});if(!element)return {found:false,text:document.body.innerText.slice(0,1200)};element.click();return {found:true};})()`);
@@ -55,7 +59,7 @@ exports.run=async({window,service,app,dataDir})=>{
       integration.preview={ok:status==='生成成功'&&result.duration===1167000&&texts.includes('双平台预览编辑验收')&&texts.includes('第句字幕'),status,draft_dir:latest.folder,duration_us:result.duration,texts:[...texts],screenshot_error:screenshotError};
     }finally{preview.destroy();}
   }catch(error){errors.push(error.stack||error.message);}
-  const report={build_id:read(path.join(service.resources,'restoration-build.json'),{}).id,pages,errors,integration,commandErrors:service.commandErrors,runtime_paths:service.resourceStatus(),platform:process.platform,arch:process.arch,version:app.getVersion(),pass:pages.every(p=>p.found)&&integration.doubao?.ok===true&&integration.ai_switch?.ok===true&&integration.sqlite===true&&integration.core?.ok===true&&integration.video?.ok===true&&integration.preview?.ok===true&&errors.length===0&&service.commandErrors.length===0};
+  const report={build_id:read(path.join(service.resources,'restoration-build.json'),{}).id,pages,errors,integration,commandErrors:service.commandErrors,runtime_paths:{resources:service.resources,data_dir:service.dataDir},local_features,platform:process.platform,arch:process.arch,version:app.getVersion(),pass:local_features.pass&&pages.every(p=>p.found)&&integration.doubao?.ok===true&&integration.ai_switch?.ok===true&&integration.sqlite===true&&integration.core?.ok===true&&integration.video?.ok===true&&integration.preview?.ok===true&&errors.length===0&&service.commandErrors.length===0};
   write(path.join(dataDir,'desktop-smoke.json'),report);console.log(JSON.stringify({report:path.join(dataDir,'desktop-smoke.json'),pass:report.pass,pages:pages.map(p=>({label:p.label,found:p.found}))}));
   app.exit(report.pass?0:1);
 };

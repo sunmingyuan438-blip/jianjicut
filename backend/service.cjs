@@ -5,6 +5,8 @@ const crypto = require('node:crypto');
 const {read, write, within, safeName, walk, run, download, extract} = require('./util.cjs');
 const {analyzeTemplate,draftFile}=require('./template.cjs');
 const {applyEditedTimeline}=require('./generation.cjs');
+const {inspectJianying,resolveJianyingDraftDirectory}=require('../desktop/jianying.cjs');
+const {finalizeJianyingDraft}=require('./draft-compat.cjs');
 
 const mediaType = file => /\.(jpe?g|png|webp|gif|bmp)$/i.test(file) ? 'image' : /\.(mp4|mov|mkv|avi|webm|m4v|wmv|flv|3gp)$/i.test(file) ? 'video' : /\.(mp3|wav|m4a|aac|flac|ogg)$/i.test(file) ? 'audio' : null;
 const listValue = value => Array.isArray(value) ? value.map(item => String(item).trim()).filter(Boolean) : String(value || '').split(/[,，、;；\s]+/).map(item => item.trim()).filter(Boolean);
@@ -38,15 +40,26 @@ function resolvePresetDirectory(value) {
 }
 
 class Service {
-  constructor({resources, dataDir, desktop = {}}) {
+  constructor({resources, dataDir, desktop = {}, account = null}) {
     this.resources = path.resolve(resources);
     this.dataDir = path.resolve(dataDir);
     this.desktop = desktop;
+    this.account = account;
     this.port = 17651;
     this.authorized = new Set([this.resources, this.dataDir]);
     this.settingsFile = path.join(this.dataDir, 'settings.json');
     this.settings = read(this.settingsFile, {});
     this.apiContext = read(path.join(this.dataDir, 'api-context.json'), {});
+    if (Object.hasOwn(this.apiContext, 'auth_token')) {
+      delete this.apiContext.auth_token;
+      write(path.join(this.dataDir, 'api-context.json'), this.apiContext);
+    }
+    const configuredDraftDir = this.apiContext.draft_output_dir;
+    const resolvedDraftDir = resolveJianyingDraftDirectory(configuredDraftDir);
+    if (resolvedDraftDir && resolvedDraftDir !== configuredDraftDir) {
+      this.apiContext = {...this.apiContext, draft_output_dir: resolvedDraftDir};
+      write(path.join(this.dataDir, 'api-context.json'), this.apiContext);
+    }
     this.storage = this.settings.storage_dir || path.join(this.dataDir, 'sucai/libraries');
     this.dbPath = path.join(this.dataDir, 'sucai/xycut-sucai.db');
     this.cache = path.join(this.dataDir, 'cache');
@@ -55,38 +68,36 @@ class Service {
     this.grant(this.apiContext.preset_dir||this.settings.preset_dir);
     if (this.apiContext.draft_output_dir) this.grant(this.apiContext.draft_output_dir);
   }
+  get platformEnabled() { return !!(this.account?.base || this.account?.required); }
+  platformApiKey() {
+    const file=path.join(this.dataDir,'platform-api.key');
+    if(!fs.existsSync(file))fs.writeFileSync(file,crypto.randomBytes(32).toString('base64url'),{mode:0o600});
+    return fs.readFileSync(file,'utf8').trim();
+  }
+  async requireMembership(features) {if(this.platformEnabled)return this.account.authorize(Array.isArray(features)?features:[features]);}
+  async platformInvoke(input) {if(!this.platformEnabled)throw new Error('AI 超市服务尚未配置');return require('./platform-client.cjs').invoke(this,input.operation,input.input,input);}
+  async platformServiceStatus({refresh=false}={}) {
+    if(!this.platformEnabled)return {platform_mode:false};
+    if(refresh)await this.account.refresh();
+    const account=this.account.status();
+    const result={platform_mode:true,provider:'aigzm',requires_user_api_key:false,configured:account.configured,authenticated:account.authenticated,pending:account.pending,
+      member_level:account.account?.membership?.member_level??null,available_points:account.account?.wallet?.available??account.account?.wallet?.balance??null,
+      billing:'current_oauth_user',operations:[],message:account.message||''};
+    if(account.authenticated){
+      const catalogue=await this.account.models();
+      const categories={analyze:'chat',embedding:'embedding',asr_short:'speech',asr_long:'speech',image:'image'};
+      result.operations=Object.entries(categories).map(([operation,category])=>{const key=catalogue.operations?.[operation];const found=catalogue.items?.find(m=>m.model_key===key&&m.model_category===category);return {operation,available:!!found,model:found?.model_key||null,name:found?.display_name||found?.model_key||null};});
+    }
+    result.unavailable=[{operation:'tts',message:'平台当前未提供可用配音模型'},{operation:'network_materials',message:'平台当前未提供已接通的素材搜索接口'}];
+    return result;
+  }
   grant(file) { if (file) this.authorized.add(path.resolve(file)); return file; }
   canRead(file) { try { const real = fs.realpathSync(file); return [...this.authorized].some(root => fs.existsSync(root) && within(fs.realpathSync(root), real)); } catch { return false; } }
-  resourceStatus() {
-    const suffix = process.platform === 'win32' ? '.exe' : '';
-    const pythonRuntime = process.platform === 'win32' ? path.join('python', 'python.exe') : path.join('python', 'bin', 'python3.9');
-    const bundledPython = path.join(this.resources, pythonRuntime);
-    const installedPython = path.join(this.dataDir, 'runtime/python', pythonRuntime);
-    const explicitPython = process.env.XYCUT_PYTHON ? path.resolve(process.env.XYCUT_PYTHON) : '';
-    const pythonPath = [explicitPython, installedPython, bundledPython].find(file => file && fs.existsSync(file)) || explicitPython || installedPython;
-    const ffmpegPath = this.tool('ffmpeg') || path.join(this.resources, 'ffmpeg', `ffmpeg${suffix}`);
-    const ffprobePath = this.tool('ffprobe') || path.join(this.resources, 'ffmpeg', `ffprobe${suffix}`);
-    const paths = {
-      resources_root: this.resources,
-      frontend_path: path.join(this.resources, 'frontend', 'index.html'),
-      core_worker_path: path.join(this.resources, 'core_worker.py'),
-      python_path: pythonPath,
-      ffmpeg_path: ffmpegPath,
-      ffprobe_path: ffprobePath,
-      agent_kit_path: path.join(this.resources, 'agent-kit'),
-      builtin_presets_path: path.join(this.resources, 'builtin-presets'),
-      draft_shell_path: path.join(this.resources, 'draft-shell'),
-      restoration_build_path: path.join(this.resources, 'restoration-build.json')
-    };
-    return {...paths, exists: Object.fromEntries(Object.entries(paths).filter(([key]) => key.endsWith('_path')).map(([key, file]) => [key, fs.existsSync(file)]))};
-  }
   python() {
     const runtime=process.platform==='win32'?'python.exe':'bin/python3.9';
     const installed=path.join(this.dataDir,'runtime/python',runtime);
-    const bundled=path.join(this.resources,'python',runtime);
-    const candidates=[process.env.XYCUT_PYTHON,installed,bundled].filter(Boolean).map(file=>path.resolve(file));
-    const candidate=candidates.find(file=>fs.existsSync(file));
-    if (!candidate) throw new Error(`缺少 CPython 3.9 运行环境，请先准备当前平台资源。resourcesRoot=${this.resources}；候选路径=${candidates.join('; ')}`);
+    const candidate = process.env.XYCUT_PYTHON || (fs.existsSync(installed)?installed:path.join(this.resources,'python',runtime));
+    if (!fs.existsSync(candidate)) throw new Error('缺少 CPython 3.9 运行环境，请先准备当前平台资源');
     return candidate;
   }
   async worker(request) {
@@ -99,8 +110,9 @@ class Service {
     return result;
   }
   async embeddings(body) {
+    if(this.platformEnabled)return require('./platform-client.cjs').embeddings(this,body);
     const context=read(path.join(this.dataDir,'agent-context.json'),{});
-    if(context.ai_services?.doubao_llm?.mode!=='user_key'&&this.apiContext.auth_token){const base=(this.apiContext.api_base_urls||['https://yushe.neirongpai.com'])[0];const response=await fetch(base+'/api/sucai/embeddings',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+this.apiContext.auth_token},body:JSON.stringify(body),signal:AbortSignal.timeout(90000)});const data=await response.json();if(!response.ok)throw new Error(data.message||data.error||'向量服务返回错误');return data;}
+    if(context.ai_services?.doubao_llm?.mode!=='user_key')throw new Error('请在设置中配置豆包向量 API Key；AI 超市账户登录不提供旧版在线向量服务');
     return this.worker({op:'embeddings',context,items:body.items||[]});
   }
   async buildEmbeddings(body) {
@@ -131,7 +143,7 @@ class Service {
     for (const dir of (process.env.PATH || '').split(path.delimiter)) { const file = path.join(dir, name + suffix); if (fs.existsSync(file)) return file; }
     return null;
   }
-  runtimeStatus() { const file=this.python(); return {installed:!this.settings.ai_runtime_disabled&&fs.existsSync(file),runtime_dir:path.dirname(file),python_path:file,version:'1.0.0',python_version:'3.9',core_version:'0.2.10',source:'restored'}; }
+  runtimeStatus() { const file=this.python(); return {installed:!this.settings.ai_runtime_disabled&&fs.existsSync(file),runtime_dir:path.dirname(file),python_path:file,version:'1.0.0',python_version:'3.9',core_version:this.desktop.appVersion||'0.2.10',source:'restored'}; }
   ffmpegStatus() { const ffmpeg = this.tool('ffmpeg'), ffprobe = this.tool('ffprobe'); return {installed: !!(ffmpeg && ffprobe), runtime_dir: ffmpeg ? path.dirname(ffmpeg) : path.join(this.dataDir, 'runtime/ffmpeg'), ffmpeg_path: ffmpeg || '', ffprobe_path: ffprobe || ''}; }
   presets(root) {
     if (!fs.existsSync(root)) return [];
@@ -232,11 +244,17 @@ class Service {
     return this.templates(kind).templates.find(t=>t.slug===slug);
   }
   async context(input = {}) {
-    this.apiContext = {...this.apiContext, ...input};
+    const normalizedInput = {...input};
+    delete normalizedInput.auth_token;
+    // Preserve saved personal settings; platform requests cannot supply keys.
+    if(this.platformEnabled)delete normalizedInput.third_party_apis;
+    delete this.apiContext.auth_token;
+    if (normalizedInput.draft_output_dir) normalizedInput.draft_output_dir = resolveJianyingDraftDirectory(normalizedInput.draft_output_dir);
+    this.apiContext = {...this.apiContext, ...normalizedInput};
     write(path.join(this.dataDir, 'api-context.json'), this.apiContext);
     const base = `http://127.0.0.1:${this.port}`;
-    for (const file of [input.preset_dir, input.draft_output_dir]) if (file) this.grant(file);
-    const context = {schema_version: 1, app: {name: 'XYCut', version: '0.2.10'}, paths: {preset_dir: this.apiContext.preset_dir || this.settings.preset_dir || '', draft_output_dir: this.apiContext.draft_output_dir || '', agent_kit_dir: path.join(this.resources, 'agent-kit')},
+    for (const file of [normalizedInput.preset_dir, normalizedInput.draft_output_dir]) if (file) this.grant(file);
+    const context = {schema_version: 1, app: {name: '掌门cut', version: this.desktop.appVersion || '0.2.10'}, paths: {preset_dir: this.apiContext.preset_dir || this.settings.preset_dir || '', draft_output_dir: this.apiContext.draft_output_dir || '', agent_kit_dir: path.join(this.resources, 'agent-kit')},
       tools: {...this.ffmpegStatus(), python_path: this.python()}, local_api: {base_url: base, generate_url: base + '/ai-editing/generate', template_designer_generate_url: base + '/ai-editing/generate', editing_workbench_open_url: base + '/ai-editing/workbench/open', video_template_preview_url: base + '/ai-editing/video-template/preview', sucai_embeddings_url: base + '/sucai/embeddings', sucai_build_embeddings_url: base + '/sucai/embeddings/build'},
       sucai: {db_path: this.dbPath, library_base_dir: this.storage, ...this.apiContext.sucai_context}, video_editing_settings: this.apiContext.video_editing_settings || {}, third_party_apis: input.third_party_apis || this.apiContext.third_party_apis || {}, favorite_index: this.apiContext.favorite_index || {schema_version: 1, groups: [], presets: []}};
     Object.assign(context.paths,{favorite_preset_index_file:path.join(this.dataDir,'favorite-index.json'),hot_templates_dir:this.templateRoot('hot_template'),local_hot_templates_dir:this.templateRoot('hot_template'),video_templates_dir:this.templateRoot('video_template'),local_video_templates_dir:this.templateRoot('video_template'),local_hot_template_index_file:path.join(this.templateRoot('hot_template'),'index.json'),local_video_template_index_file:path.join(this.templateRoot('video_template'),'index.json'),subtitle_preset_index_file:path.join(this.dataDir,'subtitle-presets/index.json')});
@@ -247,15 +265,27 @@ class Service {
     const apis=Array.isArray(context.third_party_apis)?context.third_party_apis:[];
     context.third_party_apis=apis.map(item=>{const parameters=this.parameters(item.parameters),key=parameters.api_key||parameters.apikey||parameters.key||parameters['x-api-key'];return key?{...item,parameters:Array.isArray(item.parameters)?[...item.parameters.filter(parameter=>String(parameter.key).toUpperCase()!=='KEY'),{key:'KEY',value:String(key).trim()}]:{...item.parameters,KEY:String(key).trim()}}:item;});
     const hasKey=type=>apis.some(item=>item.type===type&&Object.entries(this.parameters(item.parameters)).some(([key,value])=>['key','api_key','apikey','x-api-key'].includes(key)&&String(value).trim()));
-    context.ai_services={doubao_llm:{mode:hasKey('doubao_llm')?'user_key':'client',api_key_source:'third_party_apis',embedding:{model:'doubao-embedding-vision-251215',url:'https://ark.cn-beijing.volces.com/api/v3/embeddings/multimodal'}},doubao_speech:{configured:hasKey('doubao_speech'),api_key_source:'third_party_apis',asr:{resource_id:'volc.bigasr.auc_turbo'},tts:{resource_id:'seed-tts-2.0'}},pexels:{configured:hasKey('pexels'),api_key_source:'third_party_apis'}};
+    context.ai_services={doubao_llm:{mode:hasKey('doubao_llm')?'user_key':'unconfigured',api_key_source:'third_party_apis',embedding:{model:'doubao-embedding-vision-251215',url:'https://ark.cn-beijing.volces.com/api/v3/embeddings/multimodal'}},doubao_speech:{configured:hasKey('doubao_speech'),api_key_source:'third_party_apis',asr:{mode:'seedasr_standard',resource_id:'volc.seedasr.auc',flash_resource_id:'volc.bigasr.auc_turbo'},tts:{resource_id:'seed-tts-2.0'}},pexels:{configured:hasKey('pexels'),api_key_source:'third_party_apis'}};
     const embeddingApi=apis.find(item=>item.type==='doubao_llm');if(embeddingApi){const params=this.parameters(embeddingApi.parameters);context.ai_services.doubao_llm.embedding.model=params.model||params.endpoint_id||context.ai_services.doubao_llm.embedding.model;context.ai_services.doubao_llm.embedding.url=params.base_url||context.ai_services.doubao_llm.embedding.url;}
-    context.speech={asr:{configured:hasKey('doubao_speech'),resource_id:'volc.bigasr.auc_turbo'},tts:{configured:hasKey('doubao_speech'),default_voice_id:'zh_female_vv_uranus_bigtts',resource_id:'seed-tts-2.0'}};
+    context.speech={asr:{configured:hasKey('doubao_speech'),mode:'seedasr_standard',resource_id:'volc.seedasr.auc',flash_resource_id:'volc.bigasr.auc_turbo'},tts:{configured:hasKey('doubao_speech'),default_voice_id:'zh_female_vv_uranus_bigtts',resource_id:'seed-tts-2.0'}};
+    if(this.platformEnabled){
+      this.platformApiKey();
+      context.third_party_apis=[];
+      context.ai_services={provider:'aigzm',requires_user_api_key:false,
+        doubao_llm:{mode:'aigzm',configured:true,api_key_source:'current_oauth_user',embedding:{model:'platform_managed',url:base+'/sucai/embeddings'}},
+        doubao_speech:{mode:'aigzm',configured:true,api_key_source:'current_oauth_user',asr:{mode:'aigzm',url:base+'/ai/platform/transcribe'},tts:{configured:false,mode:'unavailable'}},
+        pexels:{configured:false,mode:'unavailable'}};
+      context.speech.asr={configured:true,mode:'aigzm'};context.speech.tts={configured:false,mode:'unavailable'};
+      Object.assign(context.local_api,{platform_invoke_url:base+'/ai/platform/invoke',platform_asr_url:base+'/ai/platform/transcribe',platform_models_url:base+'/ai/platform/models',platform_task_url:base+'/ai/platform/task',authorization_file:path.join(this.dataDir,'platform-api.key')});
+      context.platform={provider:'aigzm',billing:'current_oauth_user',local_features:'membership',instructions:'文案分析、剪辑规划及其他模型推理必须调用platform_invoke_url的analyze操作，不要以Agent自身模型输出替代用户付费模型调用；AI请求使用上述本机API；读取authorization_file并使用Authorization: Bearer请求头。不要使用旧豆包/火山密钥。调用前确保桌面已登录；失败重试保留task_id和step_id。'};
+    }
     write(context.paths.local_hot_template_index_file,this.templates('hot_template'));write(context.paths.local_video_template_index_file,this.templates('video_template'));
     write(context.paths.favorite_preset_index_file,context.favorite_index);
     write(path.join(this.dataDir, 'agent-context.json'), context);
     return {agent_context_file: path.join(this.dataDir, 'agent-context.json'), ...context.local_api, enabled: this.apiContext.ai_editing_enabled!==false, port: this.port};
   }
   async generate(body) {
+    await this.requireMembership(['template_apply','draft_export']);
     if(!this.runtimeStatus().installed)throw new Error('请先安装 AI 剪辑运行环境');
     let plan = body.generation_plan, mode = body.mode || 'video_template';
     if (body.analysis_file) {
@@ -288,22 +318,33 @@ class Service {
     if(plan.cut_plan?.delete_ranges?.length && !plan.cut_plan.keep_ranges?.length)throw new Error('全部媒体已删除，无法生成空草稿');
     if (timelineFile) {plan.line_timeline_file=timelineFile;const timeline=read(timelineFile);if(!timeline)throw new Error('工作台时间线文件不存在');applyEditedTimeline(plan,timeline,plan.line_timeline);}
     if(plan.cut_plan?.keep_ranges?.length){const duration=plan.cut_plan.total_keep_duration??plan.cut_plan.duration??plan.cut_plan.keep_ranges.reduce((sum,item)=>sum+Number(item.source_end)-Number(item.source_start),0);if(Number.isFinite(Number(duration)))plan.timeline_duration_ms=Math.round(Number(duration)*1000);}
-    const output = body.draft_output_dir || plan.draft_output_dir || this.apiContext.draft_output_dir;
+    const output = resolveJianyingDraftDirectory(body.draft_output_dir || this.apiContext.draft_output_dir || plan.draft_output_dir);
     if (!output || !fs.existsSync(output)) throw new Error('请设置存在的剪映草稿保存目录');
     const template = body.template_dir || plan.template_dir || '';
     const config = body.template_config_file || plan.template_config_file || path.join(template, 'template-config.json');
     const task = path.join(this.dataDir, 'tasks', crypto.randomUUID());
     fs.mkdirSync(task, {recursive: true});
     const planFile = path.join(task, 'generation_plan.json'); write(planFile, plan);
-    const result = await this.worker({op: 'assemble', mode, payload: {plan_path: planFile, template_dir: template, template_config_path: config, draft_output_dir: output, base_draft_dir: path.join(this.resources, 'draft-shell')}});
+    const result = await this.worker({op: 'assemble', mode, payload: {plan_path: planFile, draft_name:plan.draft_name, template_dir: template, template_config_path: config, draft_output_dir: output, base_draft_dir: path.join(this.resources, 'draft-shell')}});
     if (!result.ok) throw new Error(result.message || '草稿生成失败');
+    const compatible=finalizeJianyingDraft(result,output);
     this.grant(output);
-    return {ok: true, draft: result, ...result};
+    return {ok: true, draft: compatible, ...compatible};
   }
   resolvePath(file) { return process.platform === 'win32' ? path.resolve(String(file)) : path.resolve(String(file).replace(/\\/g, '/')); }
   async invoke(name, args = {}) {
     if (name.startsWith('plugin:')) return this.desktop.invokePlugin(name, args);
     const commands = {
+      zhangmen_skill_catalog: () => require('./skills.cjs').catalog(),
+      platform_ai_invoke: () => this.platformInvoke(args),
+      platform_ai_models: () => this.account.models(),
+      platform_ai_task: () => this.account.task(args.task_id,args.step_id),
+      account_sso_billing: () => this.account.billing(args.intent),
+      account_sso_status: () => this.account?.status() || {configured:false,authenticated:false,pending:false,profile:null,persistent:false,message:'统一账户服务尚未配置，请联系管理员'},
+      get_platform_service_status: () => this.platformServiceStatus(args),
+      account_sso_login: () => {if(!this.account)throw new Error('统一账户服务尚未配置，请联系管理员');return this.account.login(this.port);},
+      account_sso_refresh: () => this.account?.refresh() || commands.account_sso_status(),
+      account_sso_logout: () => this.account?.logout() || commands.account_sso_status(),
       get_cache_dir: () => this.cache,
       get_ai_runtime_status: () => this.runtimeStatus(),
       get_ffmpeg_runtime_status: () => this.ffmpegStatus(),
@@ -342,6 +383,7 @@ class Service {
       update_agent_api_context: async () => {if (args.input.favorite_index) write(path.join(this.dataDir, 'favorite-index.json'), args.input.favorite_index); return this.context(args.input);},
        list_recent_workbench_tasks: () => {const file=path.join(this.dataDir,'workbench-tasks.json'),records=read(file,[]),limit=Math.max(0,Math.min(100,Number(args.limit)||5));return (Array.isArray(records)?records:[]).filter(item=>item&&typeof item==='object'&&item.task_id&&item.task_dir).slice(0,limit).map(item=>({...item,url:`http://127.0.0.1:${this.port}/xycut/${encodeURIComponent(item.task_id)}`}));},
       open_local_folder: () => {const file = path.resolve(args.path); if (!fs.existsSync(file)) throw new Error('路径不存在'); return this.desktop.openPath(file);},
+      get_jianying_status: () => inspectJianying({platform: process.platform, env: process.env, settings: this.settings}),
       restart_jianying: () => this.desktop.restartJianying(),
       pack_template_folder: () => this.pack(args.input.presetDir),
       test_template_zip: () => this.testTemplate(args.input),
@@ -366,29 +408,20 @@ class Service {
       clear_ffmpeg_runtime: () => {this.removeManaged(path.join(this.dataDir,'runtime/ffmpeg'));this.settings.ffmpeg_disabled=true;write(this.settingsFile,this.settings);return this.ffmpegStatus();},
       clear_cache: () => this.clearCache(args.options || {}),
       reset_local_data: () => this.resetData(args.options || {}),
-       download_and_open_update: async () => {const folder=path.join(this.cache,'updates');fs.mkdirSync(folder,{recursive:true});const file = await download(args.url, path.join(folder, safeName(args.fileName)), args.sha256); return this.desktop.openPath(file);},
+      check_app_update: () => {if (!this.desktop.checkUpdate) throw new Error('当前运行方式不支持自动更新'); return this.desktop.checkUpdate();},
+      download_and_open_update: () => {if (!this.desktop.installUpdate) throw new Error('当前运行方式不支持自动更新'); return this.desktop.installUpdate({url: args.url, sha256: args.sha256});},
       upload_share_source: () => this.uploadShare(args),
     };
     if (!commands[name]) throw new Error('未知接口：' + name);
+    const templateCommands=['delete_local_video_template','delete_local_hot_template','save_video_template_config','save_hot_template_config','save_local_preset_as_video_template','save_local_preset_as_hot_template','install_builtin_preset','install_imported_presets','install_online_preset','pack_template_folder'];
+    const localCommands=['create_sucai_library','delete_sucai_library','clear_sucai_pending_sources','update_sucai_material','reset_sucai_material_analysis','delete_sucai_material','import_sucai_materials','index_sucai_classified_directory','update_sucai_storage_dir'];
+    if(templateCommands.includes(name))await this.requireMembership('template_apply');
+    if(localCommands.includes(name))await this.requireMembership('local_edit');
     return commands[name]();
   }
   removeManaged(file) { if (!within(this.dataDir, file) || path.resolve(file) === this.dataDir) throw new Error('拒绝删除数据目录以外路径'); fs.rmSync(file, {recursive: true, force: true}); }
-  async uploadShare(args) {
-    const base=new URL(args.apiBaseUrl);
-    if(base.protocol!=='https:'||!['yushe.neirongpai.com','www.xycut.com','xycut.com'].includes(base.hostname))throw new Error('分享服务地址不受支持');
-    if(!args.authToken)throw new Error('请先登录后再上传预设');
-    const source=this.resolvePath(args.path);
-    if(!fs.existsSync(source))throw new Error('预设路径不存在');
-    let file=source;
-    if(fs.statSync(source).isDirectory()){
-      const packed=this.pack(source);if(!packed.ok)throw new Error('预设含缺失媒体，补齐资源后再上传');file=packed.zip_path;
-    }
-    if(path.extname(file).toLowerCase()!=='.zip')throw new Error('请选择预设文件夹或 ZIP');
-    const form=new FormData();form.append('original_name',path.basename(source));form.append('note',String(args.note||''));form.append('is_original',args.isOriginal?'1':'0');
-    form.append('file',new Blob([fs.readFileSync(file)],{type:'application/zip'}),path.basename(file));
-    const response=await fetch(new URL('/api/share-uploads',base),{method:'POST',headers:{Authorization:'Bearer '+args.authToken},body:form,signal:AbortSignal.timeout(120000)});
-    const data=await response.json();if(!response.ok)throw new Error(data.message||data.error||'预设上传失败：'+response.status);return data;
-  }
+  async uploadShare() {throw new Error('分享功能已停用');}
+
   deleteTemplate(kind, slug) {this.removeManaged(path.join(this.templateRoot(kind), safeName(slug))); return this.templates(kind);}
   async installFolder(source, customDir) {
     if (!fs.existsSync(source)) throw new Error('预设来源不存在');
@@ -498,6 +531,7 @@ class Service {
     return this.generate({mode:kind,template_dir:folder,template_config_file:configFile,draft_output_dir:input.draftOutputDir,generation_plan:plan});
   }
   async testAI(input) {
+    if(this.platformEnabled){await this.account.models();return {ok:true,message:'AI 超市模型目录连接正常；未发起付费模型调用'};}
     const parameters = this.parameters(input.parameters), type = input.service_type;
     parameters.api_key=parameters.api_key||parameters.apikey||parameters.key||parameters['x-api-key'];
     if (type === 'pexels') {const response = await fetch('https://api.pexels.com/v1/search?query=nature&per_page=1', {headers: {Authorization: parameters.api_key || parameters.apiKey || ''}, signal: AbortSignal.timeout(20000)}); if (!response.ok) throw new Error('Pexels 接口校验失败：' + response.status); return {ok: true, message: 'Pexels 连接成功'};}
@@ -542,6 +576,7 @@ class Service {
     return file;
   }
   async generateDoubaoTts(input = {}, clone = false) {
+    if(this.platformEnabled)throw new Error('AI 超市当前接入尚未提供配音接口，不会回退调用旧语音服务');
     if (!input || typeof input !== 'object') throw new Error('语音参数无效');
     const root = path.join(this.cache, 'requests', crypto.randomUUID()); fs.mkdirSync(root, {recursive:true});
     try {
@@ -564,6 +599,7 @@ class Service {
     } finally { this.removeManaged(root); }
   }
   async transcribeDoubaoAsr(input = {}) {
+    if(this.platformEnabled)return require('./platform-client.cjs').transcribe(this,input);
     if (!input || typeof input !== 'object' || !input.input_media) throw new Error('缺少 input_media');
     const inputMedia = this.resolvePath(input.input_media); if (!fs.existsSync(inputMedia)) throw new Error('输入媒体不存在');
     const root = path.join(this.cache, 'requests', crypto.randomUUID()); fs.mkdirSync(root, {recursive:true});
